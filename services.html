@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Услуги — Aspect IT: разработка, дизайн, контент, SEO</title>
+    <meta name="description" content="Комплексное обновление сайтов: дизайн, верстка, контент, SEO и техническая поддержка. Фиксированные цены и сроки." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-mark">A</span>
+                Aspect<span>IT</span>
+            </a>
+            <nav class="nav">
+                <a href="services.html" class="active">Услуги</a>
+                <a href="index.html#cases">Кейсы</a>
+                <a href="index.html#contact">Контакты</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="index.html#contact" class="btn">Обсудить проект</a>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="section-label">Услуги</div>
+            <h1>Наши <span>услуги</span></h1>
+            <p>Комплексное обновление сайтов для бизнеса. Работаем без сложных интеграций — только внешний вид, контент и SEO.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+
+            <div class="service-detail reveal" id="design">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+                </div>
+                <div class="content">
+                    <h3>Дизайн сайта</h3>
+                    <p>Разрабатываем современный, строгий и продающий дизайн. Учитываем вашу отрасль, фирменный стиль и целевую аудиторию.</p>
+                    <div class="features">
+                        <span>Адаптив под все устройства</span>
+                        <span>Утверждение макета</span>
+                        <span>Правки до 2-х итераций</span>
+                    </div>
+                </div>
+                <div class="price">
+                    от 45 000 ₽
+                    <small>Срок: 5–7 дней</small>
+                    <a href="index.html#contact" class="btn-small">Заказать</a>
+                </div>
+            </div>
+
+            <div class="service-detail reveal" id="layout">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <div class="content">
+                    <h3>Верстка HTML/CSS</h3>
+                    <p>Чистый, валидный код. Адаптивная верстка под все экраны. Высокая скорость загрузки — 95+ баллов Google PageSpeed.</p>
+                    <div class="features">
+                        <span>Кроссбраузерность</span>
+                        <span>Семантическая верстка</span>
+                        <span>Оптимизация изображений</span>
+                    </div>
+                </div>
+                <div class="price">
+                    от 35 000 ₽
+                    <small>Срок: 3–5 дней</small>
+                    <a href="index.html#contact" class="btn-small">Заказать</a>
+                </div>
+            </div>
+
+            <div class="service-detail reveal" id="content">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div class="content">
+                    <h3>Наполнение контентом</h3>
+                    <p>Пишем тексты, которые читают и которые продают. Структурируем информацию, делаем УТП понятным. Подбираем и обрабатываем фотографии.</p>
+                    <div class="features">
+                        <span>SEO-копирайтинг</span>
+                        <span>Структурирование данных</span>
+                        <span>Подбор фото</span>
+                    </div>
+                </div>
+                <div class="price">
+                    от 25 000 ₽
+                    <small>Срок: 3–7 дней</small>
+                    <a href="index.html#contact" class="btn-small">Заказать</a>
+                </div>
+            </div>
+
+            <div class="service-detail reveal" id="seo">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <div class="content">
+                    <h3>SEO-оптимизация</h3>
+                    <p>Настраиваем заголовки, мета-теги, alt-атрибуты и ключевые слова. Делаем базовую оптимизацию для Яндекса и Google.</p>
+                    <div class="features">
+                        <span>Сбор семантики</span>
+                        <span>Настройка meta-тегов</span>
+                        <span>Оптимизация контента</span>
+                    </div>
+                </div>
+                <div class="price">
+                    от 20 000 ₽
+                    <small>Срок: 3–5 дней</small>
+                    <a href="index.html#contact" class="btn-small">Заказать</a>
+                </div>
+            </div>
+
+            <div class="service-detail reveal" id="support">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </div>
+                <div class="content">
+                    <h3>Техническая поддержка</h3>
+                    <p>Регулярное обновление контента, проверка работоспособности, устранение ошибок. Вы всегда спокойны — сайт работает как часы.</p>
+                    <div class="features">
+                        <span>Ежемесячный отчет</span>
+                        <span>Срочные правки за 24 ч</span>
+                        <span>Бэкап и безопасность</span>
+                    </div>
+                </div>
+                <div class="price">
+                    от 8 000 ₽/мес
+                    <small>Абонемент</small>
+                    <a href="index.html#contact" class="btn-small">Заказать</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section section--alt">
+        <div class="container reveal">
+            <div class="section-label">Процесс</div>
+            <h2 class="section-title">Как мы работаем</h2>
+            <p class="section-desc" style="margin-bottom: 40px;">Прозрачный процесс без сюрпризов</p>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="num">1</div>
+                    <h4>Знакомство</h4>
+                    <p>Обсуждаем задачу, смотрим ваш текущий сайт, определяем цели.</p>
+                </div>
+                <div class="step-item">
+                    <div class="num">2</div>
+                    <h4>Коммерческое предложение</h4>
+                    <p>Готовим КП со сроками и фиксированной ценой. Без скрытых платежей.</p>
+                </div>
+                <div class="step-item">
+                    <div class="num">3</div>
+                    <h4>Работа</h4>
+                    <p>Делаем дизайн, верстку, контент, SEO. Показываем промежуточные результаты.</p>
+                </div>
+                <div class="step-item">
+                    <div class="num">4</div>
+                    <h4>Сдача проекта</h4>
+                    <p>Передаем готовый сайт, обучаем, как им пользоваться. Поддерживаем после запуска.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section form-section" id="contact">
+        <div class="container reveal">
+            <div class="form-block">
+                <div>
+                    <h2>Нужна консультация?</h2>
+                    <p>Оставьте телефон — мы перезвоним, разберем вашу задачу и пришлем коммерческое предложение.</p>
+                </div>
+                <form class="form-group" data-form>
+                    <div class="form-row">
+                        <input type="text" placeholder="Ваше имя" required />
+                        <input type="tel" placeholder="+7 (___) ___-__-__" required />
+                    </div>
+                    <button type="submit" class="btn">Отправить заявку</button>
+                    <p class="form-success">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer container">
+        <p>© 2026 Aspect IT. IT-аутсорсинг для бизнеса.</p>
+        <div class="footer-links">
+            <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+            <a href="#">Политика конфиденциальности</a>
+            <a href="mailto:hello@aspect-it.ru">hello@aspect-it.ru</a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+# Деплой на VPS: архив кода → SCP → распаковка → docker compose (nginx, статический сайт).
+#
+# Секреты GitHub (Settings → Secrets and variables → Actions):
+#   SERVER_HOST     — IP или домен сервера
+#   SERVER_USER     — пользователь SSH (например root или deploy)
+#   SSH_PASSWORD    — пароль SSH (или SSH-ключ — см. appleboy docs)
+#   DEPLOY_PATH     — каталог на сервере, например /root/aspect-it
+#
+# Опционально:
+#   SSH_PORT        — порт SSH, если не 22
+#   DOCKERHUB_USERNAME / DOCKERHUB_TOKEN — login в Docker Hub при лимитах pull
+#
+# На сервере один раз: установлены Docker и docker compose plugin.
+# Файл .env на сервере не обязателен. Для смены порта создайте DEPLOY_PATH/.env:
+#   HTTP_PORT=8080
+
+name: Build and Deploy Aspect IT
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      SSH_PORT_DEPLOY: ${{ secrets.SSH_PORT }}
+
+    steps:
+      - name: Verify deployment secrets
+        run: |
+          set -euo pipefail
+          if [ -z "${{ secrets.SERVER_HOST }}" ] || [ -z "${{ secrets.SERVER_USER }}" ] || \
+             [ -z "${{ secrets.SSH_PASSWORD }}" ] || [ -z "${{ secrets.DEPLOY_PATH }}" ]; then
+            echo "::error::Задайте секреты репозитория: SERVER_HOST, SERVER_USER, SSH_PASSWORD, DEPLOY_PATH"
+            exit 1
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Create deployment archive
+        run: |
+          set -euo pipefail
+          ARCHIVE_PATH="/tmp/aspect-it-deploy-${GITHUB_RUN_ID}.tgz"
+          tar --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='.github' \
+            -czf "${ARCHIVE_PATH}" .
+          mv "${ARCHIVE_PATH}" aspect-it-deploy.tgz
+
+      - name: Ensure deploy directory exists
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ env.SSH_PORT_DEPLOY != '' && env.SSH_PORT_DEPLOY || 22 }}
+          script: mkdir -p '${{ secrets.DEPLOY_PATH }}'
+
+      - name: Copy archive to remote server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ env.SSH_PORT_DEPLOY != '' && env.SSH_PORT_DEPLOY || 22 }}
+          source: "aspect-it-deploy.tgz"
+          target: ${{ secrets.DEPLOY_PATH }}
+
+      - name: Extract and run Docker Compose
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ env.SSH_PORT_DEPLOY != '' && env.SSH_PORT_DEPLOY || 22 }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            DEPLOY_PATH='${{ secrets.DEPLOY_PATH }}'
+            test -n "$DEPLOY_PATH"
+            cd "$DEPLOY_PATH"
+            find . -mindepth 1 -maxdepth 1 \
+              ! -name '.env' \
+              ! -name 'aspect-it-deploy.tgz' \
+              -exec rm -rf {} +
+            tar xzf aspect-it-deploy.tgz
+            rm -f aspect-it-deploy.tgz
+
+            if ! command -v docker >/dev/null 2>&1; then
+              echo "Docker not found. Installing via get.docker.com..."
+              if command -v curl >/dev/null 2>&1; then
+                curl -fsSL https://get.docker.com | sh
+              elif command -v wget >/dev/null 2>&1; then
+                wget -qO- https://get.docker.com | sh
+              else
+                echo "::error::Neither curl nor wget is available to install Docker."
+                exit 1
+              fi
+            fi
+
+            if docker compose version >/dev/null 2>&1; then
+              COMPOSE_CMD="docker compose"
+            elif command -v docker-compose >/dev/null 2>&1; then
+              COMPOSE_CMD="docker-compose"
+            else
+              echo "::error::Docker Compose is not available on server."
+              exit 1
+            fi
+
+            if [ -n "${{ secrets.DOCKERHUB_USERNAME }}" ] && [ -n "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
+              echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+            else
+              echo "::notice::DOCKERHUB_USERNAME/DOCKERHUB_TOKEN not set; using anonymous pulls."
+            fi
+
+            $COMPOSE_CMD up -d --build
+            $COMPOSE_CMD ps
