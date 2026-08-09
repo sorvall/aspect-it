@@ -7,10 +7,13 @@
     <meta name="description" content="Комплексное обновление сайтов: дизайн, верстка, контент, SEO и техническая поддержка. Фиксированные цены и сроки." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+
+    <div class="scroll-progress" aria-hidden="true"></div>
 
     <header class="header">
         <div class="container header-inner">
@@ -176,21 +179,27 @@
         </div>
     </section>
 
-    <section class="section form-section" id="contact">
+    <section class="form-section" id="contact">
+        <div class="form-section-bg" aria-hidden="true"></div>
         <div class="container reveal">
-            <div class="form-block">
-                <div>
-                    <h2>Нужна консультация?</h2>
-                    <p>Оставьте телефон — мы перезвоним, разберем вашу задачу и пришлем коммерческое предложение.</p>
-                </div>
-                <form class="form-group" data-form>
-                    <div class="form-row">
-                        <input type="text" placeholder="Ваше имя" required />
-                        <input type="tel" placeholder="+7 (___) ___-__-__" required />
+            <div class="form-glass">
+                <div class="form-glass-inner">
+                    <div class="form-glass-text">
+                        <h2>Нужна консультация?</h2>
+                        <p>Оставьте телефон — мы перезвоним, разберем вашу задачу и пришлем коммерческое предложение.</p>
                     </div>
-                    <button type="submit" class="btn">Отправить заявку</button>
-                    <p class="form-success">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
-                </form>
+                    <form class="form-group" data-form>
+                        <div class="form-row">
+                            <input type="text" placeholder="Ваше имя" required />
+                            <input type="tel" placeholder="+7 (___) ___-__-__" required />
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Отправить заявку</button>
+                            <a href="https://t.me/" class="btn btn-telegram" target="_blank" rel="noopener">Telegram</a>
+                        </div>
+                        <p class="form-success">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+                    </form>
+                </div>
             </div>
         </div>
     </section>

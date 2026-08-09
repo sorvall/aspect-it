@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aspect IT — Обновление сайтов для бизнеса</title>
     <meta name="description" content="IT-аутсорсинг: дизайн, верстка, контент и SEO. Обновим сайт под ключ без сложных интеграций." />
+    <meta property="og:title" content="Aspect IT — Обновление сайтов для бизнеса" />
+    <meta property="og:description" content="Дизайн, верстка, контент и SEO под ключ. Без сложных интеграций." />
+    <meta property="og:image" content="assets/og-image.svg" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -12,7 +17,11 @@
 </head>
 <body>
 
-    <header class="header">
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
+    <header class="header header--hero">
         <div class="container header-inner">
             <a href="index.html" class="logo">
                 <span class="logo-mark">A</span>
@@ -32,11 +41,13 @@
         </div>
     </header>
 
-    <section class="hero">
+    <section class="hero hero--dark">
+        <div class="hero-mesh" aria-hidden="true"></div>
+        <div class="hero-grid-bg" aria-hidden="true"></div>
         <div class="container hero-grid">
             <div class="hero-content">
                 <div class="hero-tags">
-                    <span class="hero-tag hero-tag--accent">IT-аутсорсинг</span>
+                    <span class="hero-tag hero-tag--glow">IT-аутсорсинг</span>
                     <span class="hero-tag">Без интеграций</span>
                 </div>
                 <h1>Обновим сайт<br /><span>под ключ</span></h1>
@@ -46,32 +57,52 @@
                 </p>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn">Получить КП</a>
-                    <a href="#cases" class="btn btn-outline">Смотреть кейсы</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <strong>50+</strong>
-                        <span>проектов</span>
-                    </div>
-                    <div class="hero-stat">
-                        <strong>7 дней</strong>
-                        <span>средний срок</span>
-                    </div>
-                    <div class="hero-stat">
-                        <strong>+35%</strong>
-                        <span>рост заявок</span>
-                    </div>
+                    <a href="#cases" class="btn btn-outline btn-outline--dark">Смотреть кейсы</a>
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="hero-img" role="img" aria-label="Команда IT-специалистов"></div>
-                <div class="hero-float hero-float--1">
+                <div class="hero-mockup">
+                    <div class="mockup-bar">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="mockup-screen">
+                        <div class="mockup-content"></div>
+                    </div>
+                </div>
+                <div class="hero-float hero-float--glow hero-float--1">
                     <strong>+37%</strong>
                     <span>заявок за 2 месяца</span>
                 </div>
-                <div class="hero-float hero-float--2">
+                <div class="hero-float hero-float--glow hero-float--2">
                     <strong>95+</strong>
                     <span>PageSpeed Score</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust">
+        <div class="container">
+            <p class="trust-label">Нам доверяют</p>
+            <div class="trust-logos">
+                <span class="trust-logo">МеталПром</span>
+                <span class="trust-logo">СтройГрупп</span>
+                <span class="trust-logo">МедЦентр+</span>
+                <span class="trust-logo">ЛогистикаPro</span>
+                <span class="trust-logo">АгроТех</span>
+            </div>
+            <div class="trust-stats reveal">
+                <div class="trust-stat">
+                    <strong>50+</strong>
+                    <span>проектов</span>
+                </div>
+                <div class="trust-stat">
+                    <strong>7 дней</strong>
+                    <span>средний срок</span>
+                </div>
+                <div class="trust-stat">
+                    <strong>+35%</strong>
+                    <span>рост заявок</span>
                 </div>
             </div>
         </div>
@@ -86,34 +117,42 @@
                 </div>
                 <a href="services.html" class="link-arrow">Все услуги →</a>
             </div>
-            <div class="services-grid">
-                <a href="services.html#design" class="service-card">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg>
+            <div class="bento-grid">
+                <a href="services.html#design" class="bento-item bento-item--large reveal stagger-1">
+                    <div class="bento-preview" aria-hidden="true">
+                        <div class="bento-preview-bar"></div>
+                        <div class="bento-preview-block bento-preview-block--1"></div>
+                        <div class="bento-preview-block bento-preview-block--2"></div>
+                        <div class="bento-preview-block bento-preview-block--3"></div>
                     </div>
-                    <h3>Дизайн сайта</h3>
-                    <p>Строгий, современный, под ваш фирменный стиль и отрасль.</p>
+                    <div class="bento-text">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+                        </div>
+                        <h3>Дизайн сайта</h3>
+                        <p>Строгий, современный, под ваш фирменный стиль и отрасль.</p>
+                    </div>
                 </a>
-                <a href="services.html#layout" class="service-card">
+                <a href="services.html#layout" class="bento-item reveal stagger-2">
                     <div class="icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                     </div>
                     <h3>Верстка HTML/CSS</h3>
-                    <p>Адаптивная верстка, высокая скорость загрузки, чистота кода.</p>
+                    <p>Адаптив, скорость, чистый код.</p>
                 </a>
-                <a href="services.html#content" class="service-card">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                    </div>
-                    <h3>Наполнение контентом</h3>
-                    <p>Тексты, структура, подбор фото — всё, чтобы сайт заговорил.</p>
-                </a>
-                <a href="services.html#seo" class="service-card">
+                <a href="services.html#seo" class="bento-item reveal stagger-3">
                     <div class="icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
                     </div>
                     <h3>SEO-оптимизация</h3>
-                    <p>Настройка заголовков, мета-тегов и ключевых слов.</p>
+                    <p>Meta-теги, семантика, ключевые слова.</p>
+                </a>
+                <a href="services.html#content" class="bento-item bento-item--wide reveal stagger-4">
+                    <div class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    </div>
+                    <h3>Наполнение контентом</h3>
+                    <p>Тексты, структура, подбор фото — всё, чтобы сайт заговорил.</p>
                 </a>
             </div>
         </div>
@@ -128,17 +167,17 @@
                 </div>
             </div>
             <div class="adv-grid">
-                <div class="adv-item">
+                <div class="adv-item reveal stagger-1">
                     <div class="adv-num">01</div>
                     <h4>Экономия бюджета</h4>
                     <p>Вам не нужен штатный программист. Платите только за результат, а не за оклад + налоги.</p>
                 </div>
-                <div class="adv-item">
+                <div class="adv-item reveal stagger-2">
                     <div class="adv-num">02</div>
                     <h4>Без риска для бизнеса</h4>
                     <p>Мы не трогаем ваши внутренние системы. Только внешний вид и контент сайта.</p>
                 </div>
-                <div class="adv-item">
+                <div class="adv-item reveal stagger-3">
                     <div class="adv-num">03</div>
                     <h4>Прозрачность</h4>
                     <p>Фиксированная цена, четкие сроки, еженедельные отчеты. Без сюрпризов.</p>
@@ -152,47 +191,71 @@
             <div class="section-header">
                 <div>
                     <div class="section-label">Наши работы</div>
-                    <h2 class="section-title">Примеры проектов</h2>
+                    <h2 class="section-title">До и после</h2>
+                    <p class="section-desc">Перетащите ползунок — сравните результат</p>
                 </div>
             </div>
             <div class="cases-grid">
-                <div class="case-card">
-                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=600&h=220&fit=crop');"></div>
+                <article class="case-card reveal stagger-1">
+                    <div class="compare" data-compare>
+                        <div class="compare-layer compare-after" style="background-image: url('https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=400&fit=crop')"></div>
+                        <div class="compare-layer compare-before" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=400&fit=crop')"></div>
+                        <div class="compare-handle" aria-hidden="true"></div>
+                        <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: завод" />
+                        <span class="compare-label compare-label--before">До</span>
+                        <span class="compare-label compare-label--after">После</span>
+                    </div>
                     <div class="case-body">
                         <span class="tag">Завод</span>
                         <h3>Обновление сайта завода</h3>
                         <p>Разработали дизайн, сверстали 12 страниц, наполнили контентом.</p>
                         <div class="result">↑ Заявок +37% за 2 месяца</div>
                     </div>
-                </div>
-                <div class="case-card">
-                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=220&fit=crop');"></div>
+                </article>
+                <article class="case-card reveal stagger-2">
+                    <div class="compare" data-compare>
+                        <div class="compare-layer compare-after" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=400&fit=crop')"></div>
+                        <div class="compare-layer compare-before" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=400&fit=crop&sat=-100')"></div>
+                        <div class="compare-handle" aria-hidden="true"></div>
+                        <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: застройщик" />
+                        <span class="compare-label compare-label--before">До</span>
+                        <span class="compare-label compare-label--after">После</span>
+                    </div>
                     <div class="case-body">
                         <span class="tag">Строительство</span>
                         <h3>Сайт-визитка для застройщика</h3>
                         <p>Сделали акцент на портфолио объектов и отзывы клиентов.</p>
                         <div class="result">↑ Звонков +25% за месяц</div>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <section class="section form-section" id="contact">
+    <section class="form-section" id="contact">
+        <div class="form-section-bg" aria-hidden="true"></div>
         <div class="container reveal">
-            <div class="form-block">
-                <div>
-                    <h2>Хотите так же?</h2>
-                    <p>Оставьте телефон — мы сделаем аудит вашего сайта и пришлем коммерческое предложение.</p>
-                </div>
-                <form class="form-group" data-form>
-                    <div class="form-row">
-                        <input type="text" placeholder="Ваше имя" required />
-                        <input type="tel" placeholder="+7 (___) ___-__-__" required />
+            <div class="form-glass">
+                <div class="form-glass-inner">
+                    <div class="form-glass-text">
+                        <h2>Хотите так же?</h2>
+                        <p>Оставьте телефон — мы сделаем аудит вашего сайта и пришлем коммерческое предложение.</p>
                     </div>
-                    <button type="submit" class="btn">Отправить заявку</button>
-                    <p class="form-success">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
-                </form>
+                    <form class="form-group" data-form>
+                        <div class="form-row">
+                            <input type="text" placeholder="Ваше имя" required />
+                            <input type="tel" placeholder="+7 (___) ___-__-__" required />
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Отправить заявку</button>
+                            <a href="https://t.me/" class="btn btn-telegram" target="_blank" rel="noopener">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                                Telegram
+                            </a>
+                        </div>
+                        <p class="form-success">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
