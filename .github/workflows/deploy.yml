@@ -112,14 +112,50 @@ jobs:
               fi
             fi
 
+            echo "Starting Docker daemon..."
+            if command -v systemctl >/dev/null 2>&1; then
+              systemctl enable docker || true
+              systemctl start docker || true
+            elif command -v service >/dev/null 2>&1; then
+              service docker start || true
+            fi
+
+            echo "Waiting for Docker..."
+            ready=0
+            for i in $(seq 1 15); do
+              if docker info >/dev/null 2>&1; then
+                ready=1
+                break
+              fi
+              sleep 2
+            done
+            if [ "$ready" -ne 1 ]; then
+              echo "::error::Docker daemon is not running. Try on server: systemctl start docker"
+              docker info || true
+              exit 1
+            fi
+
             if docker compose version >/dev/null 2>&1; then
               COMPOSE_CMD="docker compose"
             elif command -v docker-compose >/dev/null 2>&1; then
               COMPOSE_CMD="docker-compose"
             else
-              echo "::error::Docker Compose is not available on server."
-              exit 1
+              echo "Docker Compose plugin not found, installing..."
+              if command -v apt-get >/dev/null 2>&1; then
+                apt-get update -qq && apt-get install -y -qq docker-compose-plugin || true
+              fi
+              if docker compose version >/dev/null 2>&1; then
+                COMPOSE_CMD="docker compose"
+              elif command -v docker-compose >/dev/null 2>&1; then
+                COMPOSE_CMD="docker-compose"
+              else
+                echo "::error::Docker Compose is not available on server."
+                exit 1
+              fi
             fi
+
+            echo "Using: $COMPOSE_CMD"
+            $COMPOSE_CMD version
 
             if [ -n "${{ secrets.DOCKERHUB_USERNAME }}" ] && [ -n "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
               echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
@@ -127,5 +163,9 @@ jobs:
               echo "::notice::DOCKERHUB_USERNAME/DOCKERHUB_TOKEN not set; using anonymous pulls."
             fi
 
-            $COMPOSE_CMD up -d --build
+            $COMPOSE_CMD up -d --build || {
+              echo "::error::docker compose up failed"
+              $COMPOSE_CMD logs --no-color || true
+              exit 1
+            }
             $COMPOSE_CMD ps
