@@ -90,6 +90,34 @@ document.addEventListener('DOMContentLoaded', () => {
         update(slider.value);
     });
 
+    document.querySelectorAll('.team-slider').forEach((slider) => {
+        let dragging = false;
+        let startX = 0;
+        let scrollStart = 0;
+
+        slider.addEventListener('pointerdown', (e) => {
+            if (e.pointerType === 'mouse' && e.button !== 0) return;
+            dragging = true;
+            startX = e.clientX;
+            scrollStart = slider.scrollLeft;
+            slider.classList.add('is-dragging');
+            slider.setPointerCapture(e.pointerId);
+        });
+
+        slider.addEventListener('pointermove', (e) => {
+            if (!dragging) return;
+            slider.scrollLeft = scrollStart - (e.clientX - startX);
+        });
+
+        const stopDrag = () => {
+            dragging = false;
+            slider.classList.remove('is-dragging');
+        };
+
+        slider.addEventListener('pointerup', stopDrag);
+        slider.addEventListener('pointercancel', stopDrag);
+    });
+
     document.querySelectorAll('form[data-form]').forEach((form) => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();

@@ -1,40 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 320" fill="none">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="400" y2="400">
+    <linearGradient id="bg" x1="0" y1="0" x2="560" y2="320">
       <stop stop-color="#065f46"/>
       <stop offset="1" stop-color="#10b981"/>
     </linearGradient>
   </defs>
-  <rect width="400" height="400" fill="url(#bg)"/>
-  <ellipse cx="200" cy="348" rx="110" ry="36" fill="#000" opacity="0.12"/>
-  <path d="M125 365c18-72 132-72 150 0H125z" fill="#059669"/>
-  <path d="M135 360c22-50 108-50 130 0H135z" fill="#ecfdf5"/>
-  <!-- curly hair -->
-  <circle cx="158" cy="148" r="28" fill="#171717"/>
-  <circle cx="200" cy="128" r="32" fill="#171717"/>
-  <circle cx="242" cy="148" r="28" fill="#171717"/>
-  <circle cx="138" cy="178" r="22" fill="#171717"/>
-  <circle cx="262" cy="178" r="22" fill="#171717"/>
-  <circle cx="168" cy="118" r="18" fill="#262626"/>
-  <circle cx="232" cy="118" r="18" fill="#262626"/>
-  <!-- neck -->
-  <rect x="180" y="250" width="40" height="38" rx="8" fill="#8d5524"/>
-  <!-- face -->
-  <ellipse cx="200" cy="210" rx="56" ry="62" fill="#c68642"/>
-  <!-- fade haircut sides -->
-  <path d="M144 210c-6-40 8-78 36-92M256 210c6-40-8-78-36-92" fill="#171717" opacity="0.85"/>
-  <!-- eyes -->
-  <ellipse cx="180" cy="206" rx="10" ry="12" fill="#fff"/>
-  <ellipse cx="220" cy="206" rx="10" ry="12" fill="#fff"/>
-  <circle cx="182" cy="208" r="6" fill="#422006"/>
-  <circle cx="222" cy="208" r="6" fill="#422006"/>
-  <circle cx="184" cy="205" r="2" fill="#fff"/>
-  <circle cx="224" cy="205" r="2" fill="#fff"/>
-  <!-- brows -->
-  <path d="M162 188c14-6 28-6 40 0M238 188c-14-6-28-6-40 0" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
-  <!-- friendly grin -->
-  <path d="M176 242c10 10 22 14 48 14s38-4 48-14" stroke="#78350f" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <path d="M180 242c8 6 18 9 40 9s32-3 40-9" fill="#fff" opacity="0.9"/>
-  <!-- subtle stubble -->
-  <ellipse cx="200" cy="248" rx="28" ry="8" fill="#422006" opacity="0.08"/>
+  <rect width="560" height="320" fill="url(#bg)"/>
+  <circle cx="80" cy="70" r="90" fill="#fff" opacity="0.05"/>
+  <ellipse cx="280" cy="310" rx="200" ry="30" fill="#000" opacity="0.1"/>
+  <path d="M120 320c30-100 240-100 320 0H120z" fill="#059669"/>
+  <path d="M150 315c40-70 220-70 260 0H150z" fill="#ecfdf5"/>
+  <circle cx="228" cy="108" r="26" fill="#171717"/>
+  <circle cx="280" cy="88" r="30" fill="#171717"/>
+  <circle cx="332" cy="108" r="26" fill="#171717"/>
+  <circle cx="208" cy="138" r="20" fill="#171717"/>
+  <circle cx="352" cy="138" r="20" fill="#171717"/>
+  <ellipse cx="280" cy="168" rx="74" ry="80" fill="#c68642"/>
+  <path d="M206 168c-8-48 12-88 48-102M354 168c8-48-12-88-48-102" fill="#171717" opacity="0.8"/>
+  <ellipse cx="256" cy="162" rx="11" ry="13" fill="#fff"/>
+  <ellipse cx="304" cy="162" rx="11" ry="13" fill="#fff"/>
+  <circle cx="258" cy="164" r="6.5" fill="#422006"/>
+  <circle cx="306" cy="164" r="6.5" fill="#422006"/>
+  <path d="M232 138c16-6 32-6 48 0M328 138c-16-6-32-6-48 0" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+  <path d="M244 200c14 12 30 16 72 16s58-4 72-16" stroke="#78350f" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M248 200c10 8 22 11 64 11s54-3 64-11" fill="#fff" opacity="0.85"/>
+  <rect x="262" y="248" width="36" height="34" rx="6" fill="#8d5524"/>
 </svg>
