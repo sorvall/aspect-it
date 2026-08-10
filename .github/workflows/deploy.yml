@@ -174,19 +174,25 @@ jobs:
             echo "=== .env ==="
             cat .env
 
+            echo "=== Docker Hub login ==="
             DOCKERHUB_USER='${{ secrets.DOCKERHUB_USERNAME }}'
             DOCKERHUB_TOKEN='${{ secrets.DOCKERHUB_TOKEN }}'
-            if [ -n "$DOCKERHUB_USER" ] && [ -n "$DOCKERHUB_TOKEN" ]; then
-              echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
+            if [ -n "${DOCKERHUB_USER:-}" ] && [ -n "${DOCKERHUB_TOKEN:-}" ]; then
+              if echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin; then
+                echo "Docker Hub login OK"
+              else
+                echo "::warning::Docker Hub login failed — continuing with anonymous pulls"
+              fi
             else
-              echo "::notice::DOCKERHUB_USERNAME/DOCKERHUB_TOKEN not set; using anonymous pulls."
+              echo "DOCKERHUB secrets not set — using anonymous pulls"
             fi
 
             echo "=== Pulling base image ==="
-            docker pull nginx:alpine || {
-              echo "::error::Failed to pull nginx:alpine. Set DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets."
+            if ! docker pull nginx:alpine; then
+              echo "::error::Failed to pull nginx:alpine."
+              echo "Add valid DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets, or run on server: docker pull nginx:alpine"
               exit 1
-            }
+            fi
 
             echo "=== Building ==="
             $COMPOSE_CMD build --progress=plain
