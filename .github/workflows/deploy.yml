@@ -87,6 +87,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ env.SSH_PORT_DEPLOY != '' && env.SSH_PORT_DEPLOY || 22 }}
+          command_timeout: 30m
+          debug: true
           script_stop: true
           script: |
             set -euo pipefail
@@ -99,6 +101,9 @@ jobs:
               -exec rm -rf {} +
             tar xzf aspect-it-deploy.tgz
             rm -f aspect-it-deploy.tgz
+
+            echo "=== Deploy directory ==="
+            ls -la
 
             if ! command -v docker >/dev/null 2>&1; then
               echo "Docker not found. Installing via get.docker.com..."
@@ -157,15 +162,50 @@ jobs:
             echo "Using: $COMPOSE_CMD"
             $COMPOSE_CMD version
 
-            if [ -n "${{ secrets.DOCKERHUB_USERNAME }}" ] && [ -n "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
-              echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+            if [ ! -f .env ]; then
+              if ss -tln 2>/dev/null | grep -q ':80 ' || netstat -tln 2>/dev/null | grep -q ':80 '; then
+                echo "HTTP_PORT=8080" > .env
+                echo "Port 80 is busy — created .env with HTTP_PORT=8080"
+              else
+                echo "HTTP_PORT=80" > .env
+                echo "Created .env with HTTP_PORT=80"
+              fi
+            fi
+            echo "=== .env ==="
+            cat .env
+
+            DOCKERHUB_USER='${{ secrets.DOCKERHUB_USERNAME }}'
+            DOCKERHUB_TOKEN='${{ secrets.DOCKERHUB_TOKEN }}'
+            if [ -n "$DOCKERHUB_USER" ] && [ -n "$DOCKERHUB_TOKEN" ]; then
+              echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USER" --password-stdin
             else
               echo "::notice::DOCKERHUB_USERNAME/DOCKERHUB_TOKEN not set; using anonymous pulls."
             fi
 
-            $COMPOSE_CMD up -d --build || {
-              echo "::error::docker compose up failed"
-              $COMPOSE_CMD logs --no-color || true
+            echo "=== Pulling base image ==="
+            docker pull nginx:alpine || {
+              echo "::error::Failed to pull nginx:alpine. Set DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets."
               exit 1
             }
+
+            echo "=== Building ==="
+            $COMPOSE_CMD build --progress=plain
+
+            echo "=== Starting containers ==="
+            set +e
+            $COMPOSE_CMD up -d
+            up_status=$?
+            set -e
+
+            if [ "$up_status" -ne 0 ]; then
+              echo "::error::docker compose up failed with exit code $up_status"
+              $COMPOSE_CMD ps -a || true
+              $COMPOSE_CMD logs --no-color || true
+              docker ps -a || true
+              exit 1
+            fi
+
+            echo "=== Deploy OK ==="
             $COMPOSE_CMD ps
+            HTTP_PORT="$(grep '^HTTP_PORT=' .env | cut -d= -f2 || echo 80)"
+            echo "Site should be available at http://$(hostname -I 2>/dev/null | awk '{print $1}'):${HTTP_PORT}"
