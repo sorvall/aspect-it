@@ -3,9 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav');
     const scrollProgress = document.querySelector('.scroll-progress');
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorRing = document.querySelector('.cursor-ring');
-    const isTouch = matchMedia('(pointer: coarse)').matches;
 
     const updateHeader = () => {
         if (!header) return;
@@ -29,33 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.addEventListener('click', () => nav.classList.toggle('open'));
     }
 
-    if (!isTouch && cursorDot && cursorRing) {
-        document.body.classList.add('custom-cursor');
-        let mx = 0;
-        let my = 0;
-        let rx = 0;
-        let ry = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mx = e.clientX;
-            my = e.clientY;
-            cursorDot.style.transform = `translate(${mx}px, ${my}px)`;
-        });
-
-        const animateRing = () => {
-            rx += (mx - rx) * 0.15;
-            ry += (my - ry) * 0.15;
-            cursorRing.style.transform = `translate(${rx}px, ${ry}px)`;
-            requestAnimationFrame(animateRing);
-        };
-        animateRing();
-
-        document.querySelectorAll('a, button, input, .compare-slider').forEach((el) => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-        });
-    }
-
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver(
         (entries) => {
@@ -71,14 +41,52 @@ document.addEventListener('DOMContentLoaded', () => {
         const slider = compare.querySelector('.compare-slider');
         const before = compare.querySelector('.compare-before');
         const handle = compare.querySelector('.compare-handle');
+        const hint = compare.querySelector('.compare-hint');
         if (!slider || !before || !handle) return;
 
         const update = (val) => {
-            before.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-            handle.style.left = `${val}%`;
+            const pct = Math.min(100, Math.max(0, Number(val)));
+            before.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+            handle.style.left = `${pct}%`;
+            slider.value = pct;
         };
 
-        slider.addEventListener('input', (e) => update(e.target.value));
+        const hideHint = () => {
+            if (hint) hint.style.opacity = '0';
+        };
+
+        slider.addEventListener('input', (e) => {
+            update(e.target.value);
+            hideHint();
+        });
+
+        let dragging = false;
+
+        const moveFromEvent = (clientX) => {
+            const rect = compare.getBoundingClientRect();
+            update(((clientX - rect.left) / rect.width) * 100);
+            hideHint();
+        };
+
+        compare.addEventListener('pointerdown', (e) => {
+            dragging = true;
+            compare.setPointerCapture(e.pointerId);
+            moveFromEvent(e.clientX);
+        });
+
+        compare.addEventListener('pointermove', (e) => {
+            if (!dragging) return;
+            moveFromEvent(e.clientX);
+        });
+
+        compare.addEventListener('pointerup', () => {
+            dragging = false;
+        });
+
+        compare.addEventListener('pointercancel', () => {
+            dragging = false;
+        });
+
         update(slider.value);
     });
 

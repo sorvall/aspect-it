@@ -18,8 +18,6 @@
 <body>
 
     <div class="scroll-progress" aria-hidden="true"></div>
-    <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-ring" aria-hidden="true"></div>
 
     <header class="header header--hero">
         <div class="container header-inner">
@@ -50,11 +48,37 @@
                     <span class="hero-tag hero-tag--glow">IT-аутсорсинг</span>
                     <span class="hero-tag">Без интеграций</span>
                 </div>
-                <h1>Обновим сайт<br /><span>под ключ</span></h1>
+                <h1>
+                    Обновим<br />
+                    <span class="hero-words" aria-live="polite">
+                        <span class="hero-words-track">
+                            <span class="hero-word">сайт</span>
+                            <span class="hero-word">дизайн</span>
+                            <span class="hero-word">вёрстку</span>
+                            <span class="hero-word">контент</span>
+                            <span class="hero-word">SEO</span>
+                        </span>
+                    </span><br />
+                    <span class="hero-accent">под ключ</span>
+                </h1>
                 <p>
                     Дизайн, верстка, наполнение контентом и SEO.
                     Работаем без сложных интеграций — не трогаем вашу 1С и CRM.
                 </p>
+                <div class="hero-services-slider">
+                    <div class="hero-services-track">
+                        <a href="services.html#design" class="hero-service-chip">🖌 Дизайн сайта</a>
+                        <a href="services.html#layout" class="hero-service-chip">⌨️ Верстка HTML/CSS</a>
+                        <a href="services.html#content" class="hero-service-chip">✍️ Наполнение контентом</a>
+                        <a href="services.html#seo" class="hero-service-chip">📈 SEO-оптимизация</a>
+                        <a href="services.html#support" class="hero-service-chip">🛠 Техподдержка</a>
+                        <a href="services.html#design" class="hero-service-chip" aria-hidden="true">🖌 Дизайн сайта</a>
+                        <a href="services.html#layout" class="hero-service-chip" aria-hidden="true">⌨️ Верстка HTML/CSS</a>
+                        <a href="services.html#content" class="hero-service-chip" aria-hidden="true">✍️ Наполнение контентом</a>
+                        <a href="services.html#seo" class="hero-service-chip" aria-hidden="true">📈 SEO-оптимизация</a>
+                        <a href="services.html#support" class="hero-service-chip" aria-hidden="true">🛠 Техподдержка</a>
+                    </div>
+                </div>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn">Получить КП</a>
                     <a href="#cases" class="btn btn-outline btn-outline--dark">Смотреть кейсы</a>
@@ -64,18 +88,47 @@
                 <div class="hero-mockup">
                     <div class="mockup-bar">
                         <span></span><span></span><span></span>
+                        <span class="mockup-url">metallprom.ru</span>
                     </div>
                     <div class="mockup-screen">
-                        <div class="mockup-content"></div>
+                        <div class="site-mock site-mock--after site-mock--factory site-mock--hero">
+                            <header class="sm-header sm-header--modern">
+                                <span class="sm-logo">МеталПром</span>
+                                <nav class="sm-nav"><span>Услуги</span><span>Продукция</span><span>Контакты</span></nav>
+                            </header>
+                            <div class="sm-hero sm-hero--modern">
+                                <h2>Металлоконструкции<br>любой сложности</h2>
+                                <button class="sm-cta">Получить расчёт</button>
+                            </div>
+                            <div class="sm-stats">
+                                <div><strong>15+</strong><span>лет на рынке</span></div>
+                                <div><strong>200+</strong><span>объектов</span></div>
+                                <div><strong>24ч</strong><span>ответ на заявку</span></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="hero-float hero-float--glow hero-float--1">
                     <strong>+37%</strong>
                     <span>заявок за 2 месяца</span>
                 </div>
-                <div class="hero-float hero-float--glow hero-float--2">
-                    <strong>95+</strong>
-                    <span>PageSpeed Score</span>
+                <div class="hero-float hero-float--glow hero-float--2 hero-float--metrics">
+                    <div class="hero-metric">
+                        <strong>95+</strong>
+                        <span>PageSpeed</span>
+                    </div>
+                    <div class="hero-metric">
+                        <strong>92</strong>
+                        <span>SEO-балл</span>
+                    </div>
+                    <div class="hero-metric">
+                        <strong>100%</strong>
+                        <span>Адаптив</span>
+                    </div>
+                    <div class="hero-metric">
+                        <strong>0.8s</strong>
+                        <span>Загрузка</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -198,33 +251,105 @@
             <div class="cases-grid">
                 <article class="case-card reveal stagger-1">
                     <div class="compare" data-compare>
-                        <div class="compare-layer compare-after" style="background-image: url('https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&h=400&fit=crop')"></div>
-                        <div class="compare-layer compare-before" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=400&fit=crop')"></div>
+                        <div class="compare-layer compare-after">
+                            <div class="site-mock site-mock--after site-mock--factory">
+                                <header class="sm-header sm-header--modern">
+                                    <span class="sm-logo">МеталПром</span>
+                                    <nav class="sm-nav"><span>Услуги</span><span>Продукция</span><span>Контакты</span></nav>
+                                </header>
+                                <div class="sm-hero sm-hero--modern">
+                                    <h2>Металлоконструкции<br>любой сложности</h2>
+                                    <button class="sm-cta">Получить расчёт</button>
+                                </div>
+                                <div class="sm-stats">
+                                    <div><strong>15+</strong><span>лет на рынке</span></div>
+                                    <div><strong>200+</strong><span>объектов</span></div>
+                                    <div><strong>24ч</strong><span>ответ на заявку</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="compare-layer compare-before">
+                            <div class="site-mock site-mock--before site-mock--factory">
+                                <table class="sm-table" cellpadding="0" cellspacing="0">
+                                    <tr><td colspan="2" class="sm-old-header">ООО «МеталПром» — металлоконструкции с 2008 года</td></tr>
+                                    <tr>
+                                        <td class="sm-old-sidebar">
+                                            <a href="#">► Главная</a>
+                                            <a href="#">► О компании</a>
+                                            <a href="#">► Продукция</a>
+                                            <a href="#">► Контакты</a>
+                                            <br><br>
+                                            <small>Посетителей: 12847</small>
+                                        </td>
+                                        <td class="sm-old-content">
+                                            <div class="sm-marquee"><span>★ Скидки на металлоконструкции! Звоните ☎ +7(495)123-45-67 ★</span></div>
+                                            <p><b>Добро пожаловать!</b></p>
+                                            <p>Наша компания занимается производством металлоконструкций. Мы работаем на рынке уже много лет и имеем большой опыт.</p>
+                                            <div class="sm-old-img" aria-hidden="true"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                         <div class="compare-handle" aria-hidden="true"></div>
                         <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: завод" />
                         <span class="compare-label compare-label--before">До</span>
                         <span class="compare-label compare-label--after">После</span>
+                        <span class="compare-hint">← перетащите →</span>
                     </div>
                     <div class="case-body">
                         <span class="tag">Завод</span>
-                        <h3>Обновление сайта завода</h3>
-                        <p>Разработали дизайн, сверстали 12 страниц, наполнили контентом.</p>
+                        <h3>Обновление сайта завода металлоконструкций</h3>
+                        <p>Был устаревший сайт на HTML 2008 года. Сделали современный дизайн, 12 страниц, форму заявки.</p>
                         <div class="result">↑ Заявок +37% за 2 месяца</div>
                     </div>
                 </article>
                 <article class="case-card reveal stagger-2">
                     <div class="compare" data-compare>
-                        <div class="compare-layer compare-after" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=400&fit=crop')"></div>
-                        <div class="compare-layer compare-before" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=400&fit=crop&sat=-100')"></div>
+                        <div class="compare-layer compare-after">
+                            <div class="site-mock site-mock--after site-mock--build">
+                                <header class="sm-header sm-header--modern sm-header--light">
+                                    <span class="sm-logo sm-logo--dark">СтройГрупп</span>
+                                    <nav class="sm-nav sm-nav--dark"><span>Объекты</span><span>О нас</span><span>Заявка</span></nav>
+                                </header>
+                                <div class="sm-hero sm-hero--build">
+                                    <div class="sm-hero-text">
+                                        <h2>Строим дома<br>вашей мечты</h2>
+                                        <p>120+ сданных объектов в Москве и МО</p>
+                                    </div>
+                                </div>
+                                <div class="sm-projects">
+                                    <div class="sm-project"></div>
+                                    <div class="sm-project"></div>
+                                    <div class="sm-project"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="compare-layer compare-before">
+                            <div class="site-mock site-mock--before site-mock--build">
+                                <div class="sm-old-banner">СтройГрупп — строительная компания!!!</div>
+                                <div class="sm-old-body">
+                                    <h1>ДОБРО ПОЖАЛОВАТЬ НА НАШ САЙТ</h1>
+                                    <hr>
+                                    <p>Мы строим дома и коттеджи. Наши цены самые низкие в городе!!! Звоните прямо сейчас!!!</p>
+                                    <div class="sm-old-boxes">
+                                        <div class="sm-old-box">Фото 1<br><small>[нет изображения]</small></div>
+                                        <div class="sm-old-box">Фото 2<br><small>[нет изображения]</small></div>
+                                    </div>
+                                    <p class="sm-old-footer-text">© 2015 СтройГрупп. Все права защищены. Разработка сайта: студия "Вебмастер"</p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="compare-handle" aria-hidden="true"></div>
                         <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: застройщик" />
                         <span class="compare-label compare-label--before">До</span>
                         <span class="compare-label compare-label--after">После</span>
+                        <span class="compare-hint">← перетащите →</span>
                     </div>
                     <div class="case-body">
                         <span class="tag">Строительство</span>
                         <h3>Сайт-визитка для застройщика</h3>
-                        <p>Сделали акцент на портфолио объектов и отзывы клиентов.</p>
+                        <p>Старый сайт с табличной вёрсткой заменили на современный с портфолио объектов и формой заявки.</p>
                         <div class="result">↑ Звонков +25% за месяц</div>
                     </div>
                 </article>
