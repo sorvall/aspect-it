@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="400" y2="400">
+      <stop stop-color="#be185d"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <ellipse cx="200" cy="348" rx="110" ry="36" fill="#000" opacity="0.12"/>
+  <path d="M125 365c18-72 132-72 150 0H125z" fill="#ec4899"/>
+  <path d="M135 360c22-50 108-50 130 0H135z" fill="#fdf2f8"/>
+  <!-- hair back -->
+  <ellipse cx="200" cy="168" rx="72" ry="78" fill="#d97706"/>
+  <!-- neck -->
+  <rect x="178" y="248" width="44" height="40" rx="8" fill="#fdba74"/>
+  <!-- face -->
+  <ellipse cx="200" cy="210" rx="58" ry="64" fill="#fed7aa"/>
+  <!-- hair front bangs -->
+  <path d="M142 188c8-42 38-68 58-68s50 26 58 68c-12-8-28-12-44-10-16 2-30 10-42 22-8-6-18-10-30-12z" fill="#d97706"/>
+  <path d="M148 175c6-28 28-48 52-48s46 20 52 48" stroke="#b45309" stroke-width="3" fill="none"/>
+  <!-- eyes -->
+  <ellipse cx="178" cy="208" rx="9" ry="11" fill="#fff"/>
+  <ellipse cx="222" cy="208" rx="9" ry="11" fill="#fff"/>
+  <circle cx="180" cy="210" r="5.5" fill="#365314"/>
+  <circle cx="224" cy="210" r="5.5" fill="#365314"/>
+  <circle cx="182" cy="208" r="2" fill="#fff"/>
+  <circle cx="226" cy="208" r="2" fill="#fff"/>
+  <!-- brows -->
+  <path d="M165 192c10-4 20-5 28-2M235 190c8-3 18-2 26 2" stroke="#92400e" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- nose -->
+  <path d="M200 218v14" stroke="#fb923c" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+  <!-- smile -->
+  <path d="M182 238c8 8 18 12 36 12s28-4 36-12" stroke="#ea580c" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M182 238c8 6 18 9 36 9s28-3 36-9" fill="#fb7185" opacity="0.35"/>
+  <!-- earrings -->
+  <circle cx="142" cy="228" r="4" fill="#fbbf24"/>
+  <circle cx="258" cy="228" r="4" fill="#fbbf24"/>
+</svg>

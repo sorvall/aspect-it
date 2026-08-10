@@ -652,6 +652,114 @@ body {
     display: block;
 }
 
+/* ===== КОМАНДА ===== */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.team-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(37, 99, 235, 0.2);
+}
+
+.team-photo {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--gradient-soft);
+}
+
+.team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.team-info {
+    padding: 24px 24px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-info h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.team-role {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.team-bio {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.team-badge {
+    align-self: flex-start;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--gradient-soft);
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    padding: 5px 12px;
+    border-radius: 100px;
+}
+
+.form-manager {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+    padding: 14px 16px;
+    background: var(--gradient-soft);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    border-radius: var(--radius);
+}
+
+.form-manager img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--surface);
+    box-shadow: var(--shadow);
+    flex-shrink: 0;
+}
+
+.form-manager strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.form-manager span {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
 /* ===== ГЕРОЙ СТРАНИЦЫ ===== */
 .page-hero {
     padding: 140px 0 64px;
@@ -2120,6 +2228,7 @@ body {
     .adv-grid--6,
     .audience-grid,
     .guarantee-grid,
+    .team-grid,
     .cases-grid {
         grid-template-columns: 1fr;
     }
@@ -2129,6 +2238,10 @@ body {
     }
 
     .guarantee-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -2218,7 +2331,8 @@ body {
     }
 
     .adv-grid--6,
-    .guarantee-grid {
+    .guarantee-grid,
+    .team-grid {
         grid-template-columns: 1fr;
     }
 

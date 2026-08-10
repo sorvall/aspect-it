@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="400" y2="400">
+      <stop stop-color="#065f46"/>
+      <stop offset="1" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <ellipse cx="200" cy="348" rx="110" ry="36" fill="#000" opacity="0.12"/>
+  <path d="M125 365c18-72 132-72 150 0H125z" fill="#059669"/>
+  <path d="M135 360c22-50 108-50 130 0H135z" fill="#ecfdf5"/>
+  <!-- curly hair -->
+  <circle cx="158" cy="148" r="28" fill="#171717"/>
+  <circle cx="200" cy="128" r="32" fill="#171717"/>
+  <circle cx="242" cy="148" r="28" fill="#171717"/>
+  <circle cx="138" cy="178" r="22" fill="#171717"/>
+  <circle cx="262" cy="178" r="22" fill="#171717"/>
+  <circle cx="168" cy="118" r="18" fill="#262626"/>
+  <circle cx="232" cy="118" r="18" fill="#262626"/>
+  <!-- neck -->
+  <rect x="180" y="250" width="40" height="38" rx="8" fill="#8d5524"/>
+  <!-- face -->
+  <ellipse cx="200" cy="210" rx="56" ry="62" fill="#c68642"/>
+  <!-- fade haircut sides -->
+  <path d="M144 210c-6-40 8-78 36-92M256 210c6-40-8-78-36-92" fill="#171717" opacity="0.85"/>
+  <!-- eyes -->
+  <ellipse cx="180" cy="206" rx="10" ry="12" fill="#fff"/>
+  <ellipse cx="220" cy="206" rx="10" ry="12" fill="#fff"/>
+  <circle cx="182" cy="208" r="6" fill="#422006"/>
+  <circle cx="222" cy="208" r="6" fill="#422006"/>
+  <circle cx="184" cy="205" r="2" fill="#fff"/>
+  <circle cx="224" cy="205" r="2" fill="#fff"/>
+  <!-- brows -->
+  <path d="M162 188c14-6 28-6 40 0M238 188c-14-6-28-6-40 0" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+  <!-- friendly grin -->
+  <path d="M176 242c10 10 22 14 48 14s38-4 48-14" stroke="#78350f" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M180 242c8 6 18 9 40 9s32-3 40-9" fill="#fff" opacity="0.9"/>
+  <!-- subtle stubble -->
+  <ellipse cx="200" cy="248" rx="28" ry="8" fill="#422006" opacity="0.08"/>
+</svg>
