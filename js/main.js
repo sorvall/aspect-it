@@ -90,12 +90,63 @@ document.addEventListener('DOMContentLoaded', () => {
         update(slider.value);
     });
 
-    document.querySelectorAll('.team-slider').forEach((slider) => {
+    document.querySelectorAll('.team-carousel').forEach((carousel) => {
+        const slider = carousel.querySelector('.team-slider');
+        const track = carousel.querySelector('.team-track');
+        const prevBtn = carousel.querySelector('.team-nav--prev');
+        const nextBtn = carousel.querySelector('.team-nav--next');
+        const dots = carousel.querySelectorAll('.team-dot');
+        if (!slider || !track) return;
+
+        const cards = () => [...track.querySelectorAll('.team-card')];
+
+        const scrollToIndex = (index) => {
+            const card = cards()[index];
+            if (!card) return;
+            const offset = card.offsetLeft - (slider.clientWidth - card.offsetWidth) / 2;
+            slider.scrollTo({ left: Math.max(0, offset), behavior: 'smooth' });
+        };
+
+        const updateDots = () => {
+            const list = cards();
+            if (!list.length) return;
+            let active = 0;
+            let minDist = Infinity;
+            const center = slider.scrollLeft + slider.clientWidth / 2;
+            list.forEach((card, i) => {
+                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                const dist = Math.abs(center - cardCenter);
+                if (dist < minDist) {
+                    minDist = dist;
+                    active = i;
+                }
+            });
+            dots.forEach((dot, i) => dot.classList.toggle('is-active', i === active));
+        };
+
+        prevBtn?.addEventListener('click', () => {
+            const step = cards()[0]?.offsetWidth + 20 || 320;
+            slider.scrollBy({ left: -step, behavior: 'smooth' });
+        });
+
+        nextBtn?.addEventListener('click', () => {
+            const step = cards()[0]?.offsetWidth + 20 || 320;
+            slider.scrollBy({ left: step, behavior: 'smooth' });
+        });
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => scrollToIndex(i));
+        });
+
+        slider.addEventListener('scroll', updateDots, { passive: true });
+        updateDots();
+
         let dragging = false;
         let startX = 0;
         let scrollStart = 0;
 
         slider.addEventListener('pointerdown', (e) => {
+            if (e.target.closest('.team-nav')) return;
             if (e.pointerType === 'mouse' && e.button !== 0) return;
             dragging = true;
             startX = e.clientX;
@@ -110,8 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const stopDrag = () => {
+            if (!dragging) return;
             dragging = false;
             slider.classList.remove('is-dragging');
+            updateDots();
         };
 
         slider.addEventListener('pointerup', stopDrag);
