@@ -8,7 +8,7 @@
 #
 # Опционально:
 #   SSH_PORT        — порт SSH, если не 22
-#   DOCKERHUB_USERNAME / DOCKERHUB_TOKEN — login в Docker Hub при лимитах pull
+#   DOCKERHUB_USERNAME / DOCKERHUB_TOKEN — не обязательны; базовый образ тянется с AWS Public ECR
 #
 # На сервере один раз: установлены Docker и docker compose plugin.
 # Файл .env на сервере не обязателен. Для смены порта создайте DEPLOY_PATH/.env:
@@ -174,27 +174,24 @@ jobs:
             echo "=== .env ==="
             cat .env
 
-            if [ -n '${{ secrets.DOCKERHUB_USERNAME }}' ] && [ -n '${{ secrets.DOCKERHUB_TOKEN }}' ]; then
-              echo "Logging in to Docker Hub..."
-              echo '${{ secrets.DOCKERHUB_TOKEN }}' | docker login -u '${{ secrets.DOCKERHUB_USERNAME }}' --password-stdin || true
-            fi
+            NGINX_IMAGE="public.ecr.aws/docker/library/nginx:alpine"
 
-            echo "=== Ensuring base image nginx:alpine ==="
-            if docker image inspect nginx:alpine >/dev/null 2>&1; then
-              echo "Using cached nginx:alpine on server."
+            echo "=== Ensuring base image ==="
+            if docker image inspect "$NGINX_IMAGE" >/dev/null 2>&1; then
+              echo "Using cached $NGINX_IMAGE on server."
             else
               pull_ok=0
               for attempt in 1 2 3 4 5; do
-                echo "Pull attempt ${attempt}/5..."
-                if docker pull nginx:alpine; then
+                echo "Pull attempt ${attempt}/5: $NGINX_IMAGE"
+                if docker pull "$NGINX_IMAGE"; then
                   pull_ok=1
                   break
                 fi
                 sleep $((attempt * 15))
               done
               if [ "$pull_ok" -ne 1 ]; then
-                echo "::error::Failed to pull nginx:alpine (Docker Hub rate limit?)."
-                echo "Add DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets, or run on server: docker pull nginx:alpine"
+                echo "::error::Failed to pull base image from AWS Public ECR."
+                echo "Run on server: docker pull $NGINX_IMAGE"
                 exit 1
               fi
             fi
