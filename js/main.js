@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav');
-    const scrollProgress = document.querySelector('.scroll-progress');
 
     const updateHeader = () => {
         if (!header) return;
@@ -13,13 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    window.addEventListener('scroll', () => {
-        updateHeader();
-        if (scrollProgress) {
-            const max = document.documentElement.scrollHeight - window.innerHeight;
-            scrollProgress.style.width = max > 0 ? `${(window.scrollY / max) * 100}%` : '0%';
-        }
-    });
+    window.addEventListener('scroll', updateHeader);
     updateHeader();
 
     if (menuToggle && nav) {
