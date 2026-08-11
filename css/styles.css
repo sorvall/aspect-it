@@ -1046,6 +1046,8 @@ body {
 .bento-item--large {
     padding: 0;
     height: 100%;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .bento-item--wide {
@@ -1054,36 +1056,146 @@ body {
     gap: 20px;
 }
 
-.bento-preview {
-    flex-shrink: 0;
-    height: 180px;
-    background: var(--gradient-soft);
-    border-bottom: 1px solid var(--border);
-    padding: 16px;
-    position: relative;
+.bento-mockup {
+    flex: 0 0 48%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: #eef2ff;
+    border-right: 1px solid var(--border);
 }
 
-.bento-preview-bar {
-    width: 40%;
+.bento-mockup-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: #e2e8f0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.bento-mockup-bar span {
+    width: 8px;
     height: 8px;
-    background: rgba(37, 99, 235, 0.2);
-    border-radius: 4px;
-    margin-bottom: 16px;
+    border-radius: 50%;
 }
 
-.bento-preview-block {
-    border-radius: 8px;
+.bento-mockup-bar span:nth-child(1) { background: #f87171; }
+.bento-mockup-bar span:nth-child(2) { background: #fbbf24; }
+.bento-mockup-bar span:nth-child(3) { background: #4ade80; }
+
+.bento-mockup-screen {
+    flex: 1;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+}
+
+.bento-mini-site {
+    width: 100%;
+    max-width: 220px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.bms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background: #fff;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.bms-logo {
+    font-size: 8px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.2px;
+}
+
+.bms-nav {
+    display: flex;
+    gap: 6px;
+}
+
+.bms-nav span {
+    font-size: 6px;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.bms-hero {
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;
+    gap: 6px;
+    padding: 10px;
+    background: linear-gradient(135deg, #eff6ff 0%, #fff 100%);
+}
+
+.bms-tag {
+    display: inline-block;
+    font-size: 5px;
+    font-weight: 600;
+    color: #2563eb;
     background: rgba(37, 99, 235, 0.1);
-    margin-bottom: 8px;
+    padding: 2px 5px;
+    border-radius: 100px;
+    margin-bottom: 4px;
 }
 
-.bento-preview-block--1 { height: 40px; width: 70%; }
-.bento-preview-block--2 { height: 24px; width: 90%; }
-.bento-preview-block--3 { height: 24px; width: 50%; }
+.bms-hero-text strong {
+    display: block;
+    font-size: 9px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+    margin-bottom: 6px;
+}
+
+.bms-btn {
+    display: inline-block;
+    font-size: 5px;
+    font-weight: 600;
+    color: #fff;
+    background: #2563eb;
+    padding: 3px 7px;
+    border-radius: 4px;
+}
+
+.bms-visual {
+    border-radius: 6px;
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    min-height: 48px;
+}
+
+.bms-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding: 0 10px 10px;
+}
+
+.bms-row span {
+    height: 18px;
+    border-radius: 4px;
+    background: #f1f5f9;
+}
+
+.bms-row span:nth-child(2) {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(124, 58, 237, 0.08));
+}
 
 .bento-text {
-    padding: 24px 28px 28px;
+    padding: 28px;
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2341,6 +2453,14 @@ body {
             "content content";
     }
 
+    .bento-item--large {
+        flex-direction: row;
+    }
+
+    .bento-mockup {
+        flex-basis: 44%;
+    }
+
     .adv-grid,
     .adv-grid--6,
     .audience-grid,
@@ -2522,6 +2642,26 @@ body {
             "layout"
             "seo"
             "content";
+    }
+
+    .bento-item--large {
+        flex-direction: column;
+    }
+
+    .bento-mockup {
+        flex: none;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .bento-mockup-screen {
+        min-height: 140px;
+        padding: 12px;
+    }
+
+    .bento-text {
+        padding: 24px;
     }
 
     .bento-item--wide {
