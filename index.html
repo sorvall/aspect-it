@@ -12,14 +12,14 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
     <div class="scroll-progress" aria-hidden="true"></div>
 
-    <header class="header header--hero">
+    <header class="header header--light">
         <div class="container header-inner">
             <a href="index.html" class="logo">
                 <span class="logo-mark">A</span>
@@ -35,346 +35,94 @@
                 <span></span>
                 <span></span>
             </button>
-            <a href="#contact" class="btn">Обсудить проект</a>
+            <a href="#contact" class="btn btn-ia">Обсудить проект</a>
         </div>
     </header>
 
-    <section class="hero hero--dark">
-        <div class="hero-mesh" aria-hidden="true"></div>
-        <div class="hero-grid-bg" aria-hidden="true"></div>
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <div class="hero-tags">
-                    <span class="hero-tag hero-tag--glow">IT-аутсорсинг</span>
-                    <span class="hero-tag">Фиксированная цена</span>
-                    <span class="hero-tag">От 7 дней</span>
-                </div>
-                <h1>
-                    Обновим<br />
-                    <span class="hero-words" aria-live="polite">
-                        <span class="hero-words-track">
-                            <span class="hero-word">сайт</span>
-                            <span class="hero-word">дизайн</span>
-                            <span class="hero-word">вёрстку</span>
-                            <span class="hero-word">контент</span>
-                            <span class="hero-word">SEO</span>
-                        </span>
-                    </span><br />
-                    <span class="hero-accent">под ключ</span>
-                </h1>
-                <p>
-                    Устаревший сайт теряет до 40% заявок ещё до звонка. Мы обновим внешний вид,
-                    тексты и SEO — чтобы клиенты доверяли и оставляли заявки.
-                    Без найма программиста в штат и без риска для вашей 1С и CRM.
-                </p>
-                <div class="hero-services-slider">
-                    <div class="hero-services-track">
-                        <a href="services.html#design" class="hero-service-chip">🖌 Дизайн сайта</a>
-                        <a href="services.html#layout" class="hero-service-chip">⌨️ Верстка HTML/CSS</a>
-                        <a href="services.html#content" class="hero-service-chip">✍️ Наполнение контентом</a>
-                        <a href="services.html#seo" class="hero-service-chip">📈 SEO-оптимизация</a>
-                        <a href="services.html#support" class="hero-service-chip">🛠 Техподдержка</a>
-                        <a href="services.html#design" class="hero-service-chip" aria-hidden="true">🖌 Дизайн сайта</a>
-                        <a href="services.html#layout" class="hero-service-chip" aria-hidden="true">⌨️ Верстка HTML/CSS</a>
-                        <a href="services.html#content" class="hero-service-chip" aria-hidden="true">✍️ Наполнение контентом</a>
-                        <a href="services.html#seo" class="hero-service-chip" aria-hidden="true">📈 SEO-оптимизация</a>
-                        <a href="services.html#support" class="hero-service-chip" aria-hidden="true">🛠 Техподдержка</a>
-                    </div>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn">Бесплатный аудит сайта</a>
-                    <a href="#cases" class="btn btn-outline btn-outline--dark">Смотреть кейсы</a>
-                </div>
-                <p class="hero-note">Ответим в течение 2 часов · КП за 24 часа · Без обязательств</p>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-mockup">
-                    <div class="mockup-bar">
-                        <span></span><span></span><span></span>
-                        <span class="mockup-url">metallprom.ru</span>
-                    </div>
-                    <div class="mockup-screen">
-                        <div class="site-mock site-mock--after site-mock--factory site-mock--hero">
-                            <header class="sm-header sm-header--modern">
-                                <span class="sm-logo">МеталПром</span>
-                                <nav class="sm-nav"><span>Услуги</span><span>Продукция</span><span>Контакты</span></nav>
-                            </header>
-                            <div class="sm-hero sm-hero--modern">
-                                <h2>Металлоконструкции<br>любой сложности</h2>
-                                <button class="sm-cta">Получить расчёт</button>
-                            </div>
-                            <div class="sm-stats">
-                                <div><strong>15+</strong><span>лет на рынке</span></div>
-                                <div><strong>200+</strong><span>объектов</span></div>
-                                <div><strong>24ч</strong><span>ответ на заявку</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-float hero-float--glow hero-float--1">
-                    <strong>+37%</strong>
-                    <span>заявок за 2 месяца</span>
-                </div>
-                <div class="hero-float hero-float--glow hero-float--2 hero-float--metrics">
-                    <div class="hero-metric">
-                        <strong>95+</strong>
-                        <span>PageSpeed</span>
-                    </div>
-                    <div class="hero-metric">
-                        <strong>92</strong>
-                        <span>SEO-балл</span>
-                    </div>
-                    <div class="hero-metric">
-                        <strong>100%</strong>
-                        <span>Адаптив</span>
-                    </div>
-                    <div class="hero-metric">
-                        <strong>0.8s</strong>
-                        <span>Загрузка</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="trust">
+    <section class="hero-editorial">
         <div class="container">
-            <p class="trust-label">Нам доверяют</p>
-            <p class="trust-lead">50+ компаний из производства, строительства, медицины и логистики уже обновили сайт с нами</p>
-            <div class="trust-logos">
-                <span class="trust-logo">МеталПром</span>
-                <span class="trust-logo">СтройГрупп</span>
-                <span class="trust-logo">МедЦентр+</span>
-                <span class="trust-logo">ЛогистикаPro</span>
-                <span class="trust-logo">АгроТех</span>
-            </div>
-            <div class="trust-stats reveal">
-                <div class="trust-stat">
+            <p class="hero-editorial-eyebrow">IT-аутсорсинг · Aspect IT</p>
+            <h1 class="hero-editorial-title">Обновление сайтов<br />для B2B-бизнеса</h1>
+            <p class="hero-editorial-lead">Дизайн, вёрстка, контент и SEO под ключ — чтобы сайт приносил заявки, а не стоял «для галочки». Без найма программиста в штат.</p>
+            <div class="hero-editorial-stats reveal">
+                <div class="hero-stat">
                     <strong>50+</strong>
-                    <span>завершённых проектов</span>
+                    <span>завершённых<br />проектов</span>
                 </div>
-                <div class="trust-stat">
-                    <strong>7–14 дней</strong>
-                    <span>средний срок запуска</span>
+                <div class="hero-stat">
+                    <strong>7–14</strong>
+                    <span>дней средний<br />срок запуска</span>
                 </div>
-                <div class="trust-stat">
+                <div class="hero-stat">
                     <strong>+35%</strong>
-                    <span>рост заявок у клиентов</span>
+                    <span>рост заявок<br />у клиентов</span>
                 </div>
-                <div class="trust-stat">
+                <div class="hero-stat">
                     <strong>0 ₽</strong>
-                    <span>скрытых доплат</span>
+                    <span>скрытых<br />доплат</span>
                 </div>
+            </div>
+            <div class="hero-editorial-actions">
+                <a href="#contact" class="btn btn-ia">Обсудить проект</a>
+                <a href="#cases" class="link-arrow">Смотреть кейсы →</a>
             </div>
         </div>
     </section>
 
-    <section class="section section--team" id="team">
+    <section class="cases-strip-section">
         <div class="container">
-            <div class="section-header reveal">
-                <div>
-                    <div class="section-label">Команда</div>
-                    <h2 class="section-title">С вами работают живые люди</h2>
-                    <p class="section-desc">Не безликий «отдел продаж» — у каждого проекта свой менеджер, который на связи от первого звонка до запуска сайта.</p>
-                </div>
+            <div class="cases-strip-head">
+                <h2 class="cases-strip-title">Кейсы</h2>
+                <a href="#cases" class="link-arrow">Все кейсы →</a>
             </div>
-            <div class="team-carousel reveal">
-                <button type="button" class="team-nav team-nav--prev" aria-label="Предыдущий сотрудник">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-                </button>
-                <div class="team-slider" tabindex="0" aria-label="Команда Aspect IT">
-                    <div class="team-track">
-                        <article class="team-card">
-                            <div class="team-photo">
-                                <img src="assets/team/maria.svg" alt="Мария Соколова" width="400" height="400" loading="lazy" />
-                            </div>
-                            <div class="team-info">
-                                <h3>Мария Соколова</h3>
-                                <p class="team-role">Менеджер по работе с клиентами</p>
-                                <p class="team-bio">Проведёт аудит, составит КП и будет на связи каждый день. Без IT-жаргона.</p>
-                                <span class="team-badge">Ответ за 2 часа</span>
-                            </div>
-                        </article>
-                        <article class="team-card">
-                            <div class="team-photo">
-                                <img src="assets/team/alexey.svg" alt="Алексей Воронин" width="400" height="400" loading="lazy" />
-                            </div>
-                            <div class="team-info">
-                                <h3>Алексей Воронин</h3>
-                                <p class="team-role">Руководитель проектов</p>
-                                <p class="team-bio">Координирует дизайн, вёрстку и контент. Еженедельные показы прогресса.</p>
-                                <span class="team-badge">50+ проектов</span>
-                            </div>
-                        </article>
-                        <article class="team-card">
-                            <div class="team-photo">
-                                <img src="assets/team/dmitry.svg" alt="Дмитрий Козлов" width="400" height="400" loading="lazy" />
-                            </div>
-                            <div class="team-info">
-                                <h3>Дмитрий Козлов</h3>
-                                <p class="team-role">Lead-разработчик</p>
-                                <p class="team-bio">Скорость, адаптив и чистый код. PageSpeed 95+ — его стандарт.</p>
-                                <span class="team-badge">PageSpeed 95+</span>
-                            </div>
-                        </article>
+            <div class="cases-strip">
+                <a href="#cases" class="case-teaser reveal">
+                    <div class="case-teaser-top">
+                        <span class="case-teaser-metric">+37%</span>
+                        <span class="case-teaser-metric-label">рост заявок</span>
                     </div>
-                </div>
-                <button type="button" class="team-nav team-nav--next" aria-label="Следующий сотрудник">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-                </button>
-                <div class="team-dots" aria-hidden="true">
-                    <span class="team-dot is-active"></span>
-                    <span class="team-dot"></span>
-                    <span class="team-dot"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section--services">
-        <div class="container reveal">
-            <div class="section-header">
-                <div>
-                    <div class="section-label">Услуги</div>
-                    <h2 class="section-title">Что мы делаем</h2>
-                    <p class="section-desc">Полный цикл обновления сайта — от макета до первых заявок. Берём на себя всё, что видит ваш клиент.</p>
-                </div>
-                <a href="services.html" class="link-arrow">Все услуги и цены →</a>
-            </div>
-            <div class="bento-grid">
-                <a href="services.html#design" class="bento-item reveal stagger-1">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+                    <h3 class="case-teaser-name">МеталПром</h3>
+                    <p class="case-teaser-desc">Обновление сайта завода металлоконструкций: мобильная версия, SEO, форма расчёта</p>
+                    <div class="case-teaser-tags">
+                        <span>Дизайн</span><span>SEO</span><span>Вёрстка</span>
                     </div>
-                    <h3>Дизайн сайта</h3>
-                    <p>Современный облик, который вызывает доверие за 3 секунды. Под вашу отрасль и фирменный стиль — не «шаблон из интернета».</p>
                 </a>
-                <a href="services.html#layout" class="bento-item reveal stagger-2">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <a href="#cases" class="case-teaser reveal">
+                    <div class="case-teaser-top">
+                        <span class="case-teaser-metric">×1,8</span>
+                        <span class="case-teaser-metric-label">конверсия</span>
                     </div>
-                    <h3>Верстка HTML/CSS</h3>
-                    <p>Быстрая загрузка на телефоне и компьютере. PageSpeed 95+ — Google и Яндекс ранжируют такие сайты выше.</p>
+                    <h3 class="case-teaser-name">СтройГрупп</h3>
+                    <p class="case-teaser-desc">Сайт-визитка застройщика: портфолио объектов, форма заявки, современный дизайн</p>
+                    <div class="case-teaser-tags">
+                        <span>Дизайн</span><span>Контент</span>
+                    </div>
                 </a>
-                <a href="services.html#seo" class="bento-item reveal stagger-3">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-                    </div>
-                    <h3>SEO-оптимизация</h3>
-                    <p>Выход в топ по запросам вашей ниши. Meta-теги, структура, ключевые слова — чтобы вас находили, а не конкурентов.</p>
-                </a>
-                <a href="services.html#content" class="bento-item bento-item--wide reveal stagger-4">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    </div>
-                    <h3>Наполнение контентом</h3>
-                    <p>Тексты, которые продают, а не просто «есть на сайте». УТП, структура, фото — клиент понимает, почему выбрать именно вас.</p>
+                <a href="#cases" class="case-teaser case-teaser--cta reveal">
+                    <span class="case-teaser-cta-label">За 7 лет помогли 50+ компаниям обновить сайт</span>
+                    <span class="link-arrow">Смотреть все кейсы →</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <section class="section section--audience" id="for-whom">
-        <div class="container reveal">
-            <div class="section-header">
-                <div>
-                    <div class="section-label">Для кого</div>
-                    <h2 class="section-title">Кому подходит Aspect IT</h2>
-                    <p class="section-desc">Мы работаем с B2B-компаниями, у которых сайт есть, но он не приносит заявок — или стыдно показывать клиентам.</p>
-                </div>
+    <section class="about-band">
+        <div class="container about-band-grid reveal">
+            <div class="about-band-item">
+                <strong>Фиксированная цена</strong>
+                <span>в договоре, без доплат</span>
             </div>
-            <div class="audience-grid">
-                <div class="audience-item reveal stagger-1">
-                    <div class="audience-icon">🏭</div>
-                    <h4>Производство и опт</h4>
-                    <p class="audience-pain">Сайт 2010-х годов, нет мобильной версии, заявки не доходят.</p>
-                    <p class="audience-solution">Сделаем современный каталог, форму расчёта и SEO под вашу нишу — как у МеталПром (+37% заявок).</p>
-                </div>
-                <div class="audience-item reveal stagger-2">
-                    <div class="audience-icon">🏗</div>
-                    <h4>Строительство и услуги</h4>
-                    <p class="audience-pain">Клиенты уходят к конкурентам с «красивыми» сайтами, звонков мало.</p>
-                    <p class="audience-solution">Портфолио объектов, кейсы, понятные цены — сайт, который продаёт доверие, а не просто «визитку».</p>
-                </div>
-                <div class="audience-item reveal stagger-3">
-                    <div class="audience-icon">🏥</div>
-                    <h4>Медицина, логистика, B2B</h4>
-                    <p class="audience-pain">Нужен порядок в контенте, но нет штатного IT-отдела и времени разбираться.</p>
-                    <p class="audience-solution">Берём всё на аутсорс: обновим сайт за 7–14 дней, не трогая ваши внутренние системы.</p>
-                </div>
+            <div class="about-band-item">
+                <strong>Не трогаем 1С и CRM</strong>
+                <span>меняем только публичный сайт</span>
             </div>
-        </div>
-    </section>
-
-    <section class="section section--advantages">
-        <div class="container reveal">
-            <div class="section-header">
-                <div>
-                    <div class="section-label">Почему мы</div>
-                    <h2 class="section-title">Почему выбирают Aspect IT</h2>
-                    <p class="section-desc">Не агентство «на все случаи жизни» — мы заточены под одну задачу: сделать ваш сайт инструментом продаж.</p>
-                </div>
+            <div class="about-band-item">
+                <strong>Ответ за 2 часа</strong>
+                <span>менеджер на связи в Telegram</span>
             </div>
-            <div class="adv-grid adv-grid--6">
-                <div class="adv-item reveal stagger-1">
-                    <div class="adv-num">01</div>
-                    <h4>Экономия до 300 000 ₽/год</h4>
-                    <p>Штатный разработчик — от 120 000 ₽/мес + налоги. Мы — фиксированная цена за проект, без оклада и больничных.</p>
-                </div>
-                <div class="adv-item reveal stagger-2">
-                    <div class="adv-num">02</div>
-                    <h4>Нулевой риск для IT-инфраструктуры</h4>
-                    <p>Не подключаемся к 1С, CRM, ERP и учёту. Меняем только то, что видит клиент — сайт остаётся безопасным.</p>
-                </div>
-                <div class="adv-item reveal stagger-3">
-                    <div class="adv-num">03</div>
-                    <h4>Цена и сроки в договоре</h4>
-                    <p>Коммерческое предложение = финальная сумма. Еженедельные отчёты, промежуточные показы, правки до согласования.</p>
-                </div>
-                <div class="adv-item reveal stagger-1">
-                    <div class="adv-num">04</div>
-                    <h4>Результат, а не «процесс»</h4>
-                    <p>Запуск за 7–14 дней, а не «ещё месяц дорабатываем». Сдаём готовый сайт, который можно сразу показывать клиентам.</p>
-                </div>
-                <div class="adv-item reveal stagger-2">
-                    <div class="adv-num">05</div>
-                    <h4>Измеримый эффект</h4>
-                    <p>PageSpeed 95+, SEO-балл 90+, адаптив 100%. Клиенты в среднем получают +35% заявок в первые 2–3 месяца.</p>
-                </div>
-                <div class="adv-item reveal stagger-3">
-                    <div class="adv-num">06</div>
-                    <h4>Поддержка после запуска</h4>
-                    <p>Не бросаем после сдачи: правки, обновление контента, мониторинг — от 8 000 ₽/мес по абонементу.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section--guarantees">
-        <div class="container reveal">
-            <div class="section-header">
-                <div>
-                    <div class="section-label">Гарантии</div>
-                    <h2 class="section-title">Работаем без сюрпризов</h2>
-                </div>
-            </div>
-            <div class="guarantee-grid">
-                <div class="guarantee-item reveal stagger-1">
-                    <strong>Бесплатный аудит</strong>
-                    <p>Разберём ваш сайт и покажем, что мешает заявкам — без оплаты и обязательств.</p>
-                </div>
-                <div class="guarantee-item reveal stagger-2">
-                    <strong>Оплата по этапам</strong>
-                    <p>50% после утверждения макета, 50% после запуска. Никаких «ещё доплатите за доработки».</p>
-                </div>
-                <div class="guarantee-item reveal stagger-3">
-                    <strong>Правки до согласования</strong>
-                    <p>2 итерации правок по дизайну включены. Не уйдём, пока вы не скажете «да, так и нужно».</p>
-                </div>
-                <div class="guarantee-item reveal stagger-4">
-                    <strong>Ответ за 2 часа</strong>
-                    <p>В рабочее время отвечаем быстро. Менеджер на связи в Telegram — без «перезвоним через неделю».</p>
-                </div>
+            <div class="about-band-item">
+                <strong>PageSpeed 95+</strong>
+                <span>стандарт по каждому проекту</span>
             </div>
         </div>
     </section>
@@ -383,9 +131,8 @@
         <div class="container reveal">
             <div class="section-header">
                 <div>
-                    <div class="section-label">Наши работы</div>
-                    <h2 class="section-title">До и после</h2>
-                    <p class="section-desc">Реальные проекты B2B-компаний. Перетащите ползунок — увидите, как меняется восприятие бизнеса.</p>
+                    <h2 class="section-title section-title--large">До и после</h2>
+                    <p class="section-desc">Перетащите ползунок — увидите, как меняется восприятие бизнеса.</p>
                 </div>
             </div>
             <div class="cases-grid">
@@ -497,6 +244,153 @@
         </div>
     </section>
 
+    <section class="section section--services">
+        <div class="container reveal">
+            <h2 class="section-title section-title--large">Мы не просто обновляем сайты —<br />делаем их инструментом продаж</h2>
+            <div class="ia-services">
+                <div class="ia-services-col">
+                    <h3>Услуги</h3>
+                    <ul class="ia-services-list">
+                        <li><a href="services.html#design">Дизайн сайта</a></li>
+                        <li><a href="services.html#layout">Вёрстка HTML/CSS</a></li>
+                        <li><a href="services.html#content">Наполнение контентом</a></li>
+                        <li><a href="services.html#seo">SEO-оптимизация</a></li>
+                        <li><a href="services.html#support">Техподдержка</a></li>
+                    </ul>
+                </div>
+                <div class="ia-services-col">
+                    <h3>Отрасли</h3>
+                    <ul class="ia-services-list ia-services-list--plain">
+                        <li>Производство и опт</li>
+                        <li>Строительство</li>
+                        <li>Медицина</li>
+                        <li>Логистика</li>
+                        <li>B2B-услуги</li>
+                    </ul>
+                </div>
+            </div>
+            <a href="services.html" class="link-arrow ia-services-link">Все услуги и цены →</a>
+        </div>
+    </section>
+
+    <section class="section section--team" id="team">
+        <div class="container">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-label">Команда</div>
+                    <h2 class="section-title">С вами работают живые люди</h2>
+                    <p class="section-desc">Не безликий «отдел продаж» — у каждого проекта свой менеджер, который на связи от первого звонка до запуска сайта.</p>
+                </div>
+            </div>
+            <div class="team-carousel reveal">
+                <button type="button" class="team-nav team-nav--prev" aria-label="Предыдущий сотрудник">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div class="team-slider" tabindex="0" aria-label="Команда Aspect IT">
+                    <div class="team-track">
+                        <article class="team-card">
+                            <div class="team-photo">
+                                <img src="assets/team/maria.svg" alt="Мария Соколова" width="400" height="400" loading="lazy" />
+                            </div>
+                            <div class="team-info">
+                                <h3>Мария Соколова</h3>
+                                <p class="team-role">Менеджер по работе с клиентами</p>
+                                <p class="team-bio">Проведёт аудит, составит КП и будет на связи каждый день. Без IT-жаргона.</p>
+                                <span class="team-badge">Ответ за 2 часа</span>
+                            </div>
+                        </article>
+                        <article class="team-card">
+                            <div class="team-photo">
+                                <img src="assets/team/alexey.svg" alt="Алексей Воронин" width="400" height="400" loading="lazy" />
+                            </div>
+                            <div class="team-info">
+                                <h3>Алексей Воронин</h3>
+                                <p class="team-role">Руководитель проектов</p>
+                                <p class="team-bio">Координирует дизайн, вёрстку и контент. Еженедельные показы прогресса.</p>
+                                <span class="team-badge">50+ проектов</span>
+                            </div>
+                        </article>
+                        <article class="team-card">
+                            <div class="team-photo">
+                                <img src="assets/team/dmitry.svg" alt="Дмитрий Козлов" width="400" height="400" loading="lazy" />
+                            </div>
+                            <div class="team-info">
+                                <h3>Дмитрий Козлов</h3>
+                                <p class="team-role">Lead-разработчик</p>
+                                <p class="team-bio">Скорость, адаптив и чистый код. PageSpeed 95+ — его стандарт.</p>
+                                <span class="team-badge">PageSpeed 95+</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <button type="button" class="team-nav team-nav--next" aria-label="Следующий сотрудник">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+                <div class="team-dots" aria-hidden="true">
+                    <span class="team-dot is-active"></span>
+                    <span class="team-dot"></span>
+                    <span class="team-dot"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--audience" id="for-whom">
+        <div class="container reveal">
+            <div class="section-header">
+                <div>
+                    <div class="section-label">Для кого</div>
+                    <h2 class="section-title">Кому подходит Aspect IT</h2>
+                    <p class="section-desc">Мы работаем с B2B-компаниями, у которых сайт есть, но он не приносит заявок — или стыдно показывать клиентам.</p>
+                </div>
+            </div>
+            <div class="audience-grid">
+                <div class="audience-item reveal stagger-1">
+                    <div class="audience-icon">🏭</div>
+                    <h4>Производство и опт</h4>
+                    <p class="audience-pain">Сайт 2010-х годов, нет мобильной версии, заявки не доходят.</p>
+                    <p class="audience-solution">Сделаем современный каталог, форму расчёта и SEO под вашу нишу — как у МеталПром (+37% заявок).</p>
+                </div>
+                <div class="audience-item reveal stagger-2">
+                    <div class="audience-icon">🏗</div>
+                    <h4>Строительство и услуги</h4>
+                    <p class="audience-pain">Клиенты уходят к конкурентам с «красивыми» сайтами, звонков мало.</p>
+                    <p class="audience-solution">Портфолио объектов, кейсы, понятные цены — сайт, который продаёт доверие, а не просто «визитку».</p>
+                </div>
+                <div class="audience-item reveal stagger-3">
+                    <div class="audience-icon">🏥</div>
+                    <h4>Медицина, логистика, B2B</h4>
+                    <p class="audience-pain">Нужен порядок в контенте, но нет штатного IT-отдела и времени разбираться.</p>
+                    <p class="audience-solution">Берём всё на аутсорс: обновим сайт за 7–14 дней, не трогая ваши внутренние системы.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--principles">
+        <div class="container">
+            <h2 class="section-title section-title--large reveal">Работаем без сюрпризов —<br />опираясь на принципы</h2>
+            <div class="principles-grid">
+                <div class="principle-item reveal stagger-1">
+                    <h4>Фиксированная цена</h4>
+                    <p>Коммерческое предложение = финальная сумма в договоре. Оплата 50/50: после макета и после запуска.</p>
+                </div>
+                <div class="principle-item reveal stagger-2">
+                    <h4>Без риска для IT</h4>
+                    <p>Не подключаемся к 1С, CRM и учёту. Меняем только публичную часть сайта — ваши системы в безопасности.</p>
+                </div>
+                <div class="principle-item reveal stagger-3">
+                    <h4>Результат за 7–14 дней</h4>
+                    <p>Еженедельные показы, правки до согласования. Сдаём готовый сайт, а не «ещё месяц дорабатываем».</p>
+                </div>
+                <div class="principle-item reveal stagger-4">
+                    <h4>Измеримый эффект</h4>
+                    <p>PageSpeed 95+, SEO-балл 90+. Клиенты в среднем получают +35% заявок в первые 2–3 месяца после запуска.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section section--faq" id="faq">
         <div class="container reveal">
             <div class="section-header">
@@ -531,43 +425,32 @@
         </div>
     </section>
 
-    <section class="form-section" id="contact">
+    <section class="form-section form-section--ia" id="contact">
         <div class="container reveal">
-            <div class="form-panel">
-                <div class="form-panel-inner">
-                    <div class="form-panel-text">
-                        <h2>Узнайте, сколько заявок теряет ваш сайт</h2>
-                        <p>Бесплатный аудит за 24 часа: покажем слабые места, предложим план обновления и назовём точную цену. Без обязательств и навязчивых звонков.</p>
-                        <ul class="form-benefits">
-                            <li>Аудит текущего сайта — 0 ₽</li>
-                            <li>КП с фиксированной ценой за 24 часа</li>
-                            <li>Запуск обновлённого сайта от 7 дней</li>
-                            <li>Не трогаем 1С, CRM и внутренние системы</li>
-                        </ul>
-                        <div class="form-manager">
-                            <img src="assets/team/maria.svg" alt="" width="56" height="56" loading="lazy" />
-                            <div>
-                                <strong>Мария ответит в течение 2 часов</strong>
-                                <span>Менеджер по работе с клиентами</span>
-                            </div>
+            <div class="form-ia">
+                <div class="form-ia-text">
+                    <h2>Готовы обновить сайт<br />и получать больше заявок</h2>
+                    <p>Мы свяжемся с вами в течение двух часов, чтобы задать вопросы и обсудить, какую пользу можем принести.</p>
+                    <div class="form-manager form-manager--ia">
+                        <img src="assets/team/maria.svg" alt="" width="64" height="64" loading="lazy" />
+                        <div>
+                            <strong>Мария Соколова</strong>
+                            <span>Менеджер по работе с клиентами</span>
+                            <a href="https://t.me/" class="link-arrow" target="_blank" rel="noopener">Написать в Telegram →</a>
                         </div>
                     </div>
-                    <form class="form-group" data-form>
+                </div>
+                <form class="form-group form-group--ia" data-form>
                         <div class="form-row">
                             <input type="text" placeholder="Ваше имя" required />
                             <input type="tel" placeholder="+7 (___) ___-__-__" required />
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn">Получить бесплатный аудит</button>
-                            <a href="https://t.me/" class="btn btn-telegram" target="_blank" rel="noopener">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                                Telegram
-                            </a>
+                            <button type="submit" class="btn btn-ia">Оставить заявку</button>
                         </div>
-                        <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку данных. Мы не передаём контакты третьим лицам.</p>
+                        <p class="form-note">Даю согласие на обработку данных в соответствии с политикой конфиденциальности.</p>
                         <p class="form-success">Спасибо! Мы свяжемся с вами в течение 2 часов в рабочее время.</p>
                     </form>
-                </div>
             </div>
         </div>
     </section>
