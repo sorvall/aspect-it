@@ -27,6 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const reveals = document.querySelectorAll('.reveal');
+    const revealIfInView = (el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.92) {
+            el.classList.add('visible');
+        }
+    };
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
@@ -35,7 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     );
-    reveals.forEach((el) => observer.observe(el));
+    reveals.forEach((el) => {
+        revealIfInView(el);
+        observer.observe(el);
+    });
 
     document.querySelectorAll('[data-compare]').forEach((compare) => {
         const slider = compare.querySelector('.compare-slider');
