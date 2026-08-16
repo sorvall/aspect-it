@@ -2780,6 +2780,11 @@ body {
 
 .tile-section-lead {
     margin-bottom: 40px;
+    max-width: 520px;
+}
+
+.tile-section .section-title--large {
+    margin-bottom: 12px;
 }
 
 .tile-grid {
@@ -2800,7 +2805,7 @@ body {
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    cursor: default;
+    cursor: pointer;
     outline: none;
     min-height: 160px;
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
@@ -2828,6 +2833,7 @@ body {
     letter-spacing: 0.1em;
     opacity: 0.75;
     margin-bottom: 8px;
+    transition: opacity 0.3s ease;
 }
 
 .info-tile-title {
@@ -2835,7 +2841,7 @@ body {
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.15;
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .info-tile-detail {
@@ -2867,10 +2873,16 @@ body {
         box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
     }
 
+    .info-tile:hover .info-tile-label,
+    .info-tile:focus-within .info-tile-label,
     .info-tile:hover .info-tile-title,
     .info-tile:focus-within .info-tile-title {
-        transform: translateY(-4px);
         opacity: 0;
+    }
+
+    .info-tile:hover .info-tile-title,
+    .info-tile:focus-within .info-tile-title {
+        transform: translateY(-8px);
     }
 
     .info-tile:hover .info-tile-detail,
