@@ -162,14 +162,16 @@ jobs:
             echo "Using: $COMPOSE_CMD"
             $COMPOSE_CMD version
 
-            if [ ! -f .env ]; then
-              if ss -tln 2>/dev/null | grep -q ':80 ' || netstat -tln 2>/dev/null | grep -q ':80 '; then
-                echo "HTTP_PORT=8080" > .env
-                echo "Port 80 is busy - created .env with HTTP_PORT=8080"
-              else
-                echo "HTTP_PORT=80" > .env
-                echo "Created .env with HTTP_PORT=80"
-              fi
+            port_80_busy() {
+              ss -tln 2>/dev/null | grep -q ':80 ' || netstat -tln 2>/dev/null | grep -q ':80 '
+            }
+
+            if port_80_busy; then
+              echo "HTTP_PORT=8080" > .env
+              echo "Port 80 is busy - using HTTP_PORT=8080"
+            else
+              echo "HTTP_PORT=80" > .env
+              echo "Port 80 is free - using HTTP_PORT=80"
             fi
             echo "=== .env ==="
             cat .env
