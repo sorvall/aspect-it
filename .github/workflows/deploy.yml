@@ -89,7 +89,6 @@ jobs:
           port: ${{ env.SSH_PORT_DEPLOY != '' && env.SSH_PORT_DEPLOY || 22 }}
           command_timeout: 30m
           debug: true
-          script_stop: true
           script: |
             set -eo pipefail
             DEPLOY_PATH='${{ secrets.DEPLOY_PATH }}'
@@ -162,26 +161,25 @@ jobs:
             $COMPOSE_CMD version
 
             echo "=== Stopping previous containers ==="
-            $COMPOSE_CMD down --remove-orphans 2>/dev/null || true
+            set +e
+            $COMPOSE_CMD down --remove-orphans
+            down_status=$?
+            set -e
+            if [ "$down_status" -ne 0 ]; then
+              echo "No previous compose stack to stop (exit $down_status)"
+            fi
 
-            port_80_busy() {
-              if ss -tln 2>/dev/null | grep -qE ':80\b'; then
-                return 0
-              fi
-              if netstat -tln 2>/dev/null | grep -qE ':80\b'; then
-                return 0
-              fi
-              return 1
-            }
-
-            rm -f .env
-            if port_80_busy; then
-              printf 'HTTP_PORT=8080\n' > .env
+            HTTP_PORT=80
+            if ss -tln 2>/dev/null | grep -qE ':80[[:space:]]'; then
+              HTTP_PORT=8080
+              echo "Port 80 is busy - using HTTP_PORT=8080"
+            elif netstat -tln 2>/dev/null | grep -qE ':80[[:space:]]'; then
+              HTTP_PORT=8080
               echo "Port 80 is busy - using HTTP_PORT=8080"
             else
-              printf 'HTTP_PORT=80\n' > .env
               echo "Port 80 is free - using HTTP_PORT=80"
             fi
+            printf 'HTTP_PORT=%s\n' "$HTTP_PORT" > .env
             echo "=== .env ==="
             cat .env
 
