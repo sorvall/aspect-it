@@ -96,7 +96,6 @@ jobs:
             test -n "$DEPLOY_PATH"
             cd "$DEPLOY_PATH"
             find . -mindepth 1 -maxdepth 1 \
-              ! -name '.env' \
               ! -name 'aspect-it-deploy.tgz' \
               -exec rm -rf {} +
             tar xzf aspect-it-deploy.tgz
@@ -162,15 +161,25 @@ jobs:
             echo "Using: $COMPOSE_CMD"
             $COMPOSE_CMD version
 
+            echo "=== Stopping previous containers ==="
+            $COMPOSE_CMD down --remove-orphans 2>/dev/null || true
+
             port_80_busy() {
-              ss -tln 2>/dev/null | grep -q ':80 ' || netstat -tln 2>/dev/null | grep -q ':80 '
+              if ss -tln 2>/dev/null | grep -qE ':80\b'; then
+                return 0
+              fi
+              if netstat -tln 2>/dev/null | grep -qE ':80\b'; then
+                return 0
+              fi
+              return 1
             }
 
+            rm -f .env
             if port_80_busy; then
-              echo "HTTP_PORT=8080" > .env
+              printf 'HTTP_PORT=8080\n' > .env
               echo "Port 80 is busy - using HTTP_PORT=8080"
             else
-              echo "HTTP_PORT=80" > .env
+              printf 'HTTP_PORT=80\n' > .env
               echo "Port 80 is free - using HTTP_PORT=80"
             fi
             echo "=== .env ==="
