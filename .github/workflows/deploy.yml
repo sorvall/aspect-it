@@ -222,6 +222,12 @@ jobs:
               fi
             fi
 
+            echo "=== Ensuring certbot image ==="
+            CERTBOT_IMAGE="certbot/certbot:latest"
+            if ! docker image inspect "$CERTBOT_IMAGE" >/dev/null 2>&1; then
+              docker pull "$CERTBOT_IMAGE"
+            fi
+
             echo "=== Building ==="
             $COMPOSE_CMD build --progress=plain
 
@@ -252,7 +258,7 @@ jobs:
             if ! $COMPOSE_CMD exec -T web sh -c "test -f ${CERT_FILE}" 2>/dev/null; then
               echo "Requesting certificate for ${DOMAIN} and www.${DOMAIN}..."
               set +e
-              $COMPOSE_CMD run --rm certbot certonly \
+              $COMPOSE_CMD --profile certbot run --rm certbot certonly \
                 --webroot -w /var/www/certbot \
                 -d "${DOMAIN}" -d "www.${DOMAIN}" \
                 --email "$CERTBOT_EMAIL" \
@@ -273,7 +279,7 @@ jobs:
             fi
 
             CRON_MARKER="aspect-it-certbot-renew"
-            CRON_CMD="0 4 * * * cd ${DEPLOY_PATH} && ${COMPOSE_CMD} run --rm certbot renew --webroot -w /var/www/certbot --quiet && ${COMPOSE_CMD} restart web >> /var/log/${CRON_MARKER}.log 2>&1"
+            CRON_CMD="0 4 * * * cd ${DEPLOY_PATH} && ${COMPOSE_CMD} --profile certbot run --rm certbot renew --webroot -w /var/www/certbot --quiet && ${COMPOSE_CMD} restart web >> /var/log/${CRON_MARKER}.log 2>&1"
             ( crontab -l 2>/dev/null | grep -v "$CRON_MARKER" || true
               echo "# ${CRON_MARKER}"
               echo "$CRON_CMD"
