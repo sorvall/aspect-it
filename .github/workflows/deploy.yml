@@ -8,11 +8,12 @@
 #
 # Опционально:
 #   SSH_PORT        — порт SSH, если не 22
+#   CERTBOT_EMAIL   — email для Let's Encrypt (уведомления об истечении сертификата)
 #   DOCKERHUB_USERNAME / DOCKERHUB_TOKEN — не обязательны; базовый образ тянется с AWS Public ECR
 #
 # На сервере один раз: установлены Docker и docker compose plugin.
-# Файл .env на сервере не обязателен. Для смены порта создайте DEPLOY_PATH/.env:
-#   HTTP_PORT=8080
+# HTTPS: порты 80 и 443 должны быть свободны и открыты в firewall.
+# Файл .env на сервере создаётся автоматически при деплое.
 
 name: Build and Deploy Aspect IT
 
@@ -170,16 +171,32 @@ jobs:
             fi
 
             HTTP_PORT=80
-            if ss -tln 2>/dev/null | grep -qE ':80[[:space:]]'; then
-              HTTP_PORT=8080
-              echo "Port 80 is busy - using HTTP_PORT=8080"
-            elif netstat -tln 2>/dev/null | grep -qE ':80[[:space:]]'; then
-              HTTP_PORT=8080
-              echo "Port 80 is busy - using HTTP_PORT=8080"
-            else
-              echo "Port 80 is free - using HTTP_PORT=80"
+            HTTPS_PORT=443
+            DOMAIN=aspect-it.ru
+
+            port_in_use() {
+              _p="$1"
+              if ss -tln 2>/dev/null | grep -qE ":${_p}[[:space:]]"; then
+                return 0
+              fi
+              if netstat -tln 2>/dev/null | grep -qE ":${_p}[[:space:]]"; then
+                return 0
+              fi
+              return 1
+            }
+
+            if port_in_use 80; then
+              echo "::error::Port 80 is busy. Let's Encrypt and HTTPS require port 80 to be free."
+              ss -tln 2>/dev/null | grep ':80 ' || netstat -tln 2>/dev/null | grep ':80 ' || true
+              exit 1
             fi
-            printf 'HTTP_PORT=%s\n' "$HTTP_PORT" > .env
+            if port_in_use 443; then
+              echo "::error::Port 443 is busy. HTTPS requires port 443 to be free."
+              ss -tln 2>/dev/null | grep ':443 ' || netstat -tln 2>/dev/null | grep ':443 ' || true
+              exit 1
+            fi
+            echo "Ports 80 and 443 are free — enabling HTTP + HTTPS"
+            printf 'HTTP_PORT=%s\nHTTPS_PORT=%s\nDOMAIN=%s\n' "$HTTP_PORT" "$HTTPS_PORT" "$DOMAIN" > .env
             echo "=== .env ==="
             cat .env
 
@@ -224,5 +241,43 @@ jobs:
 
             echo "=== Deploy OK ==="
             $COMPOSE_CMD ps
-            HTTP_PORT="$(grep '^HTTP_PORT=' .env | cut -d= -f2 || echo 80)"
-            echo "Site should be available at http://$(hostname -I 2>/dev/null | awk '{print $1}'):${HTTP_PORT}"
+
+            echo "=== Let's Encrypt ==="
+            CERTBOT_EMAIL='${{ secrets.CERTBOT_EMAIL }}'
+            if [ -z "$CERTBOT_EMAIL" ]; then
+              CERTBOT_EMAIL="admin@aspect-it.ru"
+            fi
+            CERT_FILE="/etc/letsencrypt/live/${DOMAIN}/fullchain.pem"
+
+            if ! $COMPOSE_CMD exec -T web sh -c "test -f ${CERT_FILE}" 2>/dev/null; then
+              echo "Requesting certificate for ${DOMAIN} and www.${DOMAIN}..."
+              set +e
+              $COMPOSE_CMD run --rm certbot certonly \
+                --webroot -w /var/www/certbot \
+                -d "${DOMAIN}" -d "www.${DOMAIN}" \
+                --email "$CERTBOT_EMAIL" \
+                --agree-tos --no-eff-email \
+                --non-interactive
+              cert_status=$?
+              set -e
+              if [ "$cert_status" -ne 0 ]; then
+                echo "::warning::Certbot failed. Check DNS (A for ${DOMAIN} and www), firewall (80/443), and email."
+                echo "Site remains on HTTP until certificate is issued."
+              else
+                echo "Certificate obtained — restarting web with HTTPS"
+                $COMPOSE_CMD restart web
+              fi
+            else
+              echo "Certificate already present — ensuring HTTPS config is active"
+              $COMPOSE_CMD restart web
+            fi
+
+            CRON_MARKER="aspect-it-certbot-renew"
+            CRON_CMD="0 4 * * * cd ${DEPLOY_PATH} && ${COMPOSE_CMD} run --rm certbot renew --webroot -w /var/www/certbot --quiet && ${COMPOSE_CMD} restart web >> /var/log/${CRON_MARKER}.log 2>&1"
+            ( crontab -l 2>/dev/null | grep -v "$CRON_MARKER" || true
+              echo "# ${CRON_MARKER}"
+              echo "$CRON_CMD"
+            ) | crontab - 2>/dev/null || echo "Could not install crontab for cert renewal"
+
+            echo "Site: https://${DOMAIN}/"
+            echo "HTTP redirects to HTTPS when certificate is active."
