@@ -183,22 +183,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    document.querySelectorAll('[data-tech-cloud]').forEach((cloud) => {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        if (window.matchMedia('(max-width: 520px)').matches) return;
-
-        cloud.addEventListener('mousemove', (e) => {
-            const rect = cloud.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-            cloud.style.setProperty('--mx', x.toFixed(3));
-            cloud.style.setProperty('--my', y.toFixed(3));
-        });
-
-        cloud.addEventListener('mouseleave', () => {
-            cloud.style.setProperty('--mx', '0');
-            cloud.style.setProperty('--my', '0');
-        });
-    });
 });
