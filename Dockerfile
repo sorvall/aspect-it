@@ -9,7 +9,7 @@ RUN chmod +x /docker-entrypoint.d/40-enable-ssl.sh
 
 ENV DOMAIN=aspect-it.ru
 
-COPY index.html services.html privacy.html cases.html case-audit.html case-leads.html case-seo.html case-launch.html robots.txt sitemap.xml yandex_36bc98c3d39c8f26.html /usr/share/nginx/html/
+COPY index.html services.html privacy.html cases.html case-audit.html case-leads.html case-seo.html case-launch.html case-yandex-local.html case-platforms.html robots.txt sitemap.xml yandex_36bc98c3d39c8f26.html /usr/share/nginx/html/
 COPY css/ /usr/share/nginx/html/css/
 COPY js/ /usr/share/nginx/html/js/
 COPY assets/ /usr/share/nginx/html/assets/

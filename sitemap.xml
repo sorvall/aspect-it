@@ -43,6 +43,18 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://aspect-it.ru/case-yandex-local.html</loc>
+        <lastmod>2026-08-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://aspect-it.ru/case-platforms.html</loc>
+        <lastmod>2026-08-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://aspect-it.ru/privacy.html</loc>
         <lastmod>2026-08-11</lastmod>
         <changefreq>yearly</changefreq>
