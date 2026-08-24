@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://mc.yandex.ru" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=10" />
+    <link rel="stylesheet" href="/css/styles.css?v=12" />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -166,22 +166,29 @@
                     <a href="#cases" class="link-arrow">Смотреть кейсы →</a>
                 </div>
             </div>
-            <div class="hero-editorial-stats">
-                <div class="hero-stat">
-                    <strong>50+</strong>
-                    <span>завершённых<br />проектов</span>
+            <div class="hero-stats-panel reveal">
+                <div class="hero-stats-watermarks" aria-hidden="true">
+                    <span class="hero-stats-watermark hero-stats-watermark--main">ЦИФРЫ</span>
+                    <span class="hero-stats-watermark hero-stats-watermark--b2b">B2B</span>
+                    <span class="hero-stats-watermark hero-stats-watermark--result">ФАКТ</span>
                 </div>
-                <div class="hero-stat">
-                    <strong>7–14</strong>
-                    <span>дней средний<br />срок запуска</span>
-                </div>
-                <div class="hero-stat">
-                    <strong>24 ч</strong>
-                    <span>аудит и КП<br />без обязательств</span>
-                </div>
-                <div class="hero-stat">
-                    <strong>0 ₽</strong>
-                    <span>скрытых<br />доплат</span>
+                <div class="hero-editorial-stats">
+                    <div class="hero-stat">
+                        <strong>50+</strong>
+                        <span>завершённых<br />проектов</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>7–14</strong>
+                        <span>дней средний<br />срок запуска</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>24 ч</strong>
+                        <span>аудит и КП<br />без обязательств</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>0 ₽</strong>
+                        <span>скрытых<br />доплат</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -317,65 +324,53 @@
                     <line x1="48" y1="72" x2="14" y2="78" />
                 </svg>
                 <div class="tech-cloud" data-tech-cloud aria-label="Технологии и сервисы">
-                <div class="tech-bubble tech-bubble--xl" style="--x: 4%; --y: 6%; --dx: 10px; --dy: -14px; --dur: 7s; --delay: 0s">
-                    <img src="assets/tech/yandex.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">Вебмастер</span>
-                    <p class="tech-bubble-tip">Индексация, sitemap и контроль ошибок в Яндексе</p>
+                <div class="tech-node" style="--x: 2%; --y: 4%; --dx: 10px; --dy: -14px; --dur: 7s; --delay: 0s">
+                    <div class="tech-bubble tech-bubble--xl"><img src="assets/tech/yandex.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>Вебмастер</strong> Индексация, sitemap и контроль ошибок в Яндексе</p>
                 </div>
-                <div class="tech-bubble tech-bubble--lg" style="--x: 38%; --y: 2%; --dx: -8px; --dy: -10px; --dur: 6.2s; --delay: -1.2s">
-                    <img src="assets/tech/docker.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">Docker</span>
-                    <p class="tech-bubble-tip">Сайт в контейнере — предсказуемый деплой на сервер</p>
+                <div class="tech-node" style="--x: 34%; --y: 0%; --dx: -8px; --dy: -10px; --dur: 6.2s; --delay: -1.2s">
+                    <div class="tech-bubble tech-bubble--lg"><img src="assets/tech/docker.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>Docker</strong> Сайт в контейнере — предсказуемый деплой на сервер</p>
                 </div>
-                <div class="tech-bubble tech-bubble--md" style="--x: 72%; --y: 8%; --dx: 12px; --dy: 8px; --dur: 5.8s; --delay: -2s">
-                    <img src="assets/tech/nginx.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">nginx</span>
-                    <p class="tech-bubble-tip">Быстрый веб-сервер и редирект на HTTPS</p>
+                <div class="tech-node" style="--x: 66%; --y: 2%; --dx: 12px; --dy: 8px; --dur: 5.8s; --delay: -2s">
+                    <div class="tech-bubble tech-bubble--md"><img src="assets/tech/nginx.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>nginx</strong> Быстрый веб-сервер и редирект на HTTPS</p>
                 </div>
-                <div class="tech-bubble tech-bubble--sm" style="--x: 88%; --y: 32%; --dx: -6px; --dy: 12px; --dur: 6.5s; --delay: -0.5s">
-                    <img src="assets/tech/html5.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">HTML5</span>
-                    <p class="tech-bubble-tip">Семантическая вёрстка — роботу Яндекса понятнее</p>
+                <div class="tech-node" style="--x: 82%; --y: 26%; --dx: -6px; --dy: 12px; --dur: 6.5s; --delay: -0.5s">
+                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/html5.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>HTML5</strong> Семантическая вёрстка — роботу Яндекса понятнее</p>
                 </div>
-                <div class="tech-bubble tech-bubble--sm" style="--x: 2%; --y: 38%; --dx: 8px; --dy: 10px; --dur: 5.5s; --delay: -3s">
-                    <img src="assets/tech/css3.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">CSS3</span>
-                    <p class="tech-bubble-tip">Адаптив и быстрый интерфейс на телефоне</p>
+                <div class="tech-node" style="--x: 0%; --y: 32%; --dx: 8px; --dy: 10px; --dur: 5.5s; --delay: -3s">
+                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/css3.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>CSS3</strong> Адаптив и быстрый интерфейс на телефоне</p>
                 </div>
-                <div class="tech-bubble tech-bubble--md" style="--x: 22%; --y: 48%; --dx: -10px; --dy: -8px; --dur: 7.2s; --delay: -1.8s">
-                    <img src="assets/tech/github.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">GitHub Actions</span>
-                    <p class="tech-bubble-tip">Автодеплой после каждого обновления</p>
+                <div class="tech-node" style="--x: 18%; --y: 44%; --dx: -10px; --dy: -8px; --dur: 7.2s; --delay: -1.8s">
+                    <div class="tech-bubble tech-bubble--md"><img src="assets/tech/github.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>GitHub Actions</strong> Автодеплой после каждого обновления</p>
                 </div>
-                <div class="tech-bubble tech-bubble--sm" style="--x: 52%; --y: 42%; --dx: 6px; --dy: -12px; --dur: 6s; --delay: -2.5s">
-                    <img src="assets/tech/ssl.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">Let's Encrypt</span>
-                    <p class="tech-bubble-tip">HTTPS-сертификат и авто-продление</p>
+                <div class="tech-node" style="--x: 48%; --y: 38%; --dx: 6px; --dy: -12px; --dur: 6s; --delay: -2.5s">
+                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/ssl.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>Let's Encrypt</strong> HTTPS-сертификат и авто-продление</p>
                 </div>
-                <div class="tech-bubble tech-bubble--md" style="--x: 68%; --y: 52%; --dx: -12px; --dy: 6px; --dur: 6.8s; --delay: -0.8s">
-                    <img src="assets/tech/metrika.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">Метрика</span>
-                    <p class="tech-bubble-tip">Считаем заявки и поведение на сайте</p>
+                <div class="tech-node" style="--x: 64%; --y: 48%; --dx: -12px; --dy: 6px; --dur: 6.8s; --delay: -0.8s">
+                    <div class="tech-bubble tech-bubble--md"><img src="assets/tech/metrika.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>Метрика</strong> Считаем заявки и поведение на сайте</p>
                 </div>
-                <div class="tech-bubble tech-bubble--sm" style="--x: 42%; --y: 68%; --dx: 8px; --dy: 10px; --dur: 5.2s; --delay: -3.5s">
-                    <img src="assets/tech/schema.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">Schema.org</span>
-                    <p class="tech-bubble-tip">Микроразметка для сниппетов в поиске</p>
+                <div class="tech-node" style="--x: 40%; --y: 62%; --dx: 8px; --dy: 10px; --dur: 5.2s; --delay: -3.5s">
+                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/schema.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>Schema.org</strong> Микроразметка для сниппетов в поиске</p>
                 </div>
-                <div class="tech-bubble tech-bubble--md" style="--x: 8%; --y: 72%; --dx: -7px; --dy: -9px; --dur: 7s; --delay: -1s">
-                    <img src="assets/tech/maps.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">Яндекс.Карты</span>
-                    <p class="tech-bubble-tip">Карточка компании и отзывы на картах</p>
+                <div class="tech-node" style="--x: 4%; --y: 66%; --dx: -7px; --dy: -9px; --dur: 7s; --delay: -1s">
+                    <div class="tech-bubble tech-bubble--md"><img src="assets/tech/maps.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>Яндекс.Карты</strong> Карточка компании и отзывы на картах</p>
                 </div>
-                <div class="tech-bubble tech-bubble--sm" style="--x: 78%; --y: 78%; --dx: 10px; --dy: -6px; --dur: 6.3s; --delay: -2.2s">
-                    <img src="assets/tech/avito.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">Avito</span>
-                    <p class="tech-bubble-tip">Объявления и профиль под вашу нишу</p>
+                <div class="tech-node" style="--x: 74%; --y: 68%; --dx: 10px; --dy: -6px; --dur: 6.3s; --delay: -2.2s">
+                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/avito.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>Avito</strong> Объявления и профиль под вашу нишу</p>
                 </div>
-                <div class="tech-bubble tech-bubble--sm" style="--x: 58%; --y: 22%; --dx: -8px; --dy: 14px; --dur: 5.6s; --delay: -4s">
-                    <img src="assets/tech/profi.svg" alt="" width="48" height="48" />
-                    <span class="tech-bubble-label">Profi.ru</span>
-                    <p class="tech-bubble-tip">Витрина услуг и отклики с площадки</p>
+                <div class="tech-node" style="--x: 54%; --y: 18%; --dx: -8px; --dy: 14px; --dur: 5.6s; --delay: -4s">
+                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/profi.svg" alt="" width="48" height="48" /></div>
+                    <p class="tech-node-desc"><strong>Profi.ru</strong> Витрина услуг и отклики с площадки</p>
                 </div>
                 </div>
             </div>
