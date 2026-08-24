@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://mc.yandex.ru" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=14" />
+    <link rel="stylesheet" href="/css/styles.css?v=15" />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -324,53 +324,149 @@
                     <line x1="48" y1="72" x2="14" y2="78" />
                 </svg>
                 <div class="tech-cloud" data-tech-cloud aria-label="Технологии и сервисы">
-                <div class="tech-node" style="--x: 2%; --y: 4%; --dx: 6px; --dy: -8px; --dur: 8s; --delay: 0s">
+                <div class="tech-node" tabindex="0" style="--x: 2%; --y: 4%; --dx: 6px; --dy: -8px; --dur: 8s; --delay: 0s">
                     <div class="tech-bubble tech-bubble--xl"><img src="assets/tech/webmaster.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>Вебмастер</strong> Индексация, sitemap и контроль ошибок в Яндексе</p>
+                    <div class="tech-node-detail">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Подключаем сайт и подтверждаем права</li>
+                            <li>Отправляем sitemap и следим за индексацией</li>
+                            <li>Разбираем ошибки обхода и дубли страниц</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 34%; --y: 0%; --dx: -4px; --dy: -5px; --dur: 9s; --delay: -1.2s">
+                <div class="tech-node" tabindex="0" style="--x: 34%; --y: 0%; --dx: -4px; --dy: -5px; --dur: 9s; --delay: -1.2s">
                     <div class="tech-bubble tech-bubble--lg"><img src="assets/tech/docker.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>Docker</strong> Сайт в контейнере — предсказуемый деплой на сервер</p>
+                    <div class="tech-node-detail">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Собираем образ сайта и nginx</li>
+                            <li>Настраиваем docker-compose на сервере</li>
+                            <li>Обновляем без ручной возни с зависимостями</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 66%; --y: 2%; --dx: 5px; --dy: 4px; --dur: 8.5s; --delay: -2s">
+                <div class="tech-node" tabindex="0" style="--x: 66%; --y: 2%; --dx: 5px; --dy: 4px; --dur: 8.5s; --delay: -2s">
                     <div class="tech-bubble tech-bubble--md"><img src="assets/tech/nginx.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>nginx</strong> Быстрый веб-сервер и редирект на HTTPS</p>
+                    <div class="tech-node-detail">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Настраиваем виртуальный хост и gzip</li>
+                            <li>Редирект HTTP → HTTPS, кэш статики</li>
+                            <li>Держим сайт быстрым под нагрузкой</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 82%; --y: 26%; --dx: -3px; --dy: 5px; --dur: 9.5s; --delay: -0.5s">
+                <div class="tech-node" tabindex="0" style="--x: 82%; --y: 26%; --dx: -3px; --dy: 5px; --dur: 9.5s; --delay: -0.5s">
                     <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/html5.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>HTML5</strong> Семантическая вёрстка — роботу Яндекса понятнее</p>
+                    <div class="tech-node-detail tech-node-detail--left">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Семантические теги и иерархия заголовков</li>
+                            <li>Alt у картинок, формы с понятными label</li>
+                            <li>Структура, которую робот читает без догадок</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 0%; --y: 32%; --dx: 4px; --dy: 5px; --dur: 8.8s; --delay: -3s">
+                <div class="tech-node" tabindex="0" style="--x: 0%; --y: 32%; --dx: 4px; --dy: 5px; --dur: 8.8s; --delay: -3s">
                     <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/css3.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>CSS3</strong> Адаптив и быстрый интерфейс на телефоне</p>
+                    <div class="tech-node-detail tech-node-detail--left">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Адаптив под телефон, планшет и десктоп</li>
+                            <li>Лёгкие стили без лишних библиотек</li>
+                            <li>Аккуратная типографика и отступы</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 18%; --y: 44%; --dx: -5px; --dy: -4px; --dur: 9.2s; --delay: -1.8s">
+                <div class="tech-node" tabindex="0" style="--x: 18%; --y: 44%; --dx: -5px; --dy: -4px; --dur: 9.2s; --delay: -1.8s">
                     <div class="tech-bubble tech-bubble--md"><img src="assets/tech/github.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>GitHub Actions</strong> Автодеплой после каждого обновления</p>
+                    <div class="tech-node-detail">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Pipeline: push → сборка → деплой на сервер</li>
+                            <li>Без FTP и ручной заливки файлов</li>
+                            <li>История изменений и откат при необходимости</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 48%; --y: 38%; --dx: 3px; --dy: -5px; --dur: 8.2s; --delay: -2.5s">
+                <div class="tech-node" tabindex="0" style="--x: 48%; --y: 38%; --dx: 3px; --dy: -5px; --dur: 8.2s; --delay: -2.5s">
                     <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/ssl.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>Let's Encrypt</strong> HTTPS-сертификат и авто-продление</p>
+                    <div class="tech-node-detail">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Выпускаем бесплатный SSL-сертификат</li>
+                            <li>Настраиваем автообновление через certbot</li>
+                            <li>Проверяем, что замок в браузере работает</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 64%; --y: 48%; --dx: -5px; --dy: 3px; --dur: 9.8s; --delay: -0.8s">
+                <div class="tech-node" tabindex="0" style="--x: 64%; --y: 48%; --dx: -5px; --dy: 3px; --dur: 9.8s; --delay: -0.8s">
                     <div class="tech-bubble tech-bubble--md"><img src="assets/tech/metrika.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>Метрика</strong> Считаем заявки и поведение на сайте</p>
+                    <div class="tech-node-detail tech-node-detail--left">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Ставим счётчик и цели на формы и звонки</li>
+                            <li>Смотрим, откуда приходят заявки</li>
+                            <li>Даём доступ к отчётам — без чёрного ящика</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 40%; --y: 62%; --dx: 4px; --dy: 5px; --dur: 8.6s; --delay: -3.5s">
+                <div class="tech-node tech-node--tip-up" tabindex="0" style="--x: 40%; --y: 62%; --dx: 4px; --dy: 5px; --dur: 8.6s; --delay: -3.5s">
                     <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/schema.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>Schema.org</strong> Микроразметка для сниппетов в поиске</p>
+                    <div class="tech-node-detail">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Organization, LocalBusiness, услуги</li>
+                            <li>Разметка для расширенных сниппетов</li>
+                            <li>Проверяем валидатором Яндекса</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 4%; --y: 66%; --dx: -4px; --dy: -5px; --dur: 9s; --delay: -1s">
+                <div class="tech-node tech-node--tip-up" tabindex="0" style="--x: 4%; --y: 66%; --dx: -4px; --dy: -5px; --dur: 9s; --delay: -1s">
                     <div class="tech-bubble tech-bubble--md"><img src="assets/tech/maps.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>Яндекс.Карты</strong> Карточка компании и отзывы на картах</p>
+                    <div class="tech-node-detail tech-node-detail--left">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Заполняем карточку: адрес, часы, услуги</li>
+                            <li>Добавляем фото и ссылку на сайт</li>
+                            <li>Помогаем собирать и отвечать на отзывы</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 74%; --y: 68%; --dx: 5px; --dy: -3px; --dur: 8.4s; --delay: -2.2s">
+                <div class="tech-node tech-node--tip-up" tabindex="0" style="--x: 74%; --y: 68%; --dx: 5px; --dy: -3px; --dur: 8.4s; --delay: -2.2s">
                     <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/avito.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>Avito</strong> Объявления и профиль под вашу нишу</p>
+                    <div class="tech-node-detail tech-node-detail--left">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Оформляем профиль компании на Avito</li>
+                            <li>Пишем объявления услуг под вашу нишу</li>
+                            <li>Сводим стиль с сайтом и контактами</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tech-node" style="--x: 54%; --y: 18%; --dx: -4px; --dy: 6px; --dur: 8.7s; --delay: -4s">
+                <div class="tech-node" tabindex="0" style="--x: 54%; --y: 18%; --dx: -4px; --dy: 6px; --dur: 8.7s; --delay: -4s">
                     <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/profi.svg" alt="" width="48" height="48" /></div>
                     <p class="tech-node-desc"><strong>Profi.ru</strong> Витрина услуг и отклики с площадки</p>
+                    <div class="tech-node-detail">
+                        <span class="tech-node-detail-label">Что делаем</span>
+                        <ul>
+                            <li>Заполняем анкету и список услуг</li>
+                            <li>Настраиваем отклики и уведомления</li>
+                            <li>Связываем профиль с сайтом и заявками</li>
+                        </ul>
+                    </div>
                 </div>
                 </div>
             </div>

@@ -4048,7 +4048,7 @@ body {
         linear-gradient(180deg, #ffffff 0%, #f8f9fb 45%, #ffffff 100%);
     padding-top: 96px;
     padding-bottom: 96px;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .section--tech-cloud .container {
@@ -4071,6 +4071,7 @@ body {
     position: relative;
     min-width: 0;
     isolation: isolate;
+    overflow: visible;
     padding: clamp(16px, 3vw, 28px);
     border-radius: 20px;
     background: linear-gradient(
@@ -4222,6 +4223,8 @@ body {
     z-index: 1;
     animation: tech-float var(--dur, 8s) ease-in-out infinite;
     animation-delay: var(--delay, 0s);
+    cursor: default;
+    outline: none;
 }
 
 .tech-bubble {
@@ -4261,6 +4264,82 @@ body {
     margin-bottom: 2px;
 }
 
+.tech-node-detail {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 50%;
+    z-index: 3;
+    width: max(210px, 22vw);
+    max-width: 248px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    box-shadow: 0 14px 40px rgba(17, 17, 17, 0.12), 0 4px 12px rgba(37, 99, 235, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(6px);
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+    text-align: left;
+}
+
+.tech-node-detail--left {
+    left: auto;
+    right: -8px;
+    transform: translateY(6px);
+}
+
+.tech-node--tip-up .tech-node-detail {
+    top: auto;
+    bottom: calc(100% + 2px);
+    transform: translateX(-50%) translateY(-6px);
+}
+
+.tech-node--tip-up .tech-node-detail--left {
+    transform: translateY(-6px);
+}
+
+.tech-node-detail-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #2563eb;
+}
+
+.tech-node-detail ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tech-node-detail li {
+    position: relative;
+    padding-left: 12px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #4b5563;
+}
+
+.tech-node-detail li + li {
+    margin-top: 6px;
+}
+
+.tech-node-detail li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #2563eb;
+    transform: translateY(-50%);
+}
+
 .tech-bubble--xl { width: 96px; height: 96px; }
 .tech-bubble--lg { width: 84px; height: 84px; }
 .tech-bubble--md { width: 76px; height: 76px; }
@@ -4270,7 +4349,30 @@ body {
 
 .tech-node:hover,
 .tech-node:focus-within {
-    z-index: 10;
+    z-index: 20;
+}
+
+.tech-node:hover .tech-node-detail,
+.tech-node:focus-within .tech-node-detail {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.tech-node:hover .tech-node-detail--left,
+.tech-node:focus-within .tech-node-detail--left {
+    transform: translateY(0);
+}
+
+.tech-node--tip-up:hover .tech-node-detail,
+.tech-node--tip-up:focus-within .tech-node-detail {
+    transform: translateX(-50%) translateY(0);
+}
+
+.tech-node--tip-up:hover .tech-node-detail--left,
+.tech-node--tip-up:focus-within .tech-node-detail--left {
+    transform: translateY(0);
 }
 
 .tech-node:hover .tech-bubble,
@@ -4347,6 +4449,33 @@ body {
     }
 
     .tech-node-desc {
+        font-size: 10px;
+    }
+
+    .tech-node-detail {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        margin-top: 4px;
+        padding: 10px 12px;
+        box-shadow: none;
+        border-color: #e8eaed;
+    }
+
+    .tech-node-detail--left {
+        right: auto;
+    }
+
+    .tech-node-detail-label {
+        font-size: 9px;
+        margin-bottom: 6px;
+    }
+
+    .tech-node-detail li {
         font-size: 10px;
     }
 }
