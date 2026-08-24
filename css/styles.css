@@ -3776,7 +3776,143 @@ body {
     border-top: 1px solid #e8eaed;
 }
 
+/* ===== ПОДДЕРЖКА / АБОНЕМЕНТ ===== */
+
+.support-band {
+    padding: 72px 0;
+    background: #111;
+    color: #fff;
+}
+
+.support-band-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 40px 56px;
+    align-items: center;
+}
+
+.support-band .section-label {
+    color: #93c5fd;
+}
+
+.support-band-title {
+    font-size: clamp(24px, 3.2vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.support-band-text p {
+    color: #cbd5e1;
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 560px;
+}
+
+.support-band-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+}
+
+.support-band-price {
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.support-band-meta {
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.support-band .btn-ia {
+    margin-top: 8px;
+    background: #fff;
+    color: #111;
+}
+
+.support-band .btn-ia:hover {
+    background: #e5e7eb;
+    color: #111;
+}
+
+.ia-services-support-note {
+    margin-bottom: 20px;
+    max-width: 520px;
+}
+
+.support-promo-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 32px 48px;
+    margin-top: 40px;
+    padding: 32px;
+    background: #f7f8f9;
+    border: 1px solid #e8eaed;
+    border-radius: 12px;
+    align-items: start;
+}
+
+.support-promo-main h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.support-promo-main p {
+    color: #4b5563;
+    line-height: 1.65;
+    margin-bottom: 20px;
+}
+
+.support-promo-price {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e8eaed;
+}
+
+.support-promo-price strong {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.support-promo-price small {
+    color: #6b7280;
+    font-size: 13px;
+}
+
 @media (max-width: 768px) {
+    .support-band {
+        padding: 56px 0;
+    }
+
+    .support-band-grid,
+    .support-promo-card {
+        grid-template-columns: 1fr;
+    }
+
+    .support-promo-price,
+    .support-band-aside {
+        text-align: left;
+    }
+
     .cases-hub-grid {
         grid-template-columns: 1fr;
     }
