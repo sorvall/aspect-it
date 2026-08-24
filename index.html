@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://mc.yandex.ru" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=15" />
+    <link rel="stylesheet" href="/css/styles.css?v=16" />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -702,32 +702,85 @@
     </section>
 
     <section class="section section--audience" id="for-whom">
-        <div class="container audience-layout">
-            <div class="section-header audience-intro">
-                <div>
-                    <div class="section-label">Для кого</div>
-                    <h2 class="section-title">Кому подходит Aspect IT</h2>
-                    <p class="section-desc">Мы работаем с B2B-компаниями, у которых сайт есть, но он не приносит заявок — или стыдно показывать клиентам.</p>
-                </div>
+        <div class="container">
+            <div class="audience-head reveal">
+                <div class="section-label">Для кого</div>
+                <h2 class="section-title section-title--large">Кому подходит Aspect IT</h2>
+                <p class="section-desc audience-head-desc">B2B-компании, у которых сайт есть, но он не приносит заявок — или его стыдно показывать клиентам и партнёрам.</p>
             </div>
-            <div class="audience-grid">
-                <div class="audience-item reveal stagger-1">
-                    <div class="audience-icon">🏭</div>
-                    <h4>Производство и опт</h4>
-                    <p class="audience-pain">Сайт 2010-х годов, нет мобильной версии, заявки не доходят.</p>
-                    <p class="audience-solution">Сделаем современный каталог, форму расчёта и SEO под вашу нишу — как у МеталПром (+37% заявок).</p>
+
+            <div class="audience-cards">
+                <article class="audience-card reveal stagger-1">
+                    <span class="audience-card-tag">Производство и опт</span>
+                    <h3 class="audience-card-title">Заводы, дистрибьюторы, оптовики</h3>
+                    <div class="audience-card-block">
+                        <span class="audience-card-label">Знакомо?</span>
+                        <p>Сайт с 2010-х, каталог неудобный, с телефона не открывается — заявки теряются.</p>
+                    </div>
+                    <div class="audience-card-block audience-card-block--accent">
+                        <span class="audience-card-label">Что делаем</span>
+                        <ul>
+                            <li>Каталог продукции и форма расчёта</li>
+                            <li>SEO под вашу нишу в Яндексе</li>
+                            <li>Метрика на заявки — видите результат</li>
+                        </ul>
+                    </div>
+                    <a href="case-audit.html" class="audience-card-link">Кейс МеталПром: +37% заявок →</a>
+                </article>
+
+                <article class="audience-card reveal stagger-2">
+                    <span class="audience-card-tag">Строительство и услуги</span>
+                    <h3 class="audience-card-title">Подрядчики, застройщики, сервис</h3>
+                    <div class="audience-card-block">
+                        <span class="audience-card-label">Знакомо?</span>
+                        <p>Нет портфолио, цены непонятны — клиент уходит к конкуренту с «красивой» картинкой.</p>
+                    </div>
+                    <div class="audience-card-block audience-card-block--accent">
+                        <span class="audience-card-label">Что делаем</span>
+                        <ul>
+                            <li>Портфолио объектов и кейсы «до/после»</li>
+                            <li>Форма заявки и понятная структура услуг</li>
+                            <li>Карточка на Яндекс.Картах и отзывы</li>
+                        </ul>
+                    </div>
+                    <a href="case-leads.html" class="audience-card-link">Кейс СтройГрупп: ×1,8 конверсия →</a>
+                </article>
+
+                <article class="audience-card reveal stagger-3">
+                    <span class="audience-card-tag">B2B без IT-отдела</span>
+                    <h3 class="audience-card-title">Медицина, логистика, профуслуги</h3>
+                    <div class="audience-card-block">
+                        <span class="audience-card-label">Знакомо?</span>
+                        <p>Контент разрознен, некому обновлять сайт, нет времени разбираться в SEO и хостинге.</p>
+                    </div>
+                    <div class="audience-card-block audience-card-block--accent">
+                        <span class="audience-card-label">Что делаем</span>
+                        <ul>
+                            <li>Обновление за 7–14 дней под ключ</li>
+                            <li>Контент и поддержка на абонементе</li>
+                            <li>Без доступа к 1С, CRM и учёту</li>
+                        </ul>
+                    </div>
+                    <a href="services.html#support" class="audience-card-link">Поддержка и контент →</a>
+                </article>
+            </div>
+
+            <div class="audience-fit reveal">
+                <div class="audience-fit-col audience-fit-col--yes">
+                    <h4 class="audience-fit-title">Подходит, если</h4>
+                    <ul>
+                        <li>Сайт есть, но не приносит заявок</li>
+                        <li>Нужен результат за недели, не за полгода</li>
+                        <li>Важны фиксированная цена и понятные сроки</li>
+                    </ul>
                 </div>
-                <div class="audience-item reveal stagger-2">
-                    <div class="audience-icon">🏗</div>
-                    <h4>Строительство и услуги</h4>
-                    <p class="audience-pain">Клиенты уходят к конкурентам с «красивыми» сайтами, звонков мало.</p>
-                    <p class="audience-solution">Портфолио объектов, кейсы, понятные цены — чтобы клиенту было проще выбрать вас, а не конкурента с «красивой» картинкой.</p>
-                </div>
-                <div class="audience-item reveal stagger-3">
-                    <div class="audience-icon">🏥</div>
-                    <h4>Медицина, логистика, B2B</h4>
-                    <p class="audience-pain">Нужен порядок в контенте, но нет штатного IT-отдела и времени разбираться.</p>
-                    <p class="audience-solution">Берём всё на аутсорс: обновим сайт за 7–14 дней, не трогая ваши внутренние системы.</p>
+                <div class="audience-fit-col audience-fit-col--no">
+                    <h4 class="audience-fit-title">Не подходит, если</h4>
+                    <ul>
+                        <li>Нужен интернет-магазин на тысячи SKU</li>
+                        <li>Требуется интеграция с 1С, ERP или CRM</li>
+                        <li>Ищете только дизайн без вёрстки и запуска</li>
+                    </ul>
                 </div>
             </div>
         </div>
