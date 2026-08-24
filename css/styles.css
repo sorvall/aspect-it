@@ -236,6 +236,12 @@ body {
 
 .link-arrow:hover {
     gap: 10px;
+    color: var(--accent);
+}
+
+.hero-editorial-actions .link-arrow:hover,
+.cases-strip-head .link-arrow:hover {
+    color: var(--accent);
 }
 
 /* ===== ТЁМНЫЙ ГЕРОЙ ===== */
@@ -2000,8 +2006,8 @@ body {
     font-size: 15px;
     display: inline-flex;
     padding: 8px 16px;
-    background: rgba(22, 163, 74, 0.1);
-    color: #16a34a;
+    background: var(--accent-glow);
+    color: var(--accent);
     border-radius: 100px;
 }
 
@@ -2536,8 +2542,8 @@ body {
 }
 
 .header--light .nav a:hover {
-    color: #111;
-    background: #f3f4f6;
+    color: var(--accent);
+    background: var(--accent-glow);
 }
 
 .btn-ia {
@@ -2557,9 +2563,22 @@ body {
 }
 
 .btn-ia:hover {
-    background: #333;
+    background: #222;
     transform: none;
     color: #fff;
+}
+
+.accent-text {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.accent-num {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
 }
 
 .hero-editorial {
@@ -2610,7 +2629,7 @@ body {
     padding: 36px 0 0 40px;
     border-top: none;
     border-bottom: none;
-    border-left: 1px solid #e8eaed;
+    border-left: 3px solid var(--accent);
     margin-bottom: 0;
     align-self: stretch;
     align-content: center;
@@ -2621,9 +2640,12 @@ body {
     font-size: clamp(32px, 4vw, 48px);
     font-weight: 700;
     letter-spacing: -0.03em;
-    color: #111;
     line-height: 1.1;
     margin-bottom: 8px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-stat span {
@@ -2658,6 +2680,18 @@ body {
     font-weight: 700;
     letter-spacing: -0.02em;
     color: #111;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cases-strip-title::before {
+    content: '';
+    width: 4px;
+    height: 0.85em;
+    border-radius: 2px;
+    background: var(--gradient);
+    flex-shrink: 0;
 }
 
 .cases-strip {
@@ -2670,6 +2704,11 @@ body {
 .case-teaser:first-child {
     grid-row: 1 / 3;
     min-height: 100%;
+    border-left: 3px solid var(--accent);
+}
+
+.case-teaser:first-child:hover {
+    border-left-color: var(--accent);
 }
 
 .case-teaser:nth-child(2) {
@@ -2692,12 +2731,15 @@ body {
     border-radius: 12px;
     text-decoration: none;
     color: inherit;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     scroll-snap-align: start;
+    border: 1px solid transparent;
 }
 
 .case-teaser:hover {
-    background: #eef0f2;
+    background: #fff;
+    border-color: rgba(37, 99, 235, 0.18);
+    box-shadow: 0 8px 28px rgba(37, 99, 235, 0.07);
 }
 
 .case-teaser-top {
@@ -2709,8 +2751,11 @@ body {
     font-size: clamp(36px, 4vw, 52px);
     font-weight: 700;
     letter-spacing: -0.03em;
-    color: #111;
     line-height: 1;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .case-teaser-metric-label {
@@ -2743,8 +2788,8 @@ body {
 .case-teaser-tags span {
     font-size: 12px;
     font-weight: 500;
-    color: #6b7280;
-    background: #fff;
+    color: var(--accent);
+    background: var(--accent-glow);
     padding: 4px 10px;
     border-radius: 999px;
 }
@@ -2756,7 +2801,8 @@ body {
 }
 
 .case-teaser--cta:hover {
-    background: #222;
+    background: #1a1a1a;
+    border-color: rgba(96, 165, 250, 0.35);
 }
 
 .case-teaser-cta-label {
@@ -2768,6 +2814,10 @@ body {
 
 .case-teaser--cta .link-arrow {
     color: #fff;
+}
+
+.case-teaser--cta .link-arrow:hover {
+    color: #60a5fa;
 }
 
 .about-band {
@@ -3202,6 +3252,21 @@ body {
 
 .section--cases {
     background: #fff;
+}
+
+.section--cases .section-title--large {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section--cases .section-title--large::before {
+    content: '';
+    width: 4px;
+    height: 0.75em;
+    border-radius: 2px;
+    background: var(--gradient);
+    flex-shrink: 0;
 }
 
 .section--services {
