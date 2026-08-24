@@ -2624,60 +2624,16 @@ body {
 
 .hero-mark {
     display: inline;
-    padding: 0.15em 0.5em;
-    border-radius: 6px;
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
     font-weight: 600;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
 }
 
 .hero-mark--yandex {
-    background: rgba(252, 63, 29, 0.14);
-    color: #c62828;
-}
-
-.hero-mark--maps {
-    background: rgba(255, 204, 0, 0.28);
-    color: #9a6700;
-}
-
-.hero-mark--avito {
-    background: rgba(0, 170, 255, 0.16);
-    color: #0277bd;
-}
-
-.hero-mark--profi {
-    background: rgba(156, 39, 176, 0.12);
-    color: #7b1fa2;
-}
-
-.hero-mark--platforms {
-    background: rgba(37, 99, 235, 0.12);
-    color: #1d4ed8;
-}
-
-.page-hero-anchors span.hero-anchor--yandex {
-    color: #c62828;
-    background: rgba(252, 63, 29, 0.14);
-    border-color: rgba(252, 63, 29, 0.28);
-}
-
-.page-hero-anchors span.hero-anchor--maps {
-    color: #9a6700;
-    background: rgba(255, 204, 0, 0.28);
-    border-color: rgba(255, 204, 0, 0.45);
-}
-
-.page-hero-anchors span.hero-anchor--platform {
-    color: #0277bd;
-    background: rgba(0, 170, 255, 0.16);
-    border-color: rgba(0, 170, 255, 0.3);
-}
-
-.page-hero-anchors span.hero-anchor--profi {
-    color: #7b1fa2;
-    background: rgba(156, 39, 176, 0.12);
-    border-color: rgba(156, 39, 176, 0.25);
+    background: #ffcc00;
+    color: #111;
 }
 
 .hero-editorial-stats {
