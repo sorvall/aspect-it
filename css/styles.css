@@ -3932,10 +3932,129 @@ body {
     max-width: none;
 }
 
+.tech-cloud-stage {
+    position: relative;
+    min-width: 0;
+    isolation: isolate;
+}
+
+.tech-cloud-stage::before,
+.tech-cloud-stage::after {
+    content: '';
+    position: absolute;
+    border: 1px solid rgba(17, 17, 17, 0.05);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tech-cloud-stage::before {
+    top: 6%;
+    left: 6%;
+    width: clamp(100px, 16vw, 200px);
+    height: clamp(100px, 16vw, 200px);
+}
+
+.tech-cloud-stage::after {
+    top: 18%;
+    right: 2%;
+    width: clamp(80px, 12vw, 140px);
+    height: clamp(80px, 12vw, 140px);
+    opacity: 0.65;
+}
+
+.tech-cloud-watermarks {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.tech-cloud-watermark {
+    position: absolute;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-weight: 800;
+    line-height: 0.9;
+    color: rgba(17, 17, 17, 0.045);
+    user-select: none;
+    white-space: nowrap;
+}
+
+.tech-cloud-watermark--main {
+    left: -4%;
+    right: -4%;
+    bottom: 0;
+    font-size: clamp(72px, 12vw, 152px);
+    letter-spacing: 0.04em;
+    text-align: center;
+    transform: translateY(22%);
+    color: rgba(17, 17, 17, 0.05);
+}
+
+.tech-cloud-watermark--stack {
+    top: -6%;
+    right: -4%;
+    font-size: clamp(52px, 8.5vw, 104px);
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+}
+
+.tech-cloud-watermark--deploy {
+    top: 14%;
+    left: -8%;
+    font-size: clamp(38px, 6vw, 76px);
+    letter-spacing: 0.14em;
+    opacity: 0.55;
+    transform: rotate(-7deg);
+}
+
+.tech-cloud-watermark--seo {
+    top: 42%;
+    right: -10%;
+    font-size: clamp(60px, 10vw, 116px);
+    letter-spacing: 0.08em;
+    opacity: 0.42;
+}
+
+.tech-cloud-watermark--https {
+    bottom: 34%;
+    left: -2%;
+    font-size: clamp(34px, 5.5vw, 68px);
+    letter-spacing: 0.16em;
+    opacity: 0.38;
+    transform: rotate(5deg);
+}
+
+.tech-cloud-watermark--content {
+    top: 58%;
+    left: 18%;
+    font-size: clamp(28px, 4.5vw, 56px);
+    letter-spacing: 0.18em;
+    opacity: 0.32;
+    transform: rotate(-4deg);
+}
+
+.tech-cloud-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.tech-cloud-lines line {
+    stroke: rgba(17, 17, 17, 0.07);
+    stroke-width: 0.35;
+    vector-effect: non-scaling-stroke;
+}
+
 .tech-cloud {
     position: relative;
     height: clamp(360px, 42vw, 480px);
     min-width: 0;
+    z-index: 1;
     --mx: 0;
     --my: 0;
 }
@@ -4094,6 +4213,13 @@ body {
 }
 
 @media (max-width: 520px) {
+    .tech-cloud-watermarks,
+    .tech-cloud-lines,
+    .tech-cloud-stage::before,
+    .tech-cloud-stage::after {
+        display: none;
+    }
+
     .tech-cloud {
         height: auto;
         display: grid;
