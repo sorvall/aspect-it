@@ -3403,6 +3403,46 @@ body {
 
 /* ===== КЕЙСЫ / СТАТЬИ-СЦЕНАРИИ ===== */
 
+.page-hero--light,
+.cases-page .page-hero {
+    background: #fff;
+    color: #111;
+}
+
+.page-hero--light::before,
+.cases-page .page-hero::before {
+    display: none;
+}
+
+.page-hero--light .section-label,
+.cases-page .page-hero .section-label {
+    color: #6b7280;
+}
+
+.page-hero--light h1,
+.cases-page .page-hero h1 {
+    color: #111;
+}
+
+.page-hero--light h1 span,
+.cases-page .page-hero h1 span {
+    background: none;
+    -webkit-text-fill-color: #111;
+    color: #111;
+}
+
+.page-hero--light p,
+.cases-page .page-hero p {
+    color: #4b5563;
+}
+
+.page-hero--light .page-hero-anchors span,
+.cases-page .page-hero .page-hero-anchors span {
+    color: #4b5563;
+    background: #f7f8f9;
+    border: 1px solid #e8eaed;
+}
+
 .cases-hub {
     padding: 0 0 96px;
 }
