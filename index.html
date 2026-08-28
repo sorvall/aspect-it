@@ -38,8 +38,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://mc.yandex.ru" />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,500;0,600;0,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=20" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css?v=37" />
+    <script>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -158,18 +159,61 @@
     <section class="hero-editorial">
         <div class="container">
             <p class="hero-editorial-eyebrow">01 / Аутсорсинг</p>
-            <h1 class="hero-editorial-title">Обновление сайтов<br class="hero-title-break" />для B2B-бизнеса</h1>
-            <p class="hero-editorial-lead">Дизайн, вёрстка, контент и SEO под ключ — с упором на <span class="hero-mark hero-mark--yandex">Яндекс</span> как главный канал поиска в России, плюс карты, отзывы, Avito и Profi.ru, и <strong>поддержка после запуска</strong>: тексты, цены, HTTPS, площадки</p>
-            <div class="hero-editorial-actions">
-                <a href="#contact" class="btn btn-ia">Обсудить проект</a>
-                <a href="#cases" class="link-arrow">Смотреть кейсы →</a>
+            <div class="hero-editorial-split">
+                <h1 class="hero-editorial-title">Обновление сайтов<br class="hero-title-break" />для B2B-бизнеса</h1>
+                <span class="hero-editorial-rule" aria-hidden="true"></span>
+                <p class="hero-editorial-lead">Дизайн, вёрстка, контент и SEO под ключ — с упором на <span class="hero-mark hero-mark--yandex">Яндекс</span> как главный канал поиска в России, плюс карты, отзывы, Avito и Profi.ru, и <strong>поддержка после запуска</strong>: тексты, цены, HTTPS, площадки</p>
+                <div class="hero-editorial-actions">
+                    <a href="#contact" class="btn btn-ia">Обсудить проект</a>
+                    <a href="#cases" class="link-arrow">Смотреть кейсы →</a>
+                </div>
+                <aside class="hero-cloud" data-cloud-cycle aria-label="Направления">
+                    <ul class="hero-cloud-list">
+                        <li>
+                            <button type="button" class="hero-cloud-kicker">трафик</button>
+                            <ul class="hero-cloud-tags">
+                                <li><span class="hero-tag hero-tag--accent">Интеграция с Яндексом</span></li>
+                                <li><span class="hero-tag">Карты и отзывы в выдаче</span></li>
+                                <li><span class="hero-tag">Avito и Profi.ru под ключ</span></li>
+                                <li><span class="hero-tag">Вся воронка в одном месте</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <button type="button" class="hero-cloud-kicker">экспертиза</button>
+                            <ul class="hero-cloud-tags">
+                                <li><span class="hero-tag">Адаптив под поисковые системы</span></li>
+                                <li><span class="hero-tag">Живые тексты, а не SEO-мусор</span></li>
+                                <li><span class="hero-tag">Цены не «слетают» после запуска</span></li>
+                                <li><span class="hero-tag">Сертификаты и HTTPS с первого дня</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <button type="button" class="hero-cloud-kicker">надежность</button>
+                            <ul class="hero-cloud-tags">
+                                <li><span class="hero-tag">Без скрытых платежей</span></li>
+                                <li><span class="hero-tag">Поддержка — не допуслуга, а часть пакета</span></li>
+                                <li><span class="hero-tag">Обновляем, пока вы ведёте переговоры</span></li>
+                                <li><span class="hero-tag">Сайт не ломается после обновлений</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <button type="button" class="hero-cloud-kicker">рост</button>
+                            <ul class="hero-cloud-tags">
+                                <li><span class="hero-tag">Конверсия из поиска в заявку</span></li>
+                                <li><span class="hero-tag">Поисковый канал — главный, а не дополнительный</span></li>
+                                <li><span class="hero-tag">Ваш сайт — точка сбора всех каналов</span></li>
+                                <li><span class="hero-tag">Масштабируем без переделки</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
             </div>
         </div>
     </section>
     <section class="hero-proof" aria-label="Показатели">
         <div class="container hero-proof-grid">
             <div class="hero-stat">
-                <strong>50+</strong>
+                <strong data-count="50" data-suffix="+">50+</strong>
                 <span>завершённых проектов</span>
             </div>
             <div class="hero-stat">
@@ -177,7 +221,7 @@
                 <span>дней средний срок запуска</span>
             </div>
             <div class="hero-stat">
-                <strong>24 ч</strong>
+                <strong data-count="24" data-suffix=" ч">24 ч</strong>
                 <span>аудит и КП без обязательств</span>
             </div>
             <div class="hero-stat">
@@ -187,14 +231,120 @@
         </div>
     </section>
 
-    <section class="cases-strip-section">
+    <section class="home-process" aria-label="Этапы работы">
+        <div class="container">
+            <p class="section-label">02 / Ход</p>
+            <h2 class="home-process-title">Четыре этапа реализации Вашего проекта</h2>
+            <ol class="home-process-track">
+                <li>
+                    <span class="home-process-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                            <circle cx="10.5" cy="10.5" r="6.25"/>
+                            <path d="M15.2 15.2 21 21"/>
+                            <path d="M8.5 10.5h4M10.5 8.5v4"/>
+                        </svg>
+                    </span>
+                    <span class="home-process-num">01</span>
+                    <strong>Аудит и техническое задание</strong>
+                    <p class="home-process-term">Срок: 24 часа.</p>
+                    <p>Проводим анализ текущего сайта (если есть), фиксируем требования к новому решению. Результат — документ со структурой, функциональными блоками и сметой. Без авансов и обязательств с вашей стороны.</p>
+                </li>
+                <li>
+                    <span class="home-process-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                            <rect x="3" y="3" width="7.5" height="7.5"/>
+                            <rect x="13.5" y="3" width="7.5" height="7.5"/>
+                            <rect x="3" y="13.5" width="7.5" height="7.5"/>
+                            <rect x="13.5" y="13.5" width="7.5" height="7.5"/>
+                        </svg>
+                    </span>
+                    <span class="home-process-num">02</span>
+                    <strong>Проектирование интерфейсов</strong>
+                    <p>Разрабатываем прототипы и дизайн-макеты. Фокус — на пользовательских сценариях и конверсионных элементах. Финализируем визуальную и структурную части до полного утверждения.</p>
+                </li>
+                <li>
+                    <span class="home-process-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                            <path d="M8.5 6.5 3.5 12l5 5.5"/>
+                            <path d="M15.5 6.5 20.5 12l-5 5.5"/>
+                            <path d="M13.2 4.5 10.8 19.5"/>
+                        </svg>
+                    </span>
+                    <span class="home-process-num">03</span>
+                    <strong>Разработка и наполнение</strong>
+                    <p>Верстка с адаптивом под все устройства, интеграция с CMS. На этом этапе закладываем базовую SEO-оптимизацию (мета-теги, структура URL, микроразметка), подготавливаем текстовый контент и настраиваем формы с отправкой заявок в вашу CRM.</p>
+                </li>
+                <li>
+                    <span class="home-process-icon home-process-icon--solid" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+                            <path d="M12 3c3.2 2.4 6 6.2 6 11.2 0 1.6-.9 2.8-2.2 2.8H8.2C6.9 17 6 15.8 6 14.2 6 9.2 8.8 5.4 12 3Z"/>
+                            <path d="M10 21h4"/>
+                            <path d="M9.2 14.5 7 20"/>
+                            <path d="M14.8 14.5 17 20"/>
+                            <circle cx="12" cy="11" r="1.2"/>
+                        </svg>
+                    </span>
+                    <span class="home-process-num">04</span>
+                    <strong>Запуск и передача</strong>
+                    <p>Размещение на боевом сервере, установка SSL-сертификата, настройка производительности и мониторинга. После технического релиза передаем полный доступ к сайту и хостингу. Последующее обслуживание — по отдельному абонементу, который включает доработки и техническую поддержку.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="cases-result home-rise" id="cases">
         <div class="container">
             <div class="cases-strip-head">
                 <div>
-                    <p class="section-label">02 / Кейсы</p>
+                    <p class="section-label">03 / Кейсы</p>
                     <h2 class="cases-strip-title">Как выглядит результат</h2>
+                    <p class="section-desc cases-result-lead">Перетащите ползунок — сравните, как сайт выглядел раньше и как может выглядеть сейчас</p>
                 </div>
                 <a href="cases.html" class="link-arrow">Все сценарии →</a>
+            </div>
+            <div class="cases-grid">
+                <article class="case-card">
+                    <div class="compare" data-compare data-compare-demo>
+                        <div class="compare-layer compare-after">
+                            <img class="compare-shot" src="/assets/cases/metalprom-after.jpg" width="1600" height="900" alt="Сайт МеталПром после обновления: тёмный герой, фото цеха, кнопка «Получить расчёт»">
+                        </div>
+                        <div class="compare-layer compare-before">
+                            <img class="compare-shot" src="/assets/cases/metalprom-before.jpg" width="1600" height="900" alt="Сайт МеталПром до обновления: табличная вёрстка 2008 года">
+                        </div>
+                        <div class="compare-handle" aria-hidden="true"></div>
+                        <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: завод" />
+                        <span class="compare-label compare-label--before">До</span>
+                        <span class="compare-label compare-label--after">После</span>
+                        <span class="compare-hint">← перетащите →</span>
+                    </div>
+                    <div class="case-body">
+                        <span class="tag">Завод</span>
+                        <h3>Обновление сайта завода металлоконструкций</h3>
+                        <p>Сайт 2008 года не открывался на телефоне, заявки шли только «сарафаном» — за 12 дней новый дизайн, 12 страниц, форма расчёта и SEO под ключевые запросы отрасли</p>
+                        <div class="result">↑ Заявок +37% за 2 месяца</div>
+                    </div>
+                </article>
+                <article class="case-card">
+                    <div class="compare" data-compare>
+                        <div class="compare-layer compare-after">
+                            <img class="compare-shot" src="/assets/cases/stroygrupp-after.jpg" width="1600" height="900" alt="Сайт СтройГрупп после обновления: фото дома и форма заявки">
+                        </div>
+                        <div class="compare-layer compare-before">
+                            <img class="compare-shot" src="/assets/cases/stroygrupp-before.jpg" width="1600" height="900" alt="Сайт СтройГрупп до обновления: жёлтая шапка и битые картинки">
+                        </div>
+                        <div class="compare-handle" aria-hidden="true"></div>
+                        <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: застройщик" />
+                        <span class="compare-label compare-label--before">До</span>
+                        <span class="compare-label compare-label--after">После</span>
+                        <span class="compare-hint">← перетащите →</span>
+                    </div>
+                    <div class="case-body">
+                        <span class="tag">Строительство</span>
+                        <h3>Сайт-визитка для застройщика</h3>
+                        <p>Табличная вёрстка, битые фото, нет портфолио — клиенты уходили к конкурентам, за 10 дней сделали сайт с объектами, отзывами и формой заявки</p>
+                        <div class="result">↑ Звонков +25% за месяц · Конверсия ×1,8</div>
+                    </div>
+                </article>
             </div>
             <div class="cases-strip">
                 <a href="case-audit.html" class="case-teaser">
@@ -227,9 +377,9 @@
         </div>
     </section>
 
-    <section class="tile-section">
+    <section class="tile-section home-rise">
         <div class="container">
-            <p class="section-label">03 / Условия</p>
+            <p class="section-label">04 / Условия</p>
             <h2 class="section-title section-title--large">Почему с нами удобно работать</h2>
             <div class="tile-grid">
                 <article class="info-tile info-tile--blue">
@@ -290,278 +440,49 @@
         </div>
     </section>
 
-    <section class="section section--tech-cloud" id="stack">
+    <section class="section section--tech-cloud home-rise" id="stack">
         <div class="container tech-cloud-layout">
-            <div class="tech-cloud-intro reveal">
-                <div class="section-label">04 / Стек</div>
+            <div class="tech-cloud-intro">
+                <div class="section-label">05 / Стек</div>
                 <h2 class="section-title section-title--large">Чем делаем сайты<br />и продвижение</h2>
                 <p class="section-desc">Не абстрактный «IT» — конкретные инструменты: от вёрстки и деплоя до <span class="hero-mark hero-mark--yandex">Яндекса</span> и площадок, где клиенты вас ищут</p>
             </div>
-            <div class="tech-cloud-stage reveal">
-                <div class="tech-cloud" data-tech-cloud aria-label="Технологии и сервисы">
-                <div class="tech-node" style="--x: 2%; --y: 4%; --dx: 6px; --dy: -8px; --dur: 8s; --delay: 0s">
-                    <div class="tech-bubble tech-bubble--xl"><img src="assets/tech/webmaster.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>Вебмастер</strong> Индексация, sitemap и контроль ошибок в Яндексе</p>
-                    <div class="tech-node-detail">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>подключение и подтверждение прав</li>
-                            <li>sitemap, индексация, ошибки обхода</li>
-                            <li>дубли страниц — разбираем</li>
+            <aside class="stack-cloud" aria-label="Технологии и сервисы">
+                <ul class="hero-cloud-list">
+                    <li>
+                        <span class="hero-cloud-kicker">вёрстка</span>
+                        <ul class="hero-cloud-tags">
+                            <li><span class="hero-tag hero-tag--lg" title="Семантическая вёрстка — роботу Яндекса понятнее">HTML5</span></li>
+                            <li><span class="hero-tag" title="Адаптив и быстрый интерфейс на телефоне">CSS3</span></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 34%; --y: 0%; --dx: -4px; --dy: -5px; --dur: 9s; --delay: -1.2s">
-                    <div class="tech-bubble tech-bubble--lg"><img src="assets/tech/docker.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>Docker</strong> Сайт в контейнере — предсказуемый деплой на сервер</p>
-                    <div class="tech-node-detail">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>образ сайта и nginx</li>
-                            <li>docker-compose на сервере</li>
-                            <li>обновления без ручной возни</li>
+                    </li>
+                    <li>
+                        <span class="hero-cloud-kicker">сервер</span>
+                        <ul class="hero-cloud-tags">
+                            <li><span class="hero-tag" title="Сайт в контейнере — предсказуемый деплой">Docker</span></li>
+                            <li><span class="hero-tag hero-tag--lg" title="Быстрый веб-сервер и редирект на HTTPS">nginx</span></li>
+                            <li><span class="hero-tag" title="Автодеплой после каждого обновления">GitHub Actions</span></li>
+                            <li><span class="hero-tag" title="HTTPS-сертификат и авто-продление">Let's Encrypt</span></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 66%; --y: 2%; --dx: 5px; --dy: 4px; --dur: 8.5s; --delay: -2s">
-                    <div class="tech-bubble tech-bubble--md"><img src="assets/tech/nginx.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>nginx</strong> Быстрый веб-сервер и редирект на HTTPS</p>
-                    <div class="tech-node-detail">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>виртуальный хост, gzip</li>
-                            <li>HTTP → HTTPS, кэш статики</li>
-                            <li>сайт не тормозит под нагрузкой</li>
+                    </li>
+                    <li>
+                        <span class="hero-cloud-kicker">яндекс</span>
+                        <ul class="hero-cloud-tags">
+                            <li><span class="hero-tag hero-tag--accent hero-tag--lg" title="Индексация, sitemap и контроль ошибок">Вебмастер</span></li>
+                            <li><span class="hero-tag hero-tag--accent" title="Считаем заявки и поведение на сайте">Метрика</span></li>
+                            <li><span class="hero-tag" title="Микроразметка для сниппетов в поиске">Schema.org</span></li>
+                            <li><span class="hero-tag hero-tag--accent" title="Карточка компании и отзывы на картах">Яндекс.Карты</span></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 82%; --y: 26%; --dx: -3px; --dy: 5px; --dur: 9.5s; --delay: -0.5s">
-                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/html5.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>HTML5</strong> Семантическая вёрстка — роботу Яндекса понятнее</p>
-                    <div class="tech-node-detail tech-node-detail--left">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>семантика, заголовки h1–h3</li>
-                            <li>alt у картинок, label у форм</li>
-                            <li>структура, понятная роботу Яндекса</li>
+                    </li>
+                    <li>
+                        <span class="hero-cloud-kicker">площадки</span>
+                        <ul class="hero-cloud-tags">
+                            <li><span class="hero-tag" title="Объявления и профиль под вашу нишу">Avito</span></li>
+                            <li><span class="hero-tag" title="Витрина услуг и отклики с площадки">Profi.ru</span></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 0%; --y: 32%; --dx: 4px; --dy: 5px; --dur: 8.8s; --delay: -3s">
-                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/css3.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>CSS3</strong> Адаптив и быстрый интерфейс на телефоне</p>
-                    <div class="tech-node-detail tech-node-detail--left">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>телефон, планшет, десктоп</li>
-                            <li>стили без лишних библиотек</li>
-                            <li>типографика и отступы</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 18%; --y: 44%; --dx: -5px; --dy: -4px; --dur: 9.2s; --delay: -1.8s">
-                    <div class="tech-bubble tech-bubble--md"><img src="assets/tech/github.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>GitHub Actions</strong> Автодеплой после каждого обновления</p>
-                    <div class="tech-node-detail">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>push → сборка → деплой</li>
-                            <li>без FTP и заливки руками</li>
-                            <li>история версий, откат если что</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 48%; --y: 38%; --dx: 3px; --dy: -5px; --dur: 8.2s; --delay: -2.5s">
-                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/ssl.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>Let's Encrypt</strong> HTTPS-сертификат и авто-продление</p>
-                    <div class="tech-node-detail">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>бесплатный SSL-сертификат</li>
-                            <li>автопродление через certbot</li>
-                            <li>замок в браузере — проверяем</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 64%; --y: 48%; --dx: -5px; --dy: 3px; --dur: 9.8s; --delay: -0.8s">
-                    <div class="tech-bubble tech-bubble--md"><img src="assets/tech/metrika.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>Метрика</strong> Считаем заявки и поведение на сайте</p>
-                    <div class="tech-node-detail tech-node-detail--left">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>счётчик, цели на формы и звонки</li>
-                            <li>откуда приходят заявки</li>
-                            <li>доступ к отчётам — без чёрного ящика</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 40%; --y: 62%; --dx: 4px; --dy: 5px; --dur: 8.6s; --delay: -3.5s">
-                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/schema.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>Schema.org</strong> Микроразметка для сниппетов в поиске</p>
-                    <div class="tech-node-detail">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>Organization, LocalBusiness, услуги</li>
-                            <li>разметка под расширенные сниппеты</li>
-                            <li>проверка в валидаторе Яндекса</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 4%; --y: 66%; --dx: -4px; --dy: -5px; --dur: 9s; --delay: -1s">
-                    <div class="tech-bubble tech-bubble--md"><img src="assets/tech/maps.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>Яндекс.Карты</strong> Карточка компании и отзывы на картах</p>
-                    <div class="tech-node-detail tech-node-detail--left">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>адрес, часы, услуги в карточке</li>
-                            <li>фото, ссылка на сайт</li>
-                            <li>отзывы — помогаем отвечать</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 74%; --y: 68%; --dx: 5px; --dy: -3px; --dur: 8.4s; --delay: -2.2s">
-                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/avito.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>Avito</strong> Объявления и профиль под вашу нишу</p>
-                    <div class="tech-node-detail tech-node-detail--left">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>профиль компании на Avito</li>
-                            <li>объявления услуг под нишу</li>
-                            <li>единые контакты и стиль с сайтом</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tech-node" style="--x: 54%; --y: 18%; --dx: -4px; --dy: 6px; --dur: 8.7s; --delay: -4s">
-                    <div class="tech-bubble tech-bubble--sm"><img src="assets/tech/profi.svg" alt="" width="48" height="48" /></div>
-                    <p class="tech-node-desc"><strong>Profi.ru</strong> Витрина услуг и отклики с площадки</p>
-                    <div class="tech-node-detail">
-                        <span class="tech-node-detail-label">Что делаем</span>
-                        <ul>
-                            <li>анкета и список услуг</li>
-                            <li>отклики, уведомления</li>
-                            <li>связка профиля с сайтом</li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section--cases" id="cases">
-        <div class="container">
-            <div class="section-header">
-                <div>
-                    <h2 class="section-title section-title--large">До и после</h2>
-                    <p class="section-desc">Перетащите ползунок — сравните, как сайт выглядел раньше и как может выглядеть сейчас <a href="cases.html" class="link-arrow">Этапы работы в сценариях →</a></p>
-                </div>
-            </div>
-            <div class="cases-grid">
-                <article class="case-card reveal stagger-1">
-                    <div class="compare" data-compare>
-                        <div class="compare-layer compare-after">
-                            <div class="site-mock site-mock--after site-mock--factory">
-                                <header class="sm-header sm-header--modern">
-                                    <span class="sm-logo">МеталПром</span>
-                                    <nav class="sm-nav"><span>Услуги</span><span>Продукция</span><span>Контакты</span></nav>
-                                </header>
-                                <div class="sm-hero sm-hero--modern">
-                                    <h2>Металлоконструкции<br>любой сложности</h2>
-                                    <button class="sm-cta">Получить расчёт</button>
-                                </div>
-                                <div class="sm-stats">
-                                    <div><strong>15+</strong><span>лет на рынке</span></div>
-                                    <div><strong>200+</strong><span>объектов</span></div>
-                                    <div><strong>24ч</strong><span>ответ на заявку</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="compare-layer compare-before">
-                            <div class="site-mock site-mock--before site-mock--factory">
-                                <table class="sm-table" cellpadding="0" cellspacing="0">
-                                    <tr><td colspan="2" class="sm-old-header">ООО «МеталПром» — металлоконструкции с 2008 года</td></tr>
-                                    <tr>
-                                        <td class="sm-old-sidebar">
-                                            <a href="#">► Главная</a>
-                                            <a href="#">► О компании</a>
-                                            <a href="#">► Продукция</a>
-                                            <a href="#">► Контакты</a>
-                                            <br><br>
-                                            <small>Посетителей: 12847</small>
-                                        </td>
-                                        <td class="sm-old-content">
-                                            <div class="sm-marquee"><span>★ Скидки на металлоконструкции! Звоните ☎ +7(495)123-45-67 ★</span></div>
-                                            <p><b>Добро пожаловать!</b></p>
-                                            <p>Наша компания занимается производством металлоконструкций. Мы работаем на рынке уже много лет и имеем большой опыт.</p>
-                                            <div class="sm-old-img" aria-hidden="true"></div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="compare-handle" aria-hidden="true"></div>
-                        <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: завод" />
-                        <span class="compare-label compare-label--before">До</span>
-                        <span class="compare-label compare-label--after">После</span>
-                        <span class="compare-hint">← перетащите →</span>
-                    </div>
-                    <div class="case-body">
-                        <span class="tag">Завод</span>
-                        <h3>Обновление сайта завода металлоконструкций</h3>
-                        <p>Сайт 2008 года не открывался на телефоне, заявки шли только «сарафаном» — за 12 дней новый дизайн, 12 страниц, форма расчёта и SEO под ключевые запросы отрасли</p>
-                        <div class="result">↑ Заявок +37% за 2 месяца</div>
-                    </div>
-                </article>
-                <article class="case-card reveal stagger-2">
-                    <div class="compare" data-compare>
-                        <div class="compare-layer compare-after">
-                            <div class="site-mock site-mock--after site-mock--build">
-                                <header class="sm-header sm-header--modern sm-header--light">
-                                    <span class="sm-logo sm-logo--dark">СтройГрупп</span>
-                                    <nav class="sm-nav sm-nav--dark"><span>Объекты</span><span>О нас</span><span>Заявка</span></nav>
-                                </header>
-                                <div class="sm-hero sm-hero--build">
-                                    <div class="sm-hero-text">
-                                        <h2>Строим дома<br>вашей мечты</h2>
-                                        <p>120+ сданных объектов в Москве и МО</p>
-                                    </div>
-                                </div>
-                                <div class="sm-projects">
-                                    <div class="sm-project"></div>
-                                    <div class="sm-project"></div>
-                                    <div class="sm-project"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="compare-layer compare-before">
-                            <div class="site-mock site-mock--before site-mock--build">
-                                <div class="sm-old-banner">СтройГрупп — строительная компания!!!</div>
-                                <div class="sm-old-body">
-                                    <h1>ДОБРО ПОЖАЛОВАТЬ НА НАШ САЙТ</h1>
-                                    <hr>
-                                    <p>Мы строим дома и коттеджи. Наши цены самые низкие в городе!!! Звоните прямо сейчас!!!</p>
-                                    <div class="sm-old-boxes">
-                                        <div class="sm-old-box">Фото 1<br><small>[нет изображения]</small></div>
-                                        <div class="sm-old-box">Фото 2<br><small>[нет изображения]</small></div>
-                                    </div>
-                                    <p class="sm-old-footer-text">© 2015 СтройГрупп. Все права защищены. Разработка сайта: студия "Вебмастер"</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="compare-handle" aria-hidden="true"></div>
-                        <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: застройщик" />
-                        <span class="compare-label compare-label--before">До</span>
-                        <span class="compare-label compare-label--after">После</span>
-                        <span class="compare-hint">← перетащите →</span>
-                    </div>
-                    <div class="case-body">
-                        <span class="tag">Строительство</span>
-                        <h3>Сайт-визитка для застройщика</h3>
-                        <p>Табличная вёрстка, битые фото, нет портфолио — клиенты уходили к конкурентам, за 10 дней сделали сайт с объектами, отзывами и формой заявки</p>
-                        <div class="result">↑ Звонков +25% за месяц · Конверсия ×1,8</div>
-                    </div>
-                </article>
-            </div>
+                    </li>
+                </ul>
+            </aside>
         </div>
     </section>
 
@@ -631,7 +552,7 @@
                     <div class="team-track">
                         <article class="team-card">
                             <div class="team-photo">
-                                <img src="assets/team/maria.svg" alt="Мария Соколова" width="400" height="400" loading="lazy" />
+                                <img src="assets/team/maria.jpg" alt="Мария Соколова" width="400" height="400" loading="lazy" />
                             </div>
                             <div class="team-info">
                                 <h3>Мария Соколова</h3>
@@ -642,7 +563,7 @@
                         </article>
                         <article class="team-card">
                             <div class="team-photo">
-                                <img src="assets/team/alexey.svg" alt="Алексей Воронин" width="400" height="400" loading="lazy" />
+                                <img src="assets/team/alexey.jpg" alt="Алексей Воронин" width="400" height="400" loading="lazy" />
                             </div>
                             <div class="team-info">
                                 <h3>Алексей Воронин</h3>
@@ -653,7 +574,7 @@
                         </article>
                         <article class="team-card">
                             <div class="team-photo">
-                                <img src="assets/team/dmitry.svg" alt="Дмитрий Козлов" width="400" height="400" loading="lazy" />
+                                <img src="assets/team/dmitry.jpg" alt="Дмитрий Козлов" width="400" height="400" loading="lazy" />
                             </div>
                             <div class="team-info">
                                 <h3>Дмитрий Козлов</h3>
@@ -838,7 +759,7 @@
                     <h2>Готовы обновить сайт<br />и получать больше заявок</h2>
                     <p>Перезвоним в течение двух часов, зададим пару вопросов и назовём цену со сроком</p>
                     <div class="form-manager form-manager--ia">
-                        <img src="assets/team/maria.svg" alt="" width="64" height="64" loading="lazy" />
+                        <img src="assets/team/maria.jpg" alt="" width="64" height="64" loading="lazy" />
                         <div>
                             <strong>Мария Соколова</strong>
                             <span>Менеджер по работе с клиентами</span>
@@ -875,6 +796,6 @@
     </footer>
 
     <script src="js/yandex-metrika.js" defer></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=22"></script>
 </body>
 </html>

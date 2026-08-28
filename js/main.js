@@ -1,7 +1,123 @@
+document.documentElement.classList.add('js');
+
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+    const onceInView = (el, fn, threshold = 0.22) => {
+        const io = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    io.disconnect();
+                    fn(entry.target);
+                });
+            },
+            { threshold, rootMargin: '0px 0px -8% 0px' }
+        );
+        io.observe(el);
+    };
+
+    const heroRule = document.querySelector('.hero-editorial-rule');
+    if (heroRule) {
+        requestAnimationFrame(() => heroRule.classList.add('is-in'));
+    }
+
+    const cloud = document.querySelector('[data-cloud-cycle]');
+    if (cloud && !reduceMotion) {
+        const items = [...cloud.querySelectorAll('.hero-cloud-list > li')];
+        if (items.length) {
+            cloud.classList.add('is-cycling');
+            let index = 0;
+            let timer = 0;
+
+            const show = (next) => {
+                index = next;
+                items.forEach((item, n) => {
+                    const on = n === index;
+                    item.classList.toggle('is-on', on);
+                    const btn = item.querySelector('.hero-cloud-kicker');
+                    if (btn) btn.setAttribute('aria-current', on ? 'true' : 'false');
+                });
+            };
+
+            const play = () => {
+                window.clearInterval(timer);
+                timer = window.setInterval(() => show((index + 1) % items.length), 3400);
+            };
+
+            const pause = () => window.clearInterval(timer);
+
+            show(0);
+            play();
+
+            cloud.addEventListener('mouseenter', pause);
+            cloud.addEventListener('mouseleave', play);
+            cloud.addEventListener('focusin', pause);
+            cloud.addEventListener('focusout', (e) => {
+                if (!cloud.contains(e.relatedTarget)) play();
+            });
+
+            items.forEach((item, n) => {
+                const btn = item.querySelector('.hero-cloud-kicker');
+                if (!btn) return;
+                btn.addEventListener('click', () => {
+                    show(n);
+                    play();
+                });
+            });
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) pause();
+                else play();
+            });
+        }
+    }
+
+    document.querySelectorAll('.home-rise, .home-process').forEach((el) => {
+        if (reduceMotion) {
+            el.classList.add('is-in');
+            return;
+        }
+        onceInView(el, () => el.classList.add('is-in'));
+    });
+
+    window.setTimeout(() => {
+        document.querySelectorAll('.home-rise, .home-process').forEach((el) => {
+            el.classList.add('is-in');
+        });
+    }, 2800);
+
+    const proof = document.querySelector('.hero-proof');
+    if (proof && !reduceMotion) {
+        const proofRect = proof.getBoundingClientRect();
+        const proofInView = proofRect.top < window.innerHeight * 0.92 && proofRect.bottom > 0;
+        if (!proofInView) {
+            onceInView(
+                proof,
+                () => {
+                    proof.querySelectorAll('[data-count]').forEach((el) => {
+                        const to = Number(el.dataset.count);
+                        if (!Number.isFinite(to)) return;
+                        const suffix = el.dataset.suffix || '';
+                        const prefix = el.dataset.prefix || '';
+                        const start = performance.now();
+                        const duration = 900;
+                        const tick = (now) => {
+                            const t = Math.min(1, (now - start) / duration);
+                            el.textContent = prefix + Math.round(to * easeOut(t)) + suffix;
+                            if (t < 1) requestAnimationFrame(tick);
+                        };
+                        requestAnimationFrame(tick);
+                    });
+                },
+                0.4
+            );
+        }
+    }
 
     const updateHeader = () => {
         if (!header) return;
@@ -57,7 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hint) hint.style.opacity = '0';
         };
 
+        let userTouched = false;
+
         slider.addEventListener('input', (e) => {
+            userTouched = true;
             update(e.target.value);
             hideHint();
         });
@@ -71,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         compare.addEventListener('pointerdown', (e) => {
+            userTouched = true;
             dragging = true;
             compare.setPointerCapture(e.pointerId);
             moveFromEvent(e.clientX);
@@ -90,6 +210,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         update(slider.value);
+
+        if (compare.hasAttribute('data-compare-demo') && !reduceMotion) {
+            onceInView(
+                compare,
+                () => {
+                    if (userTouched) return;
+                    const startVal = 22;
+                    const endVal = 58;
+                    const duration = 1100;
+                    update(startVal);
+                    const t0 = performance.now();
+                    const tick = (now) => {
+                        if (userTouched) return;
+                        const t = Math.min(1, (now - t0) / duration);
+                        update(startVal + (endVal - startVal) * easeOut(t));
+                        if (t < 1) requestAnimationFrame(tick);
+                    };
+                    requestAnimationFrame(tick);
+                },
+                0.35
+            );
+        }
     });
 
     document.querySelectorAll('.team-carousel').forEach((carousel) => {
