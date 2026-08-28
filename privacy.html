@@ -9,9 +9,10 @@
     <link rel="canonical" href="https://aspect-it.ru/privacy.html" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,500;0,600;0,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=18" />
+    <link rel="stylesheet" href="/css/styles.css?v=44" />
 </head>
 <body>
+    <a class="skip-link" href="#main">К содержанию</a>
 
     <header class="header header--light scrolled">
         <div class="container header-inner">
@@ -19,22 +20,27 @@
                 <span class="logo-mark">A</span>
                 Aspect<span>IT</span>
             </a>
-            <nav class="nav" aria-label="Основная навигация">
+            <nav id="site-nav" class="nav" aria-label="Основная навигация">
                 <a href="services.html">Услуги</a>
-                <a href="index.html#cases">Кейсы</a>
+                <a href="cases.html">Сценарии</a>
                 <a href="index.html#contact">Контакты</a>
             </nav>
+            <button class="menu-toggle" type="button" aria-label="Меню" aria-expanded="false" aria-controls="site-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <a href="index.html#contact" class="btn btn-ia">Обсудить проект</a>
         </div>
     </header>
 
-    <main class="page-hero" style="padding-bottom: 80px;">
+    <main id="main" class="page-hero" style="padding-bottom: 80px;">
         <div class="container" style="max-width: 720px;">
             <div class="section-label">Документы</div>
             <h1>Политика конфиденциальности</h1>
             <p>Дата публикации: 11 августа 2026 г.</p>
 
-            <div style="margin-top: 40px; font-size: 16px; line-height: 1.75; color: #4b5563;">
+            <div class="privacy-body">
                 <p style="margin-bottom: 16px;">Настоящая политика описывает порядок обработки персональных данных пользователей сайта <strong>aspect-it.ru</strong>, принадлежащего Aspect IT (далее — «Оператор»).</p>
 
                 <h2 style="font-size: 20px; color: #111; margin: 32px 0 12px;">1. Какие данные мы собираем</h2>
@@ -66,5 +72,7 @@
         </div>
     </footer>
 
+    <script src="js/yandex-metrika.js" defer></script>
+    <script src="js/main.js?v=27"></script>
 </body>
 </html>

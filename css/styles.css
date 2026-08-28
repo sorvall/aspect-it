@@ -52,6 +52,43 @@ body {
 }
 
 /* ===== ШАПКА ===== */
+.skip-link {
+    position: absolute;
+    left: 16px;
+    top: 0;
+    z-index: 200;
+    padding: 10px 14px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transform: translateY(-120%);
+}
+
+.skip-link:focus {
+    transform: none;
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+}
+
+.privacy-body {
+    margin-top: 40px;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text-muted);
+}
+
+.privacy-body h2 {
+    font-size: 20px;
+    color: var(--ink);
+    margin: 32px 0 12px;
+}
+
+.privacy-body p {
+    margin-bottom: 16px;
+}
+
 .header {
     position: fixed;
     top: 0;
@@ -5118,6 +5155,52 @@ body {
 .form-note {
     opacity: 1;
     color: var(--text-muted);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 140px;
+}
+
+.form-field span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.form-field input {
+    width: 100%;
+}
+
+.form-group input:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+    border-color: var(--ink);
+}
+
+.form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.form-consent input {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    margin-top: 2px;
+    accent-color: var(--ink);
+    cursor: pointer;
 }
 
 .form-success {

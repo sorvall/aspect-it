@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://mc.yandex.ru" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=43" />
+    <link rel="stylesheet" href="/css/styles.css?v=44" />
     <script>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json">
     {
@@ -134,6 +134,7 @@
     </script>
 </head>
 <body class="home">
+    <a class="skip-link" href="#main">К содержанию</a>
 
     <header class="header header--light">
         <div class="container header-inner">
@@ -141,12 +142,12 @@
                 <span class="logo-mark">A</span>
                 Aspect<span>IT</span>
             </a>
-            <nav class="nav" aria-label="Основная навигация">
+            <nav id="site-nav" class="nav" aria-label="Основная навигация">
                 <a href="services.html">Услуги</a>
-                <a href="cases.html">Кейсы</a>
+                <a href="cases.html">Сценарии</a>
                 <a href="#contact">Контакты</a>
             </nav>
-            <button class="menu-toggle" aria-label="Меню">
+            <button class="menu-toggle" type="button" aria-label="Меню" aria-expanded="false" aria-controls="site-nav">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -165,7 +166,7 @@
                 <p class="hero-editorial-lead">Дизайн, вёрстка, контент и SEO под ключ — с упором на <span class="hero-mark hero-mark--yandex">Яндекс</span> как главный канал поиска в России, плюс карты, отзывы, Avito и Profi.ru, и <strong>поддержка после запуска</strong>: тексты, цены, HTTPS, площадки</p>
                 <div class="hero-editorial-actions">
                     <a href="#contact" class="btn btn-ia">Обсудить проект</a>
-                    <a href="#cases" class="link-arrow">Смотреть кейсы →</a>
+                    <a href="#cases" class="link-arrow">Смотреть сценарии →</a>
                 </div>
                 <aside class="hero-cloud" data-cloud-cycle aria-label="Направления">
                     <div class="hero-cloud-tabs" role="tablist">
@@ -339,9 +340,9 @@
         <div class="container">
             <div class="cases-strip-head">
                 <div>
-                    <p class="section-label">04 / Кейсы</p>
-                    <h2 class="cases-strip-title">Как выглядит результат</h2>
-                    <p class="section-desc cases-result-lead">Перетащите ползунок — сравните, как сайт выглядел раньше и как может выглядеть сейчас</p>
+                    <p class="section-label">04 / Сценарии</p>
+                    <h2 class="cases-strip-title">Как может выглядеть результат</h2>
+                    <p class="section-desc cases-result-lead">Это типовые сценарии, не опубликованные кейсы клиентов. Перетащите ползунок — сравните «до» и «после»</p>
                 </div>
                 <a href="cases.html" class="link-arrow">Все сценарии →</a>
             </div>
@@ -349,10 +350,10 @@
                 <article class="case-card">
                     <div class="compare" data-compare data-compare-demo>
                         <div class="compare-layer compare-after">
-                            <img class="compare-shot" src="/assets/cases/metalprom-after.jpg" width="1600" height="900" alt="Сайт МеталПром после обновления: тёмный герой, фото цеха, кнопка «Получить расчёт»">
+                            <img class="compare-shot" src="/assets/cases/metalprom-after.jpg" width="1600" height="900" alt="Пример сайта завода после обновления: тёмный герой, фото цеха, кнопка «Получить расчёт»">
                         </div>
                         <div class="compare-layer compare-before">
-                            <img class="compare-shot" src="/assets/cases/metalprom-before.jpg" width="1600" height="900" alt="Сайт МеталПром до обновления: табличная вёрстка 2008 года">
+                            <img class="compare-shot" src="/assets/cases/metalprom-before.jpg" width="1600" height="900" alt="Пример сайта завода до обновления: табличная вёрстка 2000-х">
                         </div>
                         <div class="compare-handle" aria-hidden="true"></div>
                         <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: завод" />
@@ -361,19 +362,19 @@
                         <span class="compare-hint">← перетащите →</span>
                     </div>
                     <div class="case-body">
-                        <span class="tag">Завод</span>
+                        <span class="tag">Сценарий · Завод</span>
                         <h3>Обновление сайта завода металлоконструкций</h3>
                         <p>Сайт 2008 года не открывался на телефоне, заявки шли только «сарафаном» — за 12 дней новый дизайн, 12 страниц, форма расчёта и SEO под ключевые запросы отрасли</p>
-                        <div class="result">↑ Заявок +37% за 2 месяца</div>
+                        <div class="result">В таком сценарии: заявки +37% за 2 месяца</div>
                     </div>
                 </article>
                 <article class="case-card">
                     <div class="compare" data-compare>
                         <div class="compare-layer compare-after">
-                            <img class="compare-shot" src="/assets/cases/stroygrupp-after.jpg" width="1600" height="900" alt="Сайт СтройГрупп после обновления: фото дома и форма заявки">
+                            <img class="compare-shot" src="/assets/cases/stroygrupp-after.jpg" width="1600" height="900" alt="Пример сайта застройщика после обновления: фото дома и форма заявки">
                         </div>
                         <div class="compare-layer compare-before">
-                            <img class="compare-shot" src="/assets/cases/stroygrupp-before.jpg" width="1600" height="900" alt="Сайт СтройГрупп до обновления: жёлтая шапка и битые картинки">
+                            <img class="compare-shot" src="/assets/cases/stroygrupp-before.jpg" width="1600" height="900" alt="Пример сайта застройщика до обновления: жёлтая шапка и битые картинки">
                         </div>
                         <div class="compare-handle" aria-hidden="true"></div>
                         <input type="range" class="compare-slider" min="0" max="100" value="50" aria-label="Сравнение до и после: застройщик" />
@@ -382,10 +383,10 @@
                         <span class="compare-hint">← перетащите →</span>
                     </div>
                     <div class="case-body">
-                        <span class="tag">Строительство</span>
+                        <span class="tag">Сценарий · Строительство</span>
                         <h3>Сайт-визитка для застройщика</h3>
                         <p>Табличная вёрстка, битые фото, нет портфолио — клиенты уходили к конкурентам, за 10 дней сделали сайт с объектами, отзывами и формой заявки</p>
-                        <div class="result">↑ Звонков +25% за месяц · Конверсия ×1,8</div>
+                        <div class="result">В таком сценарии: звонки +25% за месяц · конверсия ×1,8</div>
                     </div>
                 </article>
             </div>
@@ -395,7 +396,7 @@
                         <span class="case-teaser-metric">+37%</span>
                         <span class="case-teaser-metric-label">рост заявок</span>
                     </div>
-                    <h3 class="case-teaser-name">МеталПром</h3>
+                    <h3 class="case-teaser-name">Завод металлоконструкций</h3>
                     <p class="case-teaser-desc">Обновление сайта завода металлоконструкций: мобильная версия, SEO, форма расчёта</p>
                     <div class="case-teaser-tags">
                         <span>Дизайн</span><span>SEO</span><span>Вёрстка</span>
@@ -406,7 +407,7 @@
                         <span class="case-teaser-metric">×1,8</span>
                         <span class="case-teaser-metric-label">конверсия</span>
                     </div>
-                    <h3 class="case-teaser-name">СтройГрупп</h3>
+                    <h3 class="case-teaser-name">Застройщик</h3>
                     <p class="case-teaser-desc">Сайт-визитка застройщика: портфолио объектов, форма заявки, современный дизайн</p>
                     <div class="case-teaser-tags">
                         <span>Дизайн</span><span>Контент</span>
@@ -414,71 +415,8 @@
                 </a>
                 <a href="cases.html" class="case-teaser case-teaser--cta">
                     <span class="case-teaser-cta-label">За 7 лет помогли <strong class="accent-num">50+</strong> компаниям обновить сайт</span>
-                    <span class="link-arrow">Смотреть все кейсы →</span>
+                    <span class="link-arrow">Смотреть все сценарии →</span>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="tile-section home-rise">
-        <div class="container">
-            <p class="section-label">05 / Условия</p>
-            <h2 class="section-title section-title--large">Почему с нами удобно работать</h2>
-            <div class="tile-grid">
-                <article class="info-tile info-tile--blue">
-                    <div class="info-tile-inner">
-                        <span class="info-tile-label">Цена</span>
-                        <strong class="info-tile-title">Фиксированная<br />стоимость</strong>
-                        <div class="info-tile-detail">
-                            <p>КП = сумма в договоре, 50/50: макет и запуск — без «ещё доплатите за доработки»</p>
-                        </div>
-                    </div>
-                </article>
-                <article class="info-tile info-tile--teal">
-                    <div class="info-tile-inner">
-                        <span class="info-tile-label">Сроки</span>
-                        <strong class="info-tile-title">7–14 дней</strong>
-                        <div class="info-tile-detail">
-                            <p>Запуск за 7–14 дней, каждую неделю показываем, что готово</p>
-                        </div>
-                    </div>
-                </article>
-                <article class="info-tile info-tile--orange">
-                    <div class="info-tile-inner">
-                        <span class="info-tile-label">Результат</span>
-                        <strong class="info-tile-title">Больше<br />заявок</strong>
-                        <div class="info-tile-detail">
-                            <p>Форма была спрятана или сайт тормозил на телефоне — после обновления заявок обычно больше, сравним по Метрике через пару месяцев</p>
-                        </div>
-                    </div>
-                </article>
-                <article class="info-tile info-tile--purple">
-                    <div class="info-tile-inner">
-                        <span class="info-tile-label">Безопасность</span>
-                        <strong class="info-tile-title">1С и CRM<br />не трогаем</strong>
-                        <div class="info-tile-detail">
-                            <p>Только публичная часть — HTML, CSS, тексты. 1С и CRM не трогаем</p>
-                        </div>
-                    </div>
-                </article>
-                <article class="info-tile info-tile--rose">
-                    <div class="info-tile-inner">
-                        <span class="info-tile-label">Поддержка</span>
-                        <strong class="info-tile-title">Контент<br />и правки</strong>
-                        <div class="info-tile-detail">
-                            <p>От 8 000 ₽/мес: цены, акции, тексты, фото. Свой маркетолог в штат не нужен</p>
-                        </div>
-                    </div>
-                </article>
-                <article class="info-tile info-tile--indigo">
-                    <div class="info-tile-inner">
-                        <span class="info-tile-label">Запуск</span>
-                        <strong class="info-tile-title">HTTPS<br />под ключ</strong>
-                        <div class="info-tile-detail">
-                            <p>Домен, nginx, Let's Encrypt — сайт сразу открывается по https://. SSH и DevOps с вашей стороны не нужны</p>
-                        </div>
-                    </div>
-                </article>
             </div>
         </div>
     </section>
@@ -486,7 +424,7 @@
     <section class="section section--tech-cloud home-rise" id="stack">
         <div class="container tech-cloud-layout">
             <div class="tech-cloud-intro">
-                <div class="section-label">06 / Стек</div>
+                <div class="section-label">05 / Стек</div>
                 <h2 class="section-title section-title--large">Чем делаем сайты<br />и продвижение</h2>
                 <p class="section-desc">Не абстрактный «IT» — конкретные инструменты: от вёрстки и деплоя до <span class="hero-mark hero-mark--yandex">Яндекса</span> и площадок, где клиенты вас ищут</p>
             </div>
@@ -649,7 +587,7 @@
                             <li>Метрика — видите, откуда приходят заявки</li>
                         </ul>
                     </div>
-                    <a href="case-audit.html" class="audience-card-link">Кейс МеталПром: +37% заявок →</a>
+                    <a href="case-audit.html" class="audience-card-link">Сценарий: завод, обновление сайта →</a>
                 </article>
 
                 <article class="audience-card reveal stagger-2">
@@ -667,7 +605,7 @@
                             <li>карточка на Картах, работа с отзывами</li>
                         </ul>
                     </div>
-                    <a href="case-leads.html" class="audience-card-link">Кейс СтройГрупп: ×1,8 конверсия →</a>
+                    <a href="case-leads.html" class="audience-card-link">Сценарий: застройщик, заявки с сайта →</a>
                 </article>
 
                 <article class="audience-card reveal stagger-3">
@@ -705,30 +643,6 @@
                         <li>интеграция с 1С, ERP или CRM</li>
                         <li>только макет — без вёрстки и запуска</li>
                     </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section--principles">
-        <div class="container principles-layout">
-            <h2 class="section-title section-title--large">Работаем без сюрпризов — опираясь на принципы</h2>
-            <div class="principles-grid">
-                <div class="principle-item reveal stagger-1">
-                    <h4>Фиксированная цена</h4>
-                    <p>КП = сумма в договоре. Платите 50/50: макет, потом запуск</p>
-                </div>
-                <div class="principle-item reveal stagger-2">
-                    <h4>Без риска для IT</h4>
-                    <p>1С, CRM и учёт не трогаем — меняем только то, что видит клиент на сайте</p>
-                </div>
-                <div class="principle-item reveal stagger-3">
-                    <h4>Результат за 7–14 дней</h4>
-                    <p>Показываем каждую неделю, правим до «ок», не тянем месяцами</p>
-                </div>
-                <div class="principle-item reveal stagger-4">
-                    <h4>Измеримый эффект</h4>
-                    <p>Цифры «до/после» — из вашей Метрики, не из нашей презентации</p>
                 </div>
             </div>
         </div>
@@ -797,13 +711,22 @@
                 </div>
                 <form class="form-group form-group--ia" data-form>
                         <div class="form-row">
-                            <input type="text" placeholder="Ваше имя" required />
-                            <input type="tel" placeholder="+7 (___) ___-__-__" required />
+                            <label class="form-field">
+                                <span>Имя</span>
+                                <input type="text" name="name" autocomplete="name" required />
+                            </label>
+                            <label class="form-field">
+                                <span>Телефон</span>
+                                <input type="tel" name="phone" autocomplete="tel" inputmode="tel" required />
+                            </label>
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-ia">Оставить заявку</button>
                         </div>
-                        <p class="form-note">Даю согласие на <a href="privacy.html">обработку данных</a> в соответствии с политикой конфиденциальности.</p>
+                        <label class="form-consent">
+                            <input type="checkbox" name="consent" required />
+                            <span>Согласен на <a href="privacy.html">обработку персональных данных</a></span>
+                        </label>
                         <p class="form-success">Спасибо! Мы свяжемся с вами в течение 2 часов в рабочее время.</p>
                     </form>
             </div>
@@ -824,6 +747,6 @@
     </footer>
 
     <script src="js/yandex-metrika.js" defer></script>
-    <script src="js/main.js?v=26"></script>
+    <script src="js/main.js?v=27"></script>
 </body>
 </html>

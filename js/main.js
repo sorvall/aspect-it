@@ -143,7 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHeader();
 
     if (menuToggle && nav) {
-        menuToggle.addEventListener('click', () => nav.classList.toggle('open'));
+        menuToggle.addEventListener('click', () => {
+            const open = nav.classList.toggle('open');
+            menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
     }
 
     const reveals = document.querySelectorAll('.reveal');
