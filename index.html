@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://mc.yandex.ru" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=37" />
+    <link rel="stylesheet" href="/css/styles.css?v=39" />
     <script>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json">
     {
@@ -168,43 +168,35 @@
                     <a href="#cases" class="link-arrow">Смотреть кейсы →</a>
                 </div>
                 <aside class="hero-cloud" data-cloud-cycle aria-label="Направления">
-                    <ul class="hero-cloud-list">
-                        <li>
-                            <button type="button" class="hero-cloud-kicker">трафик</button>
-                            <ul class="hero-cloud-tags">
-                                <li><span class="hero-tag hero-tag--accent">Интеграция с Яндексом</span></li>
-                                <li><span class="hero-tag">Карты и отзывы в выдаче</span></li>
-                                <li><span class="hero-tag">Avito и Profi.ru под ключ</span></li>
-                                <li><span class="hero-tag">Вся воронка в одном месте</span></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <button type="button" class="hero-cloud-kicker">экспертиза</button>
-                            <ul class="hero-cloud-tags">
-                                <li><span class="hero-tag">Адаптив под поисковые системы</span></li>
-                                <li><span class="hero-tag">Живые тексты, а не SEO-мусор</span></li>
-                                <li><span class="hero-tag">Цены не «слетают» после запуска</span></li>
-                                <li><span class="hero-tag">Сертификаты и HTTPS с первого дня</span></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <button type="button" class="hero-cloud-kicker">надежность</button>
-                            <ul class="hero-cloud-tags">
-                                <li><span class="hero-tag">Без скрытых платежей</span></li>
-                                <li><span class="hero-tag">Поддержка — не допуслуга, а часть пакета</span></li>
-                                <li><span class="hero-tag">Обновляем, пока вы ведёте переговоры</span></li>
-                                <li><span class="hero-tag">Сайт не ломается после обновлений</span></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <button type="button" class="hero-cloud-kicker">рост</button>
-                            <ul class="hero-cloud-tags">
-                                <li><span class="hero-tag">Конверсия из поиска в заявку</span></li>
-                                <li><span class="hero-tag">Поисковый канал — главный, а не дополнительный</span></li>
-                                <li><span class="hero-tag">Ваш сайт — точка сбора всех каналов</span></li>
-                                <li><span class="hero-tag">Масштабируем без переделки</span></li>
-                            </ul>
-                        </li>
+                    <div class="hero-cloud-tabs" role="tablist">
+                        <button type="button" class="hero-cloud-tab" role="tab" id="cloud-tab-0" aria-controls="cloud-panel-0" aria-selected="true">трафик</button>
+                        <button type="button" class="hero-cloud-tab" role="tab" id="cloud-tab-1" aria-controls="cloud-panel-1" aria-selected="false">экспертиза</button>
+                        <button type="button" class="hero-cloud-tab" role="tab" id="cloud-tab-2" aria-controls="cloud-panel-2" aria-selected="false">надежность</button>
+                        <button type="button" class="hero-cloud-tab" role="tab" id="cloud-tab-3" aria-controls="cloud-panel-3" aria-selected="false">рост</button>
+                    </div>
+                    <ul class="hero-cloud-tags hero-cloud-panel is-on" role="tabpanel" id="cloud-panel-0" aria-labelledby="cloud-tab-0">
+                        <li><span class="hero-tag hero-tag--accent">Интеграция с Яндексом</span></li>
+                        <li><span class="hero-tag">Карты и отзывы в выдаче</span></li>
+                        <li><span class="hero-tag">Avito и Profi.ru под ключ</span></li>
+                        <li><span class="hero-tag">Вся воронка в одном месте</span></li>
+                    </ul>
+                    <ul class="hero-cloud-tags hero-cloud-panel" role="tabpanel" id="cloud-panel-1" aria-labelledby="cloud-tab-1">
+                        <li><span class="hero-tag">Адаптив под поисковые системы</span></li>
+                        <li><span class="hero-tag">Живые тексты, а не SEO-мусор</span></li>
+                        <li><span class="hero-tag">Цены не «слетают» после запуска</span></li>
+                        <li><span class="hero-tag">Сертификаты и HTTPS с первого дня</span></li>
+                    </ul>
+                    <ul class="hero-cloud-tags hero-cloud-panel" role="tabpanel" id="cloud-panel-2" aria-labelledby="cloud-tab-2">
+                        <li><span class="hero-tag">Без скрытых платежей</span></li>
+                        <li><span class="hero-tag">Поддержка — не допуслуга, а часть пакета</span></li>
+                        <li><span class="hero-tag">Обновляем, пока вы ведёте переговоры</span></li>
+                        <li><span class="hero-tag">Сайт не ломается после обновлений</span></li>
+                    </ul>
+                    <ul class="hero-cloud-tags hero-cloud-panel" role="tabpanel" id="cloud-panel-3" aria-labelledby="cloud-tab-3">
+                        <li><span class="hero-tag">Конверсия из поиска в заявку</span></li>
+                        <li><span class="hero-tag">Поисковый канал — главный, а не дополнительный</span></li>
+                        <li><span class="hero-tag">Ваш сайт — точка сбора всех каналов</span></li>
+                        <li><span class="hero-tag">Масштабируем без переделки</span></li>
                     </ul>
                 </aside>
             </div>
@@ -544,55 +536,40 @@
                     <p class="section-desc">Не безликий «отдел продаж» — у каждого проекта свой менеджер, на связи от первого звонка до запуска и дальше на абонементе</p>
                 </div>
             </div>
-            <div class="team-carousel reveal">
-                <button type="button" class="team-nav team-nav--prev" aria-label="Предыдущий сотрудник">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-                </button>
-                <div class="team-slider" tabindex="0" aria-label="Команда Aspect IT">
-                    <div class="team-track">
-                        <article class="team-card">
-                            <div class="team-photo">
-                                <img src="assets/team/maria.jpg" alt="Мария Соколова" width="400" height="400" loading="lazy" />
-                            </div>
-                            <div class="team-info">
-                                <h3>Мария Соколова</h3>
-                                <p class="team-role">Менеджер по работе с клиентами</p>
-                                <p class="team-bio">Проведёт аудит, составит КП и будет на связи каждый день — без IT-жаргона</p>
-                                <span class="team-badge">Ответ за 2 часа</span>
-                            </div>
-                        </article>
-                        <article class="team-card">
-                            <div class="team-photo">
-                                <img src="assets/team/alexey.jpg" alt="Алексей Воронин" width="400" height="400" loading="lazy" />
-                            </div>
-                            <div class="team-info">
-                                <h3>Алексей Воронин</h3>
-                                <p class="team-role">Руководитель проектов</p>
-                                <p class="team-bio">Координирует дизайн, вёрстку и контент, еженедельные показы прогресса</p>
-                                <span class="team-badge">50+ проектов</span>
-                            </div>
-                        </article>
-                        <article class="team-card">
-                            <div class="team-photo">
-                                <img src="assets/team/dmitry.jpg" alt="Дмитрий Козлов" width="400" height="400" loading="lazy" />
-                            </div>
-                            <div class="team-info">
-                                <h3>Дмитрий Козлов</h3>
-                                <p class="team-role">Lead-разработчик</p>
-                                <p class="team-bio">Скорость, адаптив и чистый код — сайт быстро открывается и на телефоне, и на слабом интернете</p>
-                                <span class="team-badge">Быстрая загрузка</span>
-                            </div>
-                        </article>
+            <div class="team-grid">
+                <article class="team-card">
+                    <div class="team-photo">
+                        <img src="assets/team/maria.jpg" alt="Мария Соколова" width="400" height="400" loading="lazy" />
                     </div>
-                </div>
-                <button type="button" class="team-nav team-nav--next" aria-label="Следующий сотрудник">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-                </button>
-                <div class="team-dots" aria-hidden="true">
-                    <span class="team-dot is-active"></span>
-                    <span class="team-dot"></span>
-                    <span class="team-dot"></span>
-                </div>
+                    <div class="team-info">
+                        <h3>Мария Соколова</h3>
+                        <p class="team-role">Менеджер по работе с клиентами</p>
+                        <p class="team-bio">Проведёт аудит, составит КП и будет на связи каждый день — без IT-жаргона</p>
+                        <span class="team-badge">Ответ за 2 часа</span>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <div class="team-photo">
+                        <img src="assets/team/alexey.jpg" alt="Алексей Воронин" width="400" height="400" loading="lazy" />
+                    </div>
+                    <div class="team-info">
+                        <h3>Алексей Воронин</h3>
+                        <p class="team-role">Руководитель проектов</p>
+                        <p class="team-bio">Координирует дизайн, вёрстку и контент, еженедельные показы прогресса</p>
+                        <span class="team-badge">50+ проектов</span>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <div class="team-photo">
+                        <img src="assets/team/dmitry.jpg" alt="Дмитрий Козлов" width="400" height="400" loading="lazy" />
+                    </div>
+                    <div class="team-info">
+                        <h3>Дмитрий Козлов</h3>
+                        <p class="team-role">Lead-разработчик</p>
+                        <p class="team-bio">Скорость, адаптив и чистый код — сайт быстро открывается и на телефоне, и на слабом интернете</p>
+                        <span class="team-badge">Быстрая загрузка</span>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -796,6 +773,6 @@
     </footer>
 
     <script src="js/yandex-metrika.js" defer></script>
-    <script src="js/main.js?v=22"></script>
+    <script src="js/main.js?v=24"></script>
 </body>
 </html>

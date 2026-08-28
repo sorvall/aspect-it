@@ -27,54 +27,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const cloud = document.querySelector('[data-cloud-cycle]');
-    if (cloud && !reduceMotion) {
-        const items = [...cloud.querySelectorAll('.hero-cloud-list > li')];
-        if (items.length) {
-            cloud.classList.add('is-cycling');
-            let index = 0;
-            let timer = 0;
-
-            const show = (next) => {
-                index = next;
-                items.forEach((item, n) => {
-                    const on = n === index;
-                    item.classList.toggle('is-on', on);
-                    const btn = item.querySelector('.hero-cloud-kicker');
-                    if (btn) btn.setAttribute('aria-current', on ? 'true' : 'false');
-                });
-            };
-
-            const play = () => {
-                window.clearInterval(timer);
-                timer = window.setInterval(() => show((index + 1) % items.length), 3400);
-            };
-
-            const pause = () => window.clearInterval(timer);
-
-            show(0);
-            play();
-
-            cloud.addEventListener('mouseenter', pause);
-            cloud.addEventListener('mouseleave', play);
-            cloud.addEventListener('focusin', pause);
-            cloud.addEventListener('focusout', (e) => {
-                if (!cloud.contains(e.relatedTarget)) play();
+    if (cloud) {
+        const tabs = [...cloud.querySelectorAll('.hero-cloud-tab')];
+        const panels = [...cloud.querySelectorAll('.hero-cloud-panel')];
+        const show = (index) => {
+            tabs.forEach((tab, n) => {
+                const on = n === index;
+                tab.setAttribute('aria-selected', on ? 'true' : 'false');
+                tab.tabIndex = on ? 0 : -1;
             });
-
-            items.forEach((item, n) => {
-                const btn = item.querySelector('.hero-cloud-kicker');
-                if (!btn) return;
-                btn.addEventListener('click', () => {
-                    show(n);
-                    play();
-                });
+            panels.forEach((panel, n) => {
+                const on = n === index;
+                panel.classList.toggle('is-on', on);
+                panel.hidden = !on;
             });
-
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) pause();
-                else play();
-            });
-        }
+        };
+        tabs.forEach((tab, n) => {
+            tab.addEventListener('click', () => show(n));
+        });
+        show(0);
     }
 
     document.querySelectorAll('.home-rise, .home-process').forEach((el) => {
@@ -232,87 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 0.35
             );
         }
-    });
-
-    document.querySelectorAll('.team-carousel').forEach((carousel) => {
-        const slider = carousel.querySelector('.team-slider');
-        const track = carousel.querySelector('.team-track');
-        const prevBtn = carousel.querySelector('.team-nav--prev');
-        const nextBtn = carousel.querySelector('.team-nav--next');
-        const dots = carousel.querySelectorAll('.team-dot');
-        if (!slider || !track) return;
-
-        const cards = () => [...track.querySelectorAll('.team-card')];
-
-        const scrollToIndex = (index) => {
-            const card = cards()[index];
-            if (!card) return;
-            const offset = card.offsetLeft - (slider.clientWidth - card.offsetWidth) / 2;
-            slider.scrollTo({ left: Math.max(0, offset), behavior: 'smooth' });
-        };
-
-        const updateDots = () => {
-            const list = cards();
-            if (!list.length) return;
-            let active = 0;
-            let minDist = Infinity;
-            const center = slider.scrollLeft + slider.clientWidth / 2;
-            list.forEach((card, i) => {
-                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-                const dist = Math.abs(center - cardCenter);
-                if (dist < minDist) {
-                    minDist = dist;
-                    active = i;
-                }
-            });
-            dots.forEach((dot, i) => dot.classList.toggle('is-active', i === active));
-        };
-
-        prevBtn?.addEventListener('click', () => {
-            const step = cards()[0]?.offsetWidth + 20 || 320;
-            slider.scrollBy({ left: -step, behavior: 'smooth' });
-        });
-
-        nextBtn?.addEventListener('click', () => {
-            const step = cards()[0]?.offsetWidth + 20 || 320;
-            slider.scrollBy({ left: step, behavior: 'smooth' });
-        });
-
-        dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => scrollToIndex(i));
-        });
-
-        slider.addEventListener('scroll', updateDots, { passive: true });
-        updateDots();
-
-        let dragging = false;
-        let startX = 0;
-        let scrollStart = 0;
-
-        slider.addEventListener('pointerdown', (e) => {
-            if (e.target.closest('.team-nav')) return;
-            if (e.pointerType === 'mouse' && e.button !== 0) return;
-            dragging = true;
-            startX = e.clientX;
-            scrollStart = slider.scrollLeft;
-            slider.classList.add('is-dragging');
-            slider.setPointerCapture(e.pointerId);
-        });
-
-        slider.addEventListener('pointermove', (e) => {
-            if (!dragging) return;
-            slider.scrollLeft = scrollStart - (e.clientX - startX);
-        });
-
-        const stopDrag = () => {
-            if (!dragging) return;
-            dragging = false;
-            slider.classList.remove('is-dragging');
-            updateDots();
-        };
-
-        slider.addEventListener('pointerup', stopDrag);
-        slider.addEventListener('pointercancel', stopDrag);
     });
 
     document.querySelectorAll('form[data-form]').forEach((form) => {

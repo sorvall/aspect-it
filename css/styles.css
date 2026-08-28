@@ -5300,46 +5300,58 @@ body.home .hero-editorial-actions {
 
 .hero-cloud {
     grid-area: cloud;
-    padding: 12px 12px 12px 4px;
-    background: var(--paper);
+    padding: 0;
+    background: transparent;
+    min-width: 0;
 }
 
-.hero-cloud-list {
-    list-style: disc;
-    margin: 0;
-    padding: 0 0 0 1.15em;
+.hero-cloud-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 14px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid var(--border);
 }
 
-.hero-cloud-list > li + li {
-    margin-top: 16px;
+.hero-cloud-tab {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
+    color: var(--text-muted);
+    background: none;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    padding: 2px 0 10px;
+    margin-bottom: -11px;
+    cursor: pointer;
+    appearance: none;
 }
 
-.hero-cloud-list > li::marker {
+.hero-cloud-tab[aria-selected="true"] {
     color: var(--ink);
+    border-bottom-color: var(--ink);
 }
 
-.hero-cloud-kicker:focus-visible {
+.hero-cloud-tab:focus-visible {
     outline: 2px solid var(--ink);
     outline-offset: 3px;
 }
 
-html.js body.home .hero-cloud.is-cycling .hero-cloud-list > li:not(.is-on) .hero-cloud-kicker {
-    color: var(--text-muted);
-}
-
-html.js body.home .hero-cloud.is-cycling .hero-cloud-list > li:not(.is-on) .hero-cloud-tags {
+html.js body.home .hero-cloud-panel:not(.is-on) {
     display: none;
 }
 
-html.js body.home .hero-cloud.is-cycling .is-on .hero-tag {
+html.js body.home .hero-cloud-panel.is-on .hero-tag {
     opacity: 0;
     animation: hero-tag-in 0.32s ease forwards;
 }
 
-html.js body.home .hero-cloud.is-cycling .is-on .hero-cloud-tags li:nth-child(1) .hero-tag { animation-delay: 0.02s; }
-html.js body.home .hero-cloud.is-cycling .is-on .hero-cloud-tags li:nth-child(2) .hero-tag { animation-delay: 0.08s; }
-html.js body.home .hero-cloud.is-cycling .is-on .hero-cloud-tags li:nth-child(3) .hero-tag { animation-delay: 0.14s; }
-html.js body.home .hero-cloud.is-cycling .is-on .hero-cloud-tags li:nth-child(4) .hero-tag { animation-delay: 0.2s; }
+html.js body.home .hero-cloud-panel.is-on li:nth-child(1) .hero-tag { animation-delay: 0.02s; }
+html.js body.home .hero-cloud-panel.is-on li:nth-child(2) .hero-tag { animation-delay: 0.08s; }
+html.js body.home .hero-cloud-panel.is-on li:nth-child(3) .hero-tag { animation-delay: 0.14s; }
+html.js body.home .hero-cloud-panel.is-on li:nth-child(4) .hero-tag { animation-delay: 0.2s; }
 
 @keyframes hero-tag-in {
     from {
@@ -5350,6 +5362,26 @@ html.js body.home .hero-cloud.is-cycling .is-on .hero-cloud-tags li:nth-child(4)
         opacity: 1;
         transform: none;
     }
+}
+
+.hero-cloud-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hero-cloud-list > li + li {
+    margin-top: 16px;
+}
+
+.hero-cloud-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    color: var(--ink);
+    margin: 0 0 8px;
+    display: block;
 }
 
 .hero-cloud-tags {
@@ -5868,13 +5900,114 @@ body.home .case-teaser {
         transform: none;
     }
 
-    html.js body.home .hero-cloud.is-cycling .hero-cloud-list > li:not(.is-on) .hero-cloud-tags {
-        display: flex;
-    }
-
-    html.js body.home .hero-cloud.is-cycling .is-on .hero-tag {
+    html.js body.home .hero-cloud-panel.is-on .hero-tag {
         opacity: 1;
         animation: none;
         transform: none;
+    }
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 40px;
+    border-top: 1px solid var(--border);
+}
+
+.team-grid .team-card {
+    flex: none;
+    width: auto;
+    flex-direction: column;
+    align-items: stretch;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+}
+
+.team-grid .team-card:hover {
+    border-color: transparent;
+}
+
+.team-grid .team-photo {
+    flex: none;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+    margin: 20px 0 16px;
+    background: var(--bg-alt);
+}
+
+.team-grid .team-photo img {
+    object-position: center 18%;
+}
+
+.team-grid .team-info {
+    padding: 0 0 28px;
+}
+
+.team-grid .team-info h3 {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    color: var(--ink);
+}
+
+.team-grid .team-role {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.team-grid .team-bio {
+    font-size: 14px;
+    line-height: 1.5;
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    margin-bottom: 14px;
+}
+
+.team-grid .team-badge {
+    border-radius: 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    padding: 4px 8px;
+}
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .team-grid .team-card {
+        display: grid;
+        grid-template-columns: 112px minmax(0, 1fr);
+        column-gap: 16px;
+        border-bottom: 1px solid var(--border);
+        padding: 20px 0;
+    }
+
+    .team-grid .team-photo {
+        aspect-ratio: 1;
+        margin: 0;
+    }
+
+    .team-grid .team-info {
+        padding: 0;
+    }
+
+    .team-grid .team-bio {
+        margin-bottom: 10px;
     }
 }
