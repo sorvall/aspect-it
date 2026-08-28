@@ -37,13 +37,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 tab.tabIndex = on ? 0 : -1;
             });
             panels.forEach((panel, n) => {
-                const on = n === index;
-                panel.classList.toggle('is-on', on);
-                panel.hidden = !on;
+                if (n === index) {
+                    panel.classList.remove('is-on');
+                    panel.hidden = false;
+                    void panel.offsetWidth;
+                    panel.classList.add('is-on');
+                } else {
+                    panel.hidden = true;
+                    panel.classList.remove('is-on');
+                }
             });
         };
         tabs.forEach((tab, n) => {
-            tab.addEventListener('click', () => show(n));
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                show(n);
+            });
+        });
+        cloud.querySelector('.hero-cloud-tabs')?.addEventListener('keydown', (e) => {
+            const current = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const dir = e.key === 'ArrowRight' ? 1 : -1;
+                const next = (current + dir + tabs.length) % tabs.length;
+                tabs[next].focus();
+                show(next);
+            }
         });
         show(0);
     }

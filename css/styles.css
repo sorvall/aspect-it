@@ -5340,12 +5340,11 @@ body.home .hero-editorial-actions {
 }
 
 html.js body.home .hero-cloud-panel:not(.is-on) {
-    display: none;
+    display: none !important;
 }
 
 html.js body.home .hero-cloud-panel.is-on .hero-tag {
-    opacity: 0;
-    animation: hero-tag-in 0.32s ease forwards;
+    animation: hero-tag-in 0.32s ease both;
 }
 
 html.js body.home .hero-cloud-panel.is-on li:nth-child(1) .hero-tag { animation-delay: 0.02s; }
