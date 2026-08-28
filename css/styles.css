@@ -5232,9 +5232,9 @@ body.home .hero-editorial::before {
             rgba(233, 227, 214, 0.95) 50%,
             rgba(233, 227, 214, 0.98) 100%
         ),
-        url("/assets/hero-abstract.jpg?v=2");
+        url("/assets/hero-abstract.jpg?v=3");
     background-size: cover;
-    background-position: 70% 20%;
+    background-position: center;
 }
 
 body.home .hero-editorial .container {
