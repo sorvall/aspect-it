@@ -30,14 +30,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cloud) {
         const tabs = [...cloud.querySelectorAll('.hero-cloud-tab')];
         const panels = [...cloud.querySelectorAll('.hero-cloud-panel')];
+        const dwell = 4200;
+        const canAuto = !reduceMotion && tabs.length > 1;
+        let current = 0;
+        let timer = 0;
+
+        const paused = () =>
+            document.hidden || cloud.matches(':hover') || cloud.contains(document.activeElement);
+
+        const arm = () => {
+            window.clearTimeout(timer);
+            cloud.classList.toggle('is-cycling', canAuto && !paused());
+            if (!canAuto || paused()) return;
+            timer = window.setTimeout(() => show(current + 1), dwell);
+        };
+
         const show = (index) => {
+            current = (index + tabs.length) % tabs.length;
             tabs.forEach((tab, n) => {
-                const on = n === index;
+                const on = n === current;
                 tab.setAttribute('aria-selected', on ? 'true' : 'false');
                 tab.tabIndex = on ? 0 : -1;
             });
             panels.forEach((panel, n) => {
-                if (n === index) {
+                if (n === current) {
                     panel.classList.remove('is-on');
                     panel.hidden = false;
                     void panel.offsetWidth;
@@ -47,7 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     panel.classList.remove('is-on');
                 }
             });
+            arm();
         };
+
         tabs.forEach((tab, n) => {
             tab.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -55,15 +73,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
         cloud.querySelector('.hero-cloud-tabs')?.addEventListener('keydown', (e) => {
-            const current = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
-            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-                e.preventDefault();
-                const dir = e.key === 'ArrowRight' ? 1 : -1;
-                const next = (current + dir + tabs.length) % tabs.length;
-                tabs[next].focus();
-                show(next);
-            }
+            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+            e.preventDefault();
+            const dir = e.key === 'ArrowRight' ? 1 : -1;
+            const next = (current + dir + tabs.length) % tabs.length;
+            tabs[next].focus();
+            show(next);
         });
+        cloud.addEventListener('mouseenter', arm);
+        cloud.addEventListener('mouseleave', arm);
+        cloud.addEventListener('focusin', arm);
+        cloud.addEventListener('focusout', () => window.setTimeout(arm, 0));
+        document.addEventListener('visibilitychange', arm);
         show(0);
     }
 
