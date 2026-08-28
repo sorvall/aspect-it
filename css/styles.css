@@ -5008,8 +5008,20 @@ body {
 .tech-node-detail,
 .tech-node-detail--left,
 .tech-node:hover .tech-node-detail,
-.tech-node:focus-within .tech-node-detail {
+.tech-node:focus-within .tech-node-detail,
+.tech-node:hover .tech-node-detail--left,
+.tech-node:focus-within .tech-node-detail--left,
+.tech-node--tip-up .tech-node-detail,
+.tech-node--tip-up .tech-node-detail--left,
+.tech-node--tip-up:hover .tech-node-detail,
+.tech-node--tip-up:focus-within .tech-node-detail,
+.tech-node--tip-up:hover .tech-node-detail--left,
+.tech-node--tip-up:focus-within .tech-node-detail--left {
     position: static;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -5021,6 +5033,17 @@ body {
     box-shadow: none;
     border: 0;
     background: none;
+}
+
+.tech-node:hover .tech-bubble,
+.tech-node:focus-within .tech-bubble {
+    box-shadow: none;
+    border-color: var(--border);
+}
+
+.tech-node:hover .tech-bubble img,
+.tech-node:focus-within .tech-bubble img {
+    transform: none;
 }
 
 .tech-node-detail li {
