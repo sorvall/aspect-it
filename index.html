@@ -38,8 +38,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://mc.yandex.ru" />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,500;0,600;0,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=19" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,500;0,600;0,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css?v=20" />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -132,7 +132,7 @@
     }
     </script>
 </head>
-<body>
+<body class="home">
 
     <header class="header header--light">
         <div class="container header-inner">
@@ -156,35 +156,33 @@
 
     <main id="main">
     <section class="hero-editorial">
-        <div class="container hero-editorial-grid">
-            <div class="hero-editorial-main">
-                <p class="hero-editorial-eyebrow">IT-аутсорсинг · <span class="accent-text">Aspect IT</span></p>
-                <h1 class="hero-editorial-title">Обновление сайтов<br class="hero-title-break" />для B2B-бизнеса</h1>
-                <p class="hero-editorial-lead">Дизайн, вёрстка, контент и SEO под ключ — с упором на <span class="hero-mark hero-mark--yandex">Яндекс</span> как главный канал поиска в России, плюс карты, отзывы, Avito и Profi.ru, и <strong>поддержка после запуска</strong>: тексты, цены, HTTPS, площадки</p>
-                <div class="hero-editorial-actions">
-                    <a href="#contact" class="btn btn-ia">Обсудить проект</a>
-                    <a href="#cases" class="link-arrow">Смотреть кейсы →</a>
-                </div>
+        <div class="container">
+            <p class="hero-editorial-eyebrow">01 / Аутсорсинг</p>
+            <h1 class="hero-editorial-title">Обновление сайтов<br class="hero-title-break" />для B2B-бизнеса</h1>
+            <p class="hero-editorial-lead">Дизайн, вёрстка, контент и SEO под ключ — с упором на <span class="hero-mark hero-mark--yandex">Яндекс</span> как главный канал поиска в России, плюс карты, отзывы, Avito и Profi.ru, и <strong>поддержка после запуска</strong>: тексты, цены, HTTPS, площадки</p>
+            <div class="hero-editorial-actions">
+                <a href="#contact" class="btn btn-ia">Обсудить проект</a>
+                <a href="#cases" class="link-arrow">Смотреть кейсы →</a>
             </div>
-            <div class="hero-stats-panel reveal">
-                <div class="hero-editorial-stats">
-                    <div class="hero-stat">
-                        <strong>50+</strong>
-                        <span>завершённых<br />проектов</span>
-                    </div>
-                    <div class="hero-stat">
-                        <strong>7–14</strong>
-                        <span>дней средний<br />срок запуска</span>
-                    </div>
-                    <div class="hero-stat">
-                        <strong>24 ч</strong>
-                        <span>аудит и КП<br />без обязательств</span>
-                    </div>
-                    <div class="hero-stat">
-                        <strong>0 ₽</strong>
-                        <span>скрытых<br />доплат</span>
-                    </div>
-                </div>
+        </div>
+    </section>
+    <section class="hero-proof" aria-label="Показатели">
+        <div class="container hero-proof-grid">
+            <div class="hero-stat">
+                <strong>50+</strong>
+                <span>завершённых проектов</span>
+            </div>
+            <div class="hero-stat">
+                <strong>7–14</strong>
+                <span>дней средний срок запуска</span>
+            </div>
+            <div class="hero-stat">
+                <strong>24 ч</strong>
+                <span>аудит и КП без обязательств</span>
+            </div>
+            <div class="hero-stat">
+                <strong>0 ₽</strong>
+                <span>скрытых доплат</span>
             </div>
         </div>
     </section>
@@ -192,8 +190,11 @@
     <section class="cases-strip-section">
         <div class="container">
             <div class="cases-strip-head">
-                <h2 class="cases-strip-title">Кейсы</h2>
-                <a href="cases.html" class="link-arrow">Все кейсы →</a>
+                <div>
+                    <p class="section-label">02 / Кейсы</p>
+                    <h2 class="cases-strip-title">Как выглядит результат</h2>
+                </div>
+                <a href="cases.html" class="link-arrow">Все сценарии →</a>
             </div>
             <div class="cases-strip">
                 <a href="case-audit.html" class="case-teaser">
@@ -228,6 +229,7 @@
 
     <section class="tile-section">
         <div class="container">
+            <p class="section-label">03 / Условия</p>
             <h2 class="section-title section-title--large">Почему с нами удобно работать</h2>
             <div class="tile-grid">
                 <article class="info-tile info-tile--blue">
@@ -291,7 +293,7 @@
     <section class="section section--tech-cloud" id="stack">
         <div class="container tech-cloud-layout">
             <div class="tech-cloud-intro reveal">
-                <div class="section-label">Стек</div>
+                <div class="section-label">04 / Стек</div>
                 <h2 class="section-title section-title--large">Чем делаем сайты<br />и продвижение</h2>
                 <p class="section-desc">Не абстрактный «IT» — конкретные инструменты: от вёрстки и деплоя до <span class="hero-mark hero-mark--yandex">Яндекса</span> и площадок, где клиенты вас ищут</p>
             </div>
@@ -861,13 +863,15 @@
 
     </main>
 
-    <footer class="footer container">
+    <footer class="footer-band">
+    <div class="footer container">
         <p>© 2026 Aspect IT. IT-аутсорсинг для бизнеса.</p>
         <div class="footer-links">
             <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
             <a href="privacy.html">Политика конфиденциальности</a>
             <a href="mailto:hello@aspect-it.ru">hello@aspect-it.ru</a>
         </div>
+    </div>
     </footer>
 
     <script src="js/yandex-metrika.js" defer></script>
