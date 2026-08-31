@@ -122,7 +122,10 @@ def send_via_https(name, phone, page, mail_to):
             "name": name,
             "phone": phone,
             "page": page,
+            "message": "Имя: %s\nТелефон: %s\nСтраница: %s" % (name, phone, page),
             "_subject": "Заявка с aspect-it.ru: %s" % name,
+            "_captcha": "false",
+            "_template": "table",
         },
         ensure_ascii=False,
     ).encode("utf-8")
@@ -139,9 +142,22 @@ def send_via_https(name, phone, page, mail_to):
     )
     with urllib.request.urlopen(req, timeout=20) as resp:
         body = resp.read().decode("utf-8", "replace")
-        sys.stderr.write("https fallback %s %s\n" % (resp.status, body[:240]))
+        sys.stderr.write("https mail %s %s\n" % (resp.status, body[:300]))
         if resp.status >= 400:
             raise RuntimeError("https mail failed")
+        try:
+            data = json.loads(body)
+        except json.JSONDecodeError:
+            return
+        success = data.get("success")
+        if success is True or str(success).lower() == "true":
+            return
+        msg = str(data.get("message") or body)
+        low = msg.lower()
+        if "activat" in low or "confirm" in low or "inbox" in low:
+            sys.stderr.write("https mail waiting for inbox confirmation\n")
+            return
+        raise RuntimeError(msg)
 
 
 def send_mail(name, phone, page):
@@ -149,25 +165,25 @@ def send_mail(name, phone, page):
     if not mail_to:
         raise RuntimeError("smtp not configured")
 
-    msg = EmailMessage()
-    msg["Subject"] = "Заявка с aspect-it.ru: %s" % name
-    msg["From"] = user or mail_to
-    msg["To"] = mail_to
-    if user:
-        msg["Reply-To"] = user
-    msg.set_content("Имя: %s\nТелефон: %s\nСтраница: %s\n" % (name, phone, page))
-
-    if user and password:
-        try:
-            with smtp_login(host, port, user, password) as smtp:
-                smtp.send_message(msg)
-            return
-        except Exception as exc:
-            sys.stderr.write("smtp send failed: %s: %s\n" % (type(exc).__name__, exc))
     try:
         send_via_https(name, phone, page, mail_to)
+        return
     except Exception as exc:
         sys.stderr.write("https send failed: %s: %s\n" % (type(exc).__name__, exc))
+
+    if not user or not password:
+        raise RuntimeError("smtp not configured")
+    msg = EmailMessage()
+    msg["Subject"] = "Заявка с aspect-it.ru: %s" % name
+    msg["From"] = user
+    msg["To"] = mail_to
+    msg["Reply-To"] = user
+    msg.set_content("Имя: %s\nТелефон: %s\nСтраница: %s\n" % (name, phone, page))
+    try:
+        with smtp_login(host, port, user, password) as smtp:
+            smtp.send_message(msg)
+    except Exception as exc:
+        sys.stderr.write("smtp send failed: %s: %s\n" % (type(exc).__name__, exc))
         raise
 
 
