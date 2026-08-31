@@ -3,6 +3,7 @@ import json
 import os
 import re
 import smtplib
+import socket
 import ssl
 import sys
 import threading
@@ -15,7 +16,7 @@ MAX_NAME = 120
 MAX_PHONE = 40
 RATE_WINDOW = 3600
 RATE_MAX = 8
-SMTP_TIMEOUT = 12
+SMTP_TIMEOUT = 6
 PHONE_RE = re.compile(r"^[+\d][\d\s\-().]{5,38}$")
 HITS = {}
 HITS_LOCK = threading.Lock()
@@ -53,16 +54,60 @@ def smtp_settings():
     return host, port, user, password, mail_to
 
 
-def smtp_login(host, port, user, password):
+def smtp_endpoints(host, preferred_port):
+    ports = []
+    for port in (preferred_port, 465, 587):
+        if port not in ports:
+            ports.append(port)
+    seen = set()
+    for port in ports:
+        for family in (socket.AF_INET, socket.AF_INET6):
+            try:
+                infos = socket.getaddrinfo(host, port, family, socket.SOCK_STREAM)
+            except socket.gaierror as exc:
+                sys.stderr.write("smtp dns %s family=%s: %s\n" % (host, family, exc))
+                continue
+            for info in infos:
+                ip = info[4][0]
+                key = (ip, port)
+                if key in seen:
+                    continue
+                seen.add(key)
+                yield ip, port
+
+
+def smtp_connect(hostname, ip, port):
     context = ssl.create_default_context()
+
+    class ToIP_SSL(smtplib.SMTP_SSL):
+        def _get_socket(self, host, port_, timeout):
+            return socket.create_connection((ip, port_), timeout)
+
+    class ToIP(smtplib.SMTP):
+        def _get_socket(self, host, port_, timeout):
+            return socket.create_connection((ip, port_), timeout)
+
     if port == 465:
-        smtp = smtplib.SMTP_SSL(host, port, context=context, timeout=SMTP_TIMEOUT)
-    else:
-        smtp = smtplib.SMTP(host, port, timeout=SMTP_TIMEOUT)
-        smtp.ehlo()
-        smtp.starttls(context=context)
-    smtp.login(user, password)
+        return ToIP_SSL(hostname, port, timeout=SMTP_TIMEOUT, context=context)
+    smtp = ToIP(hostname, port, timeout=SMTP_TIMEOUT)
+    smtp.starttls(context=context)
+    smtp.ehlo()
     return smtp
+
+
+def smtp_login(host, port, user, password):
+    errors = []
+    for ip, try_port in smtp_endpoints(host, port):
+        try:
+            sys.stderr.write("smtp try %s:%s via %s\n" % (host, try_port, ip))
+            smtp = smtp_connect(host, ip, try_port)
+            smtp.login(user, password)
+            sys.stderr.write("smtp login ok %s:%s via %s\n" % (host, try_port, ip))
+            return smtp
+        except Exception as exc:
+            errors.append("%s:%s (%s): %s: %s" % (host, try_port, ip, type(exc).__name__, exc))
+            sys.stderr.write("smtp fail %s\n" % errors[-1])
+    raise OSError("smtp unreachable: %s" % "; ".join(errors[:6] or ["no addresses"]))
 
 
 def send_mail(name, phone, page):
