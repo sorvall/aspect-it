@@ -9,8 +9,9 @@
 # Опционально:
 #   SSH_PORT        — порт SSH, если не 22
 #   CERTBOT_EMAIL   — email для Let's Encrypt (уведомления об истечении сертификата)
-#   SMTP_PASSWORD   — пароль приложения Mail.ru для sorvall@mail.ru
-#   SMTP_USER       — ящик SMTP, по умолчанию sorvall@mail.ru
+#   SMTP_PASSWORD   — пароль приложения Яндекс.Почты для hello@aspect-it.ru
+#                     (не пароль Mail.ru: с VPS smtp.mail.ru недоступен)
+#   SMTP_USER       — ящик SMTP, по умолчанию hello@aspect-it.ru
 #   MAIL_TO         — куда слать заявки, по умолчанию sorvall@mail.ru
 #   DOCKERHUB_USERNAME / DOCKERHUB_TOKEN — не обязательны; базовый образ тянется с AWS Public ECR
 #
@@ -54,6 +55,43 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v5
+
+      - name: Write mailer env
+        env:
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: |
+          python3 << 'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          def val(name, default=""):
+              return (os.environ.get(name) or "").replace("\r", "").replace("\n", "").strip() or default
+
+          password = val("SMTP_PASSWORD")
+          if not password:
+              raise SystemExit("Задайте секрет SMTP_PASSWORD: пароль приложения Яндекс.Почты для hello@aspect-it.ru")
+
+          def line(key, value):
+              return "%s=%s" % (key, json.dumps(value, ensure_ascii=False))
+
+          Path("mailer.env").write_text(
+              "\n".join([
+                  line("SMTP_HOST", "smtp.yandex.ru"),
+                  line("SMTP_PORT", "465"),
+                  line("SMTP_USER", val("SMTP_USER", "hello@aspect-it.ru")),
+                  line("MAIL_TO", val("MAIL_TO", "sorvall@mail.ru")),
+                  line("SMTP_PASSWORD", password),
+              ]) + "\n",
+              encoding="utf-8",
+          )
+          print(
+              "mailer.env written; password_len=%s user=%s to=%s"
+              % (len(password), val("SMTP_USER", "hello@aspect-it.ru"), val("MAIL_TO", "sorvall@mail.ru"))
+          )
+          PY
 
       - name: Create deployment archive
         run: |
@@ -199,20 +237,12 @@ jobs:
               exit 1
             fi
             echo "Ports 80 and 443 are free — enabling HTTP + HTTPS"
-            SMTP_USER='${{ secrets.SMTP_USER }}'
-            MAIL_TO='${{ secrets.MAIL_TO }}'
-            if [ -z "$SMTP_USER" ]; then SMTP_USER='sorvall@mail.ru'; fi
-            if [ -z "$MAIL_TO" ]; then MAIL_TO='sorvall@mail.ru'; fi
-            {
-              printf 'HTTP_PORT=%s\nHTTPS_PORT=%s\nDOMAIN=%s\n' "$HTTP_PORT" "$HTTPS_PORT" "$DOMAIN"
-              printf 'SMTP_HOST=%s\nSMTP_PORT=%s\nSMTP_USER=%s\nMAIL_TO=%s\n' \
-                'smtp.mail.ru' '465' "$SMTP_USER" "$MAIL_TO"
-              printf 'SMTP_PASSWORD=%s\n' '${{ secrets.SMTP_PASSWORD }}'
-            } > .env
-            echo "=== .env (SMTP_PASSWORD hidden) ==="
-            grep -v '^SMTP_PASSWORD=' .env || true
-            if ! grep -q '^SMTP_PASSWORD=.\+' .env; then
-              echo "::warning::SMTP_PASSWORD не задан — заявки с формы не уйдут на почту"
+            printf 'HTTP_PORT=%s\nHTTPS_PORT=%s\nDOMAIN=%s\n' "$HTTP_PORT" "$HTTPS_PORT" "$DOMAIN" > .env
+            echo "=== .env ==="
+            cat .env
+            if [ ! -f mailer.env ]; then
+              echo "::error::mailer.env missing from deploy archive"
+              exit 1
             fi
 
             NGINX_IMAGE="public.ecr.aws/docker/library/nginx:alpine"
@@ -283,6 +313,16 @@ jobs:
 
             echo "=== Deploy OK ==="
             $COMPOSE_CMD ps
+
+            echo "=== SMTP check ==="
+            set +e
+            $COMPOSE_CMD exec -T mailer python -u /app/server.py check
+            smtp_status=$?
+            set -e
+            if [ "$smtp_status" -ne 0 ]; then
+              echo "::warning::SMTP login failed. SMTP_PASSWORD must be a Yandex app password for hello@aspect-it.ru"
+              $COMPOSE_CMD logs --no-color --tail 40 mailer || true
+            fi
 
             echo "=== Let's Encrypt ==="
             CERTBOT_EMAIL='${{ secrets.CERTBOT_EMAIL }}'

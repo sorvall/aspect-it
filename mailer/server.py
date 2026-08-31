@@ -3,10 +3,12 @@ import json
 import os
 import re
 import smtplib
+import socket
 import ssl
 import sys
 import threading
 import time
+from contextlib import contextmanager
 from email.message import EmailMessage
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -15,6 +17,7 @@ MAX_NAME = 120
 MAX_PHONE = 40
 RATE_WINDOW = 3600
 RATE_MAX = 8
+SMTP_TIMEOUT = 12
 PHONE_RE = re.compile(r"^[+\d][\d\s\-().]{5,38}$")
 HITS = {}
 HITS_LOCK = threading.Lock()
@@ -22,6 +25,20 @@ HITS_LOCK = threading.Lock()
 
 def env(name, default=""):
     return os.environ.get(name, default).strip()
+
+
+@contextmanager
+def ipv4_only():
+    real = socket.getaddrinfo
+
+    def wrapped(host, port, family=0, type=0, proto=0, flags=0):
+        return real(host, port, socket.AF_INET, type, proto, flags)
+
+    socket.getaddrinfo = wrapped
+    try:
+        yield
+    finally:
+        socket.getaddrinfo = real
 
 
 def client_ip(handler):
@@ -43,39 +60,62 @@ def rate_ok(ip):
         return True
 
 
-def send_mail(name, phone, page):
-    host = env("SMTP_HOST", "smtp.mail.ru")
+def smtp_settings():
+    host = env("SMTP_HOST", "smtp.yandex.ru")
     port = int(env("SMTP_PORT", "465") or "465")
-    user = env("SMTP_USER") or "sorvall@mail.ru"
+    user = env("SMTP_USER") or "hello@aspect-it.ru"
     password = env("SMTP_PASSWORD")
     mail_to = env("MAIL_TO") or "sorvall@mail.ru"
+    return host, port, user, password, mail_to
+
+
+def smtp_login(host, port, user, password):
+    context = ssl.create_default_context()
+    with ipv4_only():
+        if port == 465:
+            smtp = smtplib.SMTP_SSL(host, port, context=context, timeout=SMTP_TIMEOUT)
+        else:
+            smtp = smtplib.SMTP(host, port, timeout=SMTP_TIMEOUT)
+            smtp.ehlo()
+            smtp.starttls(context=context)
+        smtp.login(user, password)
+        return smtp
+
+
+def send_mail(name, phone, page):
+    host, port, user, password, mail_to = smtp_settings()
     if not user or not password or not mail_to:
         raise RuntimeError("smtp not configured")
 
     msg = EmailMessage()
-    msg["Subject"] = f"Заявка с aspect-it.ru: {name}"
+    msg["Subject"] = "Заявка с aspect-it.ru: %s" % name
     msg["From"] = user
     msg["To"] = mail_to
     msg["Reply-To"] = user
-    msg.set_content(
-        f"Имя: {name}\nТелефон: {phone}\nСтраница: {page}\n"
-    )
+    msg.set_content("Имя: %s\nТелефон: %s\nСтраница: %s\n" % (name, phone, page))
 
-    context = ssl.create_default_context()
     try:
-        if port == 465:
-            with smtplib.SMTP_SSL(host, port, context=context, timeout=20) as smtp:
-                smtp.login(user, password)
-                smtp.send_message(msg)
-            return
-        with smtplib.SMTP(host, port, timeout=20) as smtp:
-            smtp.ehlo()
-            smtp.starttls(context=context)
-            smtp.login(user, password)
+        with smtp_login(host, port, user, password) as smtp:
             smtp.send_message(msg)
     except Exception as exc:
         sys.stderr.write("smtp send failed: %s: %s\n" % (type(exc).__name__, exc))
         raise
+
+
+def check_smtp():
+    host, port, user, password, mail_to = smtp_settings()
+    if not password:
+        print("smtp login failed: SMTP_PASSWORD empty", flush=True)
+        return 1
+    print("smtp check host=%s port=%s user=%s to=%s" % (host, port, user, mail_to), flush=True)
+    try:
+        with smtp_login(host, port, user, password) as smtp:
+            smtp.noop()
+        print("smtp login ok", flush=True)
+        return 0
+    except Exception as exc:
+        print("smtp login failed: %s: %s" % (type(exc).__name__, exc), flush=True)
+        return 1
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -93,7 +133,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/health":
-            configured = bool(env("SMTP_USER") and env("SMTP_PASSWORD"))
+            configured = bool(env("SMTP_PASSWORD"))
             self._json(200, {"ok": True, "mail": configured})
             return
         self._json(404, {"ok": False})
@@ -148,10 +188,17 @@ class Handler(BaseHTTPRequestHandler):
 
 def main():
     port = int(env("PORT", "8080") or "8080")
+    host, smtp_port, user, password, mail_to = smtp_settings()
+    print(
+        "mailer listening on %s smtp=%s:%s user=%s to=%s configured=%s"
+        % (port, host, smtp_port, user, mail_to, bool(password)),
+        flush=True,
+    )
     server = ThreadingHTTPServer(("0.0.0.0", port), Handler)
-    print("mailer listening on %s" % port, flush=True)
     server.serve_forever()
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "check":
+        sys.exit(check_smtp())
     main()
