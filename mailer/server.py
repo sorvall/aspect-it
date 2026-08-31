@@ -66,7 +66,7 @@ def smtp_endpoints(host, preferred_port):
             ports.append(port)
     seen = set()
     for port in ports:
-        for family in (socket.AF_INET6, socket.AF_INET):
+        for family in (socket.AF_INET, socket.AF_INET6):
             try:
                 infos = socket.getaddrinfo(host, port, family, socket.SOCK_STREAM)
             except socket.gaierror as exc:
@@ -115,6 +115,15 @@ def smtp_login(host, port, user, password):
     raise OSError("smtp unreachable: %s" % "; ".join(errors[:6] or ["no addresses"]))
 
 
+def recipients(user, mail_to):
+    addrs = []
+    for addr in (mail_to, user):
+        addr = (addr or "").strip()
+        if addr and addr.lower() not in [a.lower() for a in addrs]:
+            addrs.append(addr)
+    return addrs
+
+
 def queue_path():
     return env("QUEUE", "/tmp/aspect-mailer/leads.jsonl")
 
@@ -152,8 +161,12 @@ def send_smtp_message(name, phone, page, message=""):
     if message:
         lines.extend(["", "Вопрос:", message])
     msg.set_content("\n".join(lines) + "\n")
+    addrs = recipients(user, mail_to)
     with smtp_login(host, port, user, password) as smtp:
-        smtp.send_message(msg)
+        refused = smtp.send_message(msg, to_addrs=addrs)
+        sys.stderr.write("smtp sent ok to=%s refused=%s\n" % (",".join(addrs), refused or {}))
+        if refused:
+            raise OSError("smtp refused: %s" % refused)
 
 
 def send_mail(name, phone, page, message=""):
@@ -202,12 +215,16 @@ def check_smtp():
         return 1
     print("smtp check host=%s port=%s user=%s to=%s" % (host, port, user, mail_to), flush=True)
     try:
-        with smtp_login(host, port, user, password) as smtp:
-            smtp.noop()
-        print("smtp login ok", flush=True)
+        send_smtp_message(
+            "SMTP-проверка",
+            "+70000000000",
+            "/deploy-check",
+            "Тестовое письмо с сервера aspect-it.ru. Если оно пришло, исходящая почта работает.",
+        )
+        print("smtp test message sent to %s and %s" % (mail_to, user), flush=True)
         return 0
     except Exception as exc:
-        print("smtp login failed: %s: %s" % (type(exc).__name__, exc), flush=True)
+        print("smtp send failed: %s: %s" % (type(exc).__name__, exc), flush=True)
         return 1
 
 
