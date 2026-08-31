@@ -2337,6 +2337,7 @@ body {
 }
 
 .form-group {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -5203,8 +5204,29 @@ body {
     cursor: pointer;
 }
 
-.form-success {
-    color: #1f6b3a;
+.form-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.form-hp input {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+}
+
+.form-error {
+    display: none;
+    color: #8a1f1f;
+    font-size: 14px;
+}
+
+.form-group button[disabled] {
+    opacity: 0.55;
+    cursor: wait;
 }
 
 .footer {

@@ -1,4 +1,18 @@
 services:
+  mailer:
+    build:
+      context: .
+      dockerfile: Dockerfile.mailer
+    environment:
+      SMTP_HOST: ${SMTP_HOST:-smtp.yandex.ru}
+      SMTP_PORT: ${SMTP_PORT:-465}
+      SMTP_USER: ${SMTP_USER:-hello@aspect-it.ru}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      MAIL_TO: ${MAIL_TO:-sorvall@mail.ru}
+    restart: unless-stopped
+    expose:
+      - "8080"
+
   web:
     build: .
     ports:
@@ -9,6 +23,8 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt:ro
       - certbot-www:/var/www/certbot:ro
+    depends_on:
+      - mailer
     restart: unless-stopped
 
   # One-off: docker compose run --rm certbot certonly ...

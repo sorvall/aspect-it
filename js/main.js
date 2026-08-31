@@ -249,12 +249,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('form[data-form]').forEach((form) => {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const success = form.querySelector('.form-success');
-            if (success) {
-                success.style.display = 'block';
+            const error = form.querySelector('.form-error');
+            const button = form.querySelector('[type="submit"]');
+            if (success) success.style.display = 'none';
+            if (error) error.style.display = 'none';
+            const payload = {
+                name: (form.elements.name && form.elements.name.value.trim()) || '',
+                phone: (form.elements.phone && form.elements.phone.value.trim()) || '',
+                company: (form.elements.company && form.elements.company.value.trim()) || '',
+                page: window.location.pathname,
+            };
+            if (button) {
+                button.disabled = true;
+                button.setAttribute('aria-busy', 'true');
+            }
+            try {
+                const res = await fetch('/api/lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                if (!res.ok) throw new Error('send');
+                if (success) success.style.display = 'block';
                 form.reset();
+            } catch (err) {
+                if (error) error.style.display = 'block';
+            } finally {
+                if (button) {
+                    button.disabled = false;
+                    button.removeAttribute('aria-busy');
+                }
             }
         });
     });

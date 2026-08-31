@@ -9,6 +9,9 @@
 # Опционально:
 #   SSH_PORT        — порт SSH, если не 22
 #   CERTBOT_EMAIL   — email для Let's Encrypt (уведомления об истечении сертификата)
+#   SMTP_PASSWORD   — пароль приложения Яндекс.Почты для hello@aspect-it.ru
+#   SMTP_USER       — ящик SMTP, по умолчанию hello@aspect-it.ru
+#   MAIL_TO         — куда слать заявки, по умолчанию sorvall@mail.ru
 #   DOCKERHUB_USERNAME / DOCKERHUB_TOKEN — не обязательны; базовый образ тянется с AWS Public ECR
 #
 # На сервере один раз: установлены Docker и docker compose plugin.
@@ -196,11 +199,24 @@ jobs:
               exit 1
             fi
             echo "Ports 80 and 443 are free — enabling HTTP + HTTPS"
-            printf 'HTTP_PORT=%s\nHTTPS_PORT=%s\nDOMAIN=%s\n' "$HTTP_PORT" "$HTTPS_PORT" "$DOMAIN" > .env
-            echo "=== .env ==="
-            cat .env
+            SMTP_USER='${{ secrets.SMTP_USER }}'
+            MAIL_TO='${{ secrets.MAIL_TO }}'
+            if [ -z "$SMTP_USER" ]; then SMTP_USER='hello@aspect-it.ru'; fi
+            if [ -z "$MAIL_TO" ]; then MAIL_TO='sorvall@mail.ru'; fi
+            {
+              printf 'HTTP_PORT=%s\nHTTPS_PORT=%s\nDOMAIN=%s\n' "$HTTP_PORT" "$HTTPS_PORT" "$DOMAIN"
+              printf 'SMTP_HOST=%s\nSMTP_PORT=%s\nSMTP_USER=%s\nMAIL_TO=%s\n' \
+                'smtp.yandex.ru' '465' "$SMTP_USER" "$MAIL_TO"
+              printf 'SMTP_PASSWORD=%s\n' '${{ secrets.SMTP_PASSWORD }}'
+            } > .env
+            echo "=== .env (SMTP_PASSWORD hidden) ==="
+            grep -v '^SMTP_PASSWORD=' .env || true
+            if ! grep -q '^SMTP_PASSWORD=.\+' .env; then
+              echo "::warning::SMTP_PASSWORD не задан — заявки с формы не уйдут на почту"
+            fi
 
             NGINX_IMAGE="public.ecr.aws/docker/library/nginx:alpine"
+            PYTHON_IMAGE="public.ecr.aws/docker/library/python:3.12-alpine"
 
             echo "=== Ensuring base image ==="
             if docker image inspect "$NGINX_IMAGE" >/dev/null 2>&1; then
@@ -218,6 +234,26 @@ jobs:
               if [ "$pull_ok" -ne 1 ]; then
                 echo "::error::Failed to pull base image from AWS Public ECR."
                 echo "Run on server: docker pull $NGINX_IMAGE"
+                exit 1
+              fi
+            fi
+
+            echo "=== Ensuring Python image ==="
+            if docker image inspect "$PYTHON_IMAGE" >/dev/null 2>&1; then
+              echo "Using cached $PYTHON_IMAGE on server."
+            else
+              py_ok=0
+              for attempt in 1 2 3 4 5; do
+                echo "Pull attempt ${attempt}/5: $PYTHON_IMAGE"
+                if docker pull "$PYTHON_IMAGE"; then
+                  py_ok=1
+                  break
+                fi
+                sleep $((attempt * 15))
+              done
+              if [ "$py_ok" -ne 1 ]; then
+                echo "::error::Failed to pull Python image from AWS Public ECR."
+                echo "Run on server: docker pull $PYTHON_IMAGE"
                 exit 1
               fi
             fi
