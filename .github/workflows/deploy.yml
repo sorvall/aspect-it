@@ -63,34 +63,32 @@ jobs:
           MAIL_TO: ${{ secrets.MAIL_TO }}
         run: |
           python3 << 'PY'
-          import json
           import os
           from pathlib import Path
 
           def val(name, default=""):
               return (os.environ.get(name) or "").replace("\r", "").replace("\n", "").strip() or default
 
+          def env_line(key, value):
+              return "%s='%s'" % (key, value.replace("'", "'\"'\"'"))
+
           password = val("SMTP_PASSWORD")
           if not password:
               raise SystemExit("Задайте секрет SMTP_PASSWORD: пароль приложения Яндекс.Почты для hello@aspect-it.ru")
 
-          def line(key, value):
-              return "%s=%s" % (key, json.dumps(value, ensure_ascii=False))
-
+          user = val("SMTP_USER", "hello@aspect-it.ru")
+          mail_to = val("MAIL_TO", "sorvall@mail.ru")
           Path("mailer.env").write_text(
               "\n".join([
-                  line("SMTP_HOST", "smtp.yandex.ru"),
-                  line("SMTP_PORT", "465"),
-                  line("SMTP_USER", val("SMTP_USER", "hello@aspect-it.ru")),
-                  line("MAIL_TO", val("MAIL_TO", "sorvall@mail.ru")),
-                  line("SMTP_PASSWORD", password),
+                  env_line("SMTP_HOST", "smtp.yandex.ru"),
+                  env_line("SMTP_PORT", "465"),
+                  env_line("SMTP_USER", user),
+                  env_line("MAIL_TO", mail_to),
+                  env_line("SMTP_PASSWORD", password),
               ]) + "\n",
               encoding="utf-8",
           )
-          print(
-              "mailer.env written; password_len=%s user=%s to=%s"
-              % (len(password), val("SMTP_USER", "hello@aspect-it.ru"), val("MAIL_TO", "sorvall@mail.ru"))
-          )
+          print("mailer.env written; password_len=%s user=%s to=%s" % (len(password), user, mail_to))
           PY
 
       - name: Create deployment archive

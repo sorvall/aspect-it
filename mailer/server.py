@@ -3,12 +3,10 @@ import json
 import os
 import re
 import smtplib
-import socket
 import ssl
 import sys
 import threading
 import time
-from contextlib import contextmanager
 from email.message import EmailMessage
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -25,20 +23,6 @@ HITS_LOCK = threading.Lock()
 
 def env(name, default=""):
     return os.environ.get(name, default).strip()
-
-
-@contextmanager
-def ipv4_only():
-    real = socket.getaddrinfo
-
-    def wrapped(host, port, family=0, type=0, proto=0, flags=0):
-        return real(host, port, socket.AF_INET, type, proto, flags)
-
-    socket.getaddrinfo = wrapped
-    try:
-        yield
-    finally:
-        socket.getaddrinfo = real
 
 
 def client_ip(handler):
@@ -71,15 +55,14 @@ def smtp_settings():
 
 def smtp_login(host, port, user, password):
     context = ssl.create_default_context()
-    with ipv4_only():
-        if port == 465:
-            smtp = smtplib.SMTP_SSL(host, port, context=context, timeout=SMTP_TIMEOUT)
-        else:
-            smtp = smtplib.SMTP(host, port, timeout=SMTP_TIMEOUT)
-            smtp.ehlo()
-            smtp.starttls(context=context)
-        smtp.login(user, password)
-        return smtp
+    if port == 465:
+        smtp = smtplib.SMTP_SSL(host, port, context=context, timeout=SMTP_TIMEOUT)
+    else:
+        smtp = smtplib.SMTP(host, port, timeout=SMTP_TIMEOUT)
+        smtp.ehlo()
+        smtp.starttls(context=context)
+    smtp.login(user, password)
+    return smtp
 
 
 def send_mail(name, phone, page):
