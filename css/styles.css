@@ -5264,6 +5264,234 @@ body {
     }
 }
 
+.promo-dialog {
+    width: min(760px, calc(100% - 28px));
+    max-height: calc(100% - 32px);
+    padding: 0;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    overflow: hidden;
+}
+
+.promo-dialog::backdrop {
+    background: rgba(18, 17, 16, 0.62);
+}
+
+.promo-dialog[open] {
+    animation: promo-dialog-in 0.32s ease-out;
+}
+
+.promo-dialog[open]::backdrop {
+    animation: promo-backdrop-in 0.28s ease-out;
+}
+
+@keyframes promo-dialog-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes promo-backdrop-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.promo-dialog-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+}
+
+.promo-dialog-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.promo-dialog-close:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+.promo-dialog-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 32px 24px 28px;
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.promo-dialog-kicker {
+    margin: 0 0 auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c4bfb3;
+}
+
+.promo-dialog-sum {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+}
+
+.promo-dialog-period {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #c4bfb3;
+}
+
+.promo-dialog-note {
+    margin: 12px 0 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #c4bfb3;
+}
+
+.promo-dialog-copy {
+    padding: 32px 48px 28px 32px;
+}
+
+.promo-dialog-copy h2 {
+    margin: 0 0 12px;
+    font-family: var(--font-serif);
+    font-size: clamp(26px, 3.2vw, 34px);
+    font-weight: 600;
+    line-height: 1.15;
+}
+
+.promo-dialog-lead {
+    margin: 0 0 18px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-muted);
+}
+
+.promo-dialog-list {
+    margin: 0 0 22px;
+    padding: 0;
+    list-style: none;
+}
+
+.promo-dialog-list li {
+    position: relative;
+    padding: 8px 0 8px 18px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.promo-dialog-list li:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.promo-dialog-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width: 7px;
+    height: 7px;
+    background: var(--ink);
+}
+
+.promo-dialog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 18px;
+}
+
+.promo-dialog-actions .btn-ia {
+    min-height: 44px;
+}
+
+.promo-dialog-more {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.promo-dialog-more:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+}
+
+@media (max-width: 680px) {
+    .promo-dialog {
+        width: calc(100% - 20px);
+        max-height: calc(100% - 20px);
+        overflow: auto;
+    }
+
+    .promo-dialog-inner {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .promo-dialog-close {
+        color: var(--paper);
+    }
+
+    .promo-dialog-close:focus-visible {
+        outline-color: var(--paper);
+    }
+
+    .promo-dialog-price {
+        padding: 20px 52px 18px 22px;
+        justify-content: flex-start;
+    }
+
+    .promo-dialog-kicker {
+        margin: 0 0 8px;
+    }
+
+    .promo-dialog-sum {
+        font-size: 36px;
+    }
+
+    .promo-dialog-copy {
+        padding: 22px 22px 24px;
+    }
+
+    .promo-dialog-actions .btn-ia {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .promo-dialog[open],
+    .promo-dialog[open]::backdrop {
+        animation: none;
+    }
+}
+
 .form-group input:focus-visible {
     outline: 2px solid var(--ink);
     outline-offset: 2px;

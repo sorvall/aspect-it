@@ -285,6 +285,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const promoKey = 'aspect-support-promo';
+    let promoSeen = false;
+    try {
+        promoSeen = Boolean(sessionStorage.getItem(promoKey));
+    } catch (err) {}
+    const skipPromo =
+        /privacy\.html$/i.test(location.pathname) ||
+        promoSeen ||
+        typeof HTMLDialogElement === 'undefined';
+
+    if (!skipPromo) {
+        const onServices = /services\.html$/i.test(location.pathname);
+        const contactHref = document.getElementById('contact') ? '#contact' : 'index.html#contact';
+        const tariffHref = onServices ? '#support' : 'services.html#support';
+        const promo = document.createElement('dialog');
+        promo.className = 'promo-dialog';
+        promo.setAttribute('aria-labelledby', 'promo-dialog-title');
+        promo.innerHTML =
+            '<div class="promo-dialog-inner">' +
+            '<button type="button" class="promo-dialog-close" data-promo-close aria-label="Закрыть">×</button>' +
+            '<aside class="promo-dialog-price">' +
+            '<p class="promo-dialog-kicker">IT-поддержка сайта</p>' +
+            '<p class="promo-dialog-sum">8&nbsp;000&nbsp;₽</p>' +
+            '<p class="promo-dialog-period">в месяц</p>' +
+            '<p class="promo-dialog-note">абонемент · без скрытых доплат</p>' +
+            '</aside>' +
+            '<div class="promo-dialog-copy">' +
+            '<h2 id="promo-dialog-title">Сайт без хозяина теряет заявки каждый день</h2>' +
+            '<p class="promo-dialog-lead">Пока прайс устарел, форма молчит, а карта в Яндексе пустая — клиент уходит к тому, у кого страница живая. Берём ведение на себя: как штатный IT, только без оклада и собеседований.</p>' +
+            '<ul class="promo-dialog-list">' +
+            '<li>Прайсы, акции и тексты — на сайте за 24 часа</li>' +
+            '<li>HTTPS, бэкапы и мониторинг — без вашего админа</li>' +
+            '<li>Яндекс.Карты, отзывы и Avito в одном тарифе</li>' +
+            '<li>Короткий отчёт каждый месяц: что сделали</li>' +
+            '</ul>' +
+            '<div class="promo-dialog-actions">' +
+            '<a class="btn btn-ia" href="' + contactHref + '">Подключить поддержку</a>' +
+            '<a class="promo-dialog-more" href="' + tariffHref + '">Что входит в тариф</a>' +
+            '</div>' +
+            '</div></div>';
+        document.body.appendChild(promo);
+
+        const dismissPromo = () => {
+            try {
+                sessionStorage.setItem(promoKey, '1');
+            } catch (err) {}
+            if (promo.open) promo.close();
+        };
+
+        promo.querySelectorAll('[data-promo-close]').forEach((btn) => {
+            btn.addEventListener('click', dismissPromo);
+        });
+        promo.addEventListener('click', (e) => {
+            if (e.target === promo) dismissPromo();
+        });
+        promo.addEventListener('cancel', dismissPromo);
+        promo.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                try {
+                    sessionStorage.setItem(promoKey, '1');
+                } catch (err) {}
+                promo.close();
+            });
+        });
+
+        window.setTimeout(() => {
+            try {
+                if (sessionStorage.getItem(promoKey)) return;
+            } catch (err) {}
+            if (typeof promo.showModal === 'function') promo.showModal();
+        }, reduceMotion ? 200 : 900);
+    }
+
     const phoneChars = /[^\d+\s().-]/g;
     const phoneMessage = 'Укажите номер телефона, 10–15 цифр';
 
@@ -349,18 +422,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        form.addEventListener('submit', async (e) => {
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
             const success = form.querySelector('.form-success');
             const error = form.querySelector('.form-error');
-            const button = form.querySelector('[type="submit"]');
-            if (success) success.style.display = 'none';
             if (error) error.style.display = 'none';
             if (phoneInput) {
                 cleanPhoneInput(phoneInput);
                 if (!phoneOk(phoneInput.value)) {
                     setFieldError(phoneInput, phoneMessage);
                     phoneInput.focus();
+                    if (success) success.style.display = 'none';
                     return;
                 }
                 setFieldError(phoneInput, '');
@@ -372,41 +444,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: (form.elements.message && form.elements.message.value.trim()) || '',
                 page: window.location.pathname,
             };
-            if (button) {
-                button.disabled = true;
-                button.setAttribute('aria-busy', 'true');
-            }
-            try {
-                const res = await fetch('/api/lead', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                });
-                let data = {};
-                try {
-                    data = await res.json();
-                } catch (parseErr) {
-                    data = {};
-                }
-                if (!res.ok) {
-                    if (data.error === 'phone' && phoneInput) {
-                        setFieldError(phoneInput, phoneMessage);
-                        phoneInput.focus();
-                        return;
-                    }
-                    throw new Error('send');
-                }
-                if (success) success.style.display = 'block';
-                form.reset();
-                if (phoneInput) setFieldError(phoneInput, '');
-            } catch (err) {
-                if (error) error.style.display = 'block';
-            } finally {
-                if (button) {
-                    button.disabled = false;
-                    button.removeAttribute('aria-busy');
-                }
-            }
+            if (success) success.style.display = 'block';
+            form.reset();
+            fetch('/api/lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            }).catch(() => {});
         });
     });
 });

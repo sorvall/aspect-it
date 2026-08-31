@@ -126,15 +126,6 @@ def smtp_login(host, port, user, password):
     raise OSError("smtp unreachable: %s" % "; ".join(errors[:6] or ["no addresses"]))
 
 
-def recipients(user, mail_to):
-    addrs = []
-    for addr in (mail_to, user):
-        addr = (addr or "").strip()
-        if addr and addr.lower() not in [a.lower() for a in addrs]:
-            addrs.append(addr)
-    return addrs
-
-
 def queue_path():
     return env("QUEUE", "/tmp/aspect-mailer/leads.jsonl")
 
@@ -172,10 +163,9 @@ def send_smtp_message(name, phone, page, message=""):
     if message:
         lines.extend(["", "Вопрос:", message])
     msg.set_content("\n".join(lines) + "\n")
-    addrs = recipients(user, mail_to)
     with smtp_login(host, port, user, password) as smtp:
-        refused = smtp.send_message(msg, to_addrs=addrs)
-        sys.stderr.write("smtp sent ok to=%s refused=%s\n" % (",".join(addrs), refused or {}))
+        refused = smtp.send_message(msg, to_addrs=[mail_to])
+        sys.stderr.write("smtp sent ok to=%s refused=%s\n" % (mail_to, refused or {}))
         if refused:
             raise OSError("smtp refused: %s" % refused)
 
@@ -232,7 +222,7 @@ def check_smtp():
             "/deploy-check",
             "Тестовое письмо с сервера aspect-it.ru. Если оно пришло, исходящая почта работает.",
         )
-        print("smtp test message sent to %s and %s" % (mail_to, user), flush=True)
+        print("smtp test message sent to %s" % mail_to, flush=True)
         return 0
     except Exception as exc:
         print("smtp send failed: %s: %s" % (type(exc).__name__, exc), flush=True)
@@ -303,14 +293,11 @@ class Handler(BaseHTTPRequestHandler):
         if not phone_ok(phone):
             self._json(400, {"ok": False, "error": "phone"})
             return
-        try:
-            send_mail(name, phone, page or "/", message)
-        except RuntimeError:
-            self._json(503, {"ok": False, "error": "config"})
-            return
-        except Exception:
-            self._json(502, {"ok": False, "error": "smtp"})
-            return
+        threading.Thread(
+            target=send_mail,
+            args=(name, phone, page or "/", message),
+            daemon=True,
+        ).start()
         self._json(200, {"ok": True})
 
 
