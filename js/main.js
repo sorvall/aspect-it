@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '<button type="button" class="support-dialog-close" data-support-close aria-label="Закрыть">×</button>' +
         '<p class="support-dialog-kicker">Поддержка</p>' +
         '<h2 id="support-dialog-title">Написать в поддержку</h2>' +
-        '<p class="support-dialog-lead">Ответим на почту, обычно в течение двух часов в рабочее время.</p>' +
+        '<p class="support-dialog-lead">Или позвоните <a href="tel:+79654080754">8&nbsp;965&nbsp;408-07-54</a>. На почту ответим обычно в течение двух часов в рабочее время.</p>' +
         '<div class="form-hp" aria-hidden="true"><input type="text" name="company" tabindex="-1" autocomplete="off" /></div>' +
         '<label class="form-field"><span>Имя</span><input type="text" name="name" autocomplete="name" required /></label>' +
         '<label class="form-field"><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="40" required /></label>' +
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '<div class="form-actions"><button type="submit" class="btn">Отправить</button></div>' +
         '<label class="form-consent"><input type="checkbox" name="consent" required /><span>Согласен на <a href="privacy.html">обработку персональных данных</a></span></label>' +
         '<p class="form-success">Спасибо! Мы ответим в ближайшее время.</p>' +
-        '<p class="form-error" role="alert">Не удалось отправить. Напишите на hello@aspect-it.ru или попробуйте ещё раз.</p>' +
+        '<p class="form-error" role="alert">Не удалось отправить. Позвоните <a href="tel:+79654080754">8&nbsp;965&nbsp;408-07-54</a> или напишите на hello@aspect-it.ru.</p>' +
         '</form>';
 
     const supportOpeners = document.querySelectorAll('[data-support-open]');
