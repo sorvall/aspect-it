@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '<p class="support-dialog-lead">Ответим на почту, обычно в течение двух часов в рабочее время.</p>' +
         '<div class="form-hp" aria-hidden="true"><input type="text" name="company" tabindex="-1" autocomplete="off" /></div>' +
         '<label class="form-field"><span>Имя</span><input type="text" name="name" autocomplete="name" required /></label>' +
-        '<label class="form-field"><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" required /></label>' +
+        '<label class="form-field"><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="40" required /></label>' +
         '<label class="form-field"><span>Вопрос</span><textarea name="message" rows="4" required maxlength="1200"></textarea></label>' +
         '<div class="form-actions"><button type="submit" class="btn">Отправить</button></div>' +
         '<label class="form-consent"><input type="checkbox" name="consent" required /><span>Согласен на <a href="privacy.html">обработку персональных данных</a></span></label>' +
@@ -285,7 +285,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const phoneChars = /[^\d+\s().-]/g;
+    const phoneMessage = 'Укажите номер телефона, 10–15 цифр';
+
+    const phoneDigits = (value) => (value || '').replace(/\D/g, '');
+    const phoneOk = (value) => {
+        const digits = phoneDigits(value);
+        return digits.length >= 10 && digits.length <= 15;
+    };
+
+    const fieldErrorFor = (input) => {
+        const field = input.closest('.form-field');
+        if (!field) return null;
+        let err = field.querySelector('.field-error');
+        if (!err) {
+            err = document.createElement('span');
+            err.className = 'field-error';
+            err.id = (input.name || 'field') + '-error-' + Math.random().toString(36).slice(2, 6);
+            err.setAttribute('role', 'alert');
+            err.hidden = true;
+            field.appendChild(err);
+            input.setAttribute('aria-describedby', err.id);
+        }
+        return err;
+    };
+
+    const setFieldError = (input, message) => {
+        if (!input) return;
+        const err = fieldErrorFor(input);
+        input.setCustomValidity(message || '');
+        input.setAttribute('aria-invalid', message ? 'true' : 'false');
+        if (!err) return;
+        err.textContent = message || '';
+        err.hidden = !message;
+    };
+
+    const cleanPhoneInput = (input) => {
+        const cleaned = input.value.replace(phoneChars, '');
+        if (cleaned !== input.value) {
+            const removed = input.value.length - cleaned.length;
+            const pos = input.selectionStart;
+            input.value = cleaned;
+            if (typeof pos === 'number') {
+                const next = Math.max(0, pos - removed);
+                input.setSelectionRange(next, next);
+            }
+        }
+        if (phoneOk(input.value) || !input.value.trim()) {
+            setFieldError(input, '');
+        }
+    };
+
     document.querySelectorAll('form[data-form]').forEach((form) => {
+        const phoneInput = form.elements.phone;
+        if (phoneInput) {
+            phoneInput.setAttribute('maxlength', '40');
+            phoneInput.setAttribute('autocomplete', 'tel');
+            phoneInput.addEventListener('input', () => cleanPhoneInput(phoneInput));
+            phoneInput.addEventListener('blur', () => {
+                if (phoneInput.value.trim() && !phoneOk(phoneInput.value)) {
+                    setFieldError(phoneInput, phoneMessage);
+                }
+            });
+        }
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const success = form.querySelector('.form-success');
@@ -293,9 +356,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const button = form.querySelector('[type="submit"]');
             if (success) success.style.display = 'none';
             if (error) error.style.display = 'none';
+            if (phoneInput) {
+                cleanPhoneInput(phoneInput);
+                if (!phoneOk(phoneInput.value)) {
+                    setFieldError(phoneInput, phoneMessage);
+                    phoneInput.focus();
+                    return;
+                }
+                setFieldError(phoneInput, '');
+            }
             const payload = {
                 name: (form.elements.name && form.elements.name.value.trim()) || '',
-                phone: (form.elements.phone && form.elements.phone.value.trim()) || '',
+                phone: (phoneInput && phoneInput.value.trim()) || '',
                 company: (form.elements.company && form.elements.company.value.trim()) || '',
                 message: (form.elements.message && form.elements.message.value.trim()) || '',
                 page: window.location.pathname,
@@ -310,9 +382,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload),
                 });
-                if (!res.ok) throw new Error('send');
+                let data = {};
+                try {
+                    data = await res.json();
+                } catch (parseErr) {
+                    data = {};
+                }
+                if (!res.ok) {
+                    if (data.error === 'phone' && phoneInput) {
+                        setFieldError(phoneInput, phoneMessage);
+                        phoneInput.focus();
+                        return;
+                    }
+                    throw new Error('send');
+                }
                 if (success) success.style.display = 'block';
                 form.reset();
+                if (phoneInput) setFieldError(phoneInput, '');
             } catch (err) {
                 if (error) error.style.display = 'block';
             } finally {

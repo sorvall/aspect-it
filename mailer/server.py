@@ -19,7 +19,7 @@ MAX_MESSAGE = 1200
 RATE_WINDOW = 3600
 RATE_MAX = 8
 SMTP_TIMEOUT = 6
-PHONE_RE = re.compile(r"^[+\d][\d\s\-().]{5,38}$")
+PHONE_KEEP_RE = re.compile(r"[^\d+\s().-]")
 HITS = {}
 HITS_LOCK = threading.Lock()
 
@@ -48,6 +48,17 @@ def rate_ok(ip):
         stamps.append(now)
         HITS[ip] = stamps
         return True
+
+
+def normalize_phone(phone):
+    return PHONE_KEEP_RE.sub("", phone or "").strip()
+
+
+def phone_ok(phone):
+    if not phone or len(phone) > MAX_PHONE:
+        return False
+    digits = re.sub(r"\D", "", phone)
+    return 10 <= len(digits) <= 15
 
 
 def smtp_settings():
@@ -283,13 +294,13 @@ class Handler(BaseHTTPRequestHandler):
             self._json(200, {"ok": True})
             return
         name = str(data.get("name") or "").strip()
-        phone = str(data.get("phone") or "").strip()
+        phone = normalize_phone(str(data.get("phone") or "").strip())
         page = str(data.get("page") or "").strip()[:200]
         message = str(data.get("message") or "").strip()[:MAX_MESSAGE]
         if not name or len(name) > MAX_NAME:
             self._json(400, {"ok": False, "error": "name"})
             return
-        if not phone or len(phone) > MAX_PHONE or not PHONE_RE.match(phone):
+        if not phone_ok(phone):
             self._json(400, {"ok": False, "error": "phone"})
             return
         try:

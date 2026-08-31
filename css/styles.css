@@ -5310,6 +5310,16 @@ body {
     font-size: 14px;
 }
 
+.field-error {
+    color: #8a1f1f;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.form-field input[aria-invalid="true"] {
+    border-color: #8a1f1f;
+}
+
 .form-group button[disabled] {
     opacity: 0.55;
     cursor: wait;
