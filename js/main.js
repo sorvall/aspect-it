@@ -132,11 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateHeader = () => {
         if (!header) return;
-        const scrolled = window.scrollY > 20;
-        header.classList.toggle('scrolled', scrolled);
-        if (header.classList.contains('header--hero')) {
-            header.classList.toggle('header--hero-top', window.scrollY < 400);
-        }
+        header.classList.toggle('scrolled', window.scrollY > 20);
     };
 
     window.addEventListener('scroll', updateHeader);
@@ -312,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '<p class="promo-dialog-note">абонемент · без скрытых доплат</p>' +
             '</aside>' +
             '<div class="promo-dialog-copy">' +
-            '<h2 id="promo-dialog-title">Сайт без хозяина теряет заявки каждый день</h2>' +
+            '<h2 id="promo-dialog-title">Поддержим ваш бизнес за 8&nbsp;000&nbsp;₽ в месяц</h2>' +
             '<p class="promo-dialog-lead">Пока прайс устарел, форма молчит, а карта в Яндексе пустая — клиент уходит к тому, у кого страница живая. Берём ведение на себя: как штатный IT, только без оклада и собеседований.</p>' +
             '<ul class="promo-dialog-list">' +
             '<li>Прайсы, акции и тексты — на сайте за 24 часа</li>' +

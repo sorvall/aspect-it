@@ -1,2 +1,4 @@
 .env
 mailer.env
+.cursor/
+design-system/

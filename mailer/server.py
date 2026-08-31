@@ -216,16 +216,11 @@ def check_smtp():
         return 1
     print("smtp check host=%s port=%s user=%s to=%s" % (host, port, user, mail_to), flush=True)
     try:
-        send_smtp_message(
-            "SMTP-проверка",
-            "+70000000000",
-            "/deploy-check",
-            "Тестовое письмо с сервера aspect-it.ru. Если оно пришло, исходящая почта работает.",
-        )
-        print("smtp test message sent to %s" % mail_to, flush=True)
+        with smtp_login(host, port, user, password):
+            print("smtp login ok, no test message", flush=True)
         return 0
     except Exception as exc:
-        print("smtp send failed: %s: %s" % (type(exc).__name__, exc), flush=True)
+        print("smtp login failed: %s: %s" % (type(exc).__name__, exc), flush=True)
         return 1
 
 

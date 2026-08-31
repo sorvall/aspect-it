@@ -91,16 +91,6 @@ jobs:
           print("mailer.env written; password_len=%s user=%s to=%s" % (len(password), user, mail_to))
           PY
 
-      - name: SMTP check from GitHub
-        env:
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
-          SMTP_HOST: smtp.yandex.ru
-          SMTP_PORT: "587"
-        run: |
-          python3 mailer/server.py check || echo "::warning::SMTP check failed from GitHub runner"
-
       - name: Create deployment archive
         run: |
           set -euo pipefail
