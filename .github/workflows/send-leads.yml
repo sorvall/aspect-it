@@ -1,0 +1,63 @@
+# Забирает заявки с VPS и шлёт их через Яндекс SMTP с GitHub (с VPS порты 465/587 закрыты).
+
+name: Send queued leads
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Build and Deploy Aspect IT"]
+    types: [completed]
+
+concurrency:
+  group: send-leads
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SSH_PORT_DEPLOY: ${{ secrets.SSH_PORT }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Pickup and send queue
+        env:
+          SSHPASS: ${{ secrets.SSH_PASSWORD }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          SMTP_HOST: smtp.yandex.ru
+          SMTP_PORT: "587"
+        run: |
+          set -euo pipefail
+          if [ -z "$SERVER_HOST" ] || [ -z "$SERVER_USER" ] || [ -z "$SSHPASS" ]; then
+            echo "SSH secrets missing"
+            exit 1
+          fi
+          if [ -z "$SMTP_PASSWORD" ]; then
+            echo "SMTP_PASSWORD missing"
+            exit 1
+          fi
+          PORT="${SSH_PORT_DEPLOY:-22}"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq sshpass
+          mkdir -p "$HOME/.ssh"
+          printf 'Host *\n  StrictHostKeyChecking accept-new\n' > "$HOME/.ssh/config"
+          set +e
+          sshpass -e ssh -p "$PORT" "$SERVER_USER@$SERVER_HOST" 'DIR=/tmp/aspect-mailer; mkdir -p "$DIR"; if [ ! -s "$DIR/leads.work" ] && [ -s "$DIR/leads.jsonl" ]; then mv "$DIR/leads.jsonl" "$DIR/leads.work"; fi; test -s "$DIR/leads.work"'
+          pick=$?
+          set -e
+          if [ "$pick" -ne 0 ]; then
+            echo "No queued leads"
+            exit 0
+          fi
+          sshpass -e scp -P "$PORT" "$SERVER_USER@$SERVER_HOST:/tmp/aspect-mailer/leads.work" ./leads.jsonl
+          python3 mailer/server.py drain ./leads.jsonl
+          sshpass -e ssh -p "$PORT" "$SERVER_USER@$SERVER_HOST" 'rm -f /tmp/aspect-mailer/leads.work'
+          echo "Queue drained"

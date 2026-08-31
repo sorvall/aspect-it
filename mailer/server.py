@@ -8,8 +8,6 @@ import ssl
 import sys
 import threading
 import time
-import urllib.error
-import urllib.request
 from email.message import EmailMessage
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from socketserver import ThreadingMixIn, UnixStreamServer
@@ -53,7 +51,7 @@ def rate_ok(ip):
 
 def smtp_settings():
     host = env("SMTP_HOST", "smtp.yandex.ru")
-    port = int(env("SMTP_PORT", "465") or "465")
+    port = int(env("SMTP_PORT", "587") or "587")
     user = env("SMTP_USER") or "sorvallsorokin@yandex.ru"
     password = env("SMTP_PASSWORD")
     mail_to = env("MAIL_TO") or "sorvall@mail.ru"
@@ -116,62 +114,26 @@ def smtp_login(host, port, user, password):
     raise OSError("smtp unreachable: %s" % "; ".join(errors[:6] or ["no addresses"]))
 
 
-def send_via_https(name, phone, page, mail_to):
-    payload = json.dumps(
-        {
-            "name": name,
-            "phone": phone,
-            "page": page,
-            "message": "Имя: %s\nТелефон: %s\nСтраница: %s" % (name, phone, page),
-            "_subject": "Заявка с aspect-it.ru: %s" % name,
-            "_captcha": "false",
-            "_template": "table",
-        },
+def queue_path():
+    return env("QUEUE", "/tmp/aspect-mailer/leads.jsonl")
+
+
+def enqueue(name, phone, page):
+    path = queue_path()
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    rec = json.dumps(
+        {"name": name, "phone": phone, "page": page, "ts": int(time.time())},
         ensure_ascii=False,
-    ).encode("utf-8")
-    url = "https://formsubmit.co/ajax/%s" % mail_to
-    req = urllib.request.Request(
-        url,
-        data=payload,
-        method="POST",
-        headers={
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "User-Agent": "aspect-it-mailer",
-        },
     )
-    with urllib.request.urlopen(req, timeout=20) as resp:
-        body = resp.read().decode("utf-8", "replace")
-        sys.stderr.write("https mail %s %s\n" % (resp.status, body[:300]))
-        if resp.status >= 400:
-            raise RuntimeError("https mail failed")
-        try:
-            data = json.loads(body)
-        except json.JSONDecodeError:
-            return
-        success = data.get("success")
-        if success is True or str(success).lower() == "true":
-            return
-        msg = str(data.get("message") or body)
-        low = msg.lower()
-        if "activat" in low or "confirm" in low or "inbox" in low:
-            sys.stderr.write("https mail waiting for inbox confirmation\n")
-            return
-        raise RuntimeError(msg)
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(rec + "\n")
+        f.flush()
+        os.fsync(f.fileno())
 
 
-def send_mail(name, phone, page):
+def send_smtp_message(name, phone, page):
     host, port, user, password, mail_to = smtp_settings()
-    if not mail_to:
-        raise RuntimeError("smtp not configured")
-
-    try:
-        send_via_https(name, phone, page, mail_to)
-        return
-    except Exception as exc:
-        sys.stderr.write("https send failed: %s: %s\n" % (type(exc).__name__, exc))
-
-    if not user or not password:
+    if not user or not password or not mail_to:
         raise RuntimeError("smtp not configured")
     msg = EmailMessage()
     msg["Subject"] = "Заявка с aspect-it.ru: %s" % name
@@ -179,12 +141,41 @@ def send_mail(name, phone, page):
     msg["To"] = mail_to
     msg["Reply-To"] = user
     msg.set_content("Имя: %s\nТелефон: %s\nСтраница: %s\n" % (name, phone, page))
-    try:
-        with smtp_login(host, port, user, password) as smtp:
-            smtp.send_message(msg)
-    except Exception as exc:
-        sys.stderr.write("smtp send failed: %s: %s\n" % (type(exc).__name__, exc))
-        raise
+    with smtp_login(host, port, user, password) as smtp:
+        smtp.send_message(msg)
+
+
+def send_mail(name, phone, page):
+    enqueue(name, phone, page or "/")
+
+
+def drain_file(path):
+    if not os.path.isfile(path) or os.path.getsize(path) == 0:
+        print("queue empty", flush=True)
+        return 0
+    lines = [ln.strip() for ln in open(path, encoding="utf-8") if ln.strip()]
+    print("queue size=%s" % len(lines), flush=True)
+    for i, line in enumerate(lines):
+        try:
+            data = json.loads(line)
+        except json.JSONDecodeError:
+            print("lead %s skipped: bad json" % i, flush=True)
+            continue
+        if not isinstance(data, dict):
+            continue
+        name = str(data.get("name") or "").strip()
+        phone = str(data.get("phone") or "").strip()
+        page = str(data.get("page") or "/").strip()
+        if not name or not phone:
+            print("lead %s skipped: missing fields" % i, flush=True)
+            continue
+        try:
+            send_smtp_message(name, phone, page)
+            print("lead %s sent" % i, flush=True)
+        except Exception as exc:
+            print("lead %s failed: %s" % (i, type(exc).__name__), flush=True)
+            return 1
+    return 0
 
 
 def check_smtp():
@@ -307,4 +298,6 @@ def main():
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "check":
         sys.exit(check_smtp())
+    if len(sys.argv) > 2 and sys.argv[1] == "drain":
+        sys.exit(drain_file(sys.argv[2]))
     main()
