@@ -3873,11 +3873,6 @@ body.home .footer-band .footer a:hover {
     border-right: 0;
 }
 
-.home-offer--featured {
-    background: var(--ink);
-    color: var(--paper);
-}
-
 .home-offer-kicker {
     margin: 0;
     font-family: var(--font-mono);
@@ -3886,13 +3881,6 @@ body.home .footer-band .footer a:hover {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--text-muted);
-}
-
-.home-offer--featured .home-offer-kicker,
-.home-offer--featured .home-offer-period,
-.home-offer--featured p,
-.home-offer--featured li {
-    color: #c4bfb3;
 }
 
 .home-offer-price {
@@ -3955,10 +3943,27 @@ body.home .footer-band .footer a:hover {
     align-self: flex-start;
 }
 
+.home-offer--featured {
+    background: var(--ink);
+    color: var(--paper);
+    -webkit-text-fill-color: var(--paper);
+}
+
+.home-offer--featured .home-offer-kicker,
+.home-offer--featured .home-offer-price,
+.home-offer--featured .home-offer-period,
+.home-offer--featured h3,
+.home-offer--featured p,
+.home-offer--featured li {
+    color: var(--paper);
+    -webkit-text-fill-color: var(--paper);
+}
+
 .home-offer--featured .btn-ia {
     background: var(--paper);
     color: var(--ink);
     border-color: var(--paper);
+    -webkit-text-fill-color: var(--ink);
 }
 
 @media (hover: hover) {
@@ -3966,12 +3971,8 @@ body.home .footer-band .footer a:hover {
         background: transparent;
         color: var(--paper);
         border-color: var(--paper);
+        -webkit-text-fill-color: var(--paper);
     }
-}
-
-.home-offer--featured h3,
-.home-offer--featured .home-offer-price {
-    color: var(--paper);
 }
 
 @media (max-width: 900px) {
