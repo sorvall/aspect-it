@@ -12,9 +12,10 @@ from email.message import EmailMessage
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from socketserver import ThreadingMixIn, UnixStreamServer
 
-MAX_BODY = 4096
+MAX_BODY = 8192
 MAX_NAME = 120
 MAX_PHONE = 40
+MAX_MESSAGE = 1200
 RATE_WINDOW = 3600
 RATE_MAX = 8
 SMTP_TIMEOUT = 6
@@ -118,11 +119,17 @@ def queue_path():
     return env("QUEUE", "/tmp/aspect-mailer/leads.jsonl")
 
 
-def enqueue(name, phone, page):
+def enqueue(name, phone, page, message=""):
     path = queue_path()
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     rec = json.dumps(
-        {"name": name, "phone": phone, "page": page, "ts": int(time.time())},
+        {
+            "name": name,
+            "phone": phone,
+            "page": page,
+            "message": message,
+            "ts": int(time.time()),
+        },
         ensure_ascii=False,
     )
     with open(path, "a", encoding="utf-8") as f:
@@ -131,22 +138,26 @@ def enqueue(name, phone, page):
         os.fsync(f.fileno())
 
 
-def send_smtp_message(name, phone, page):
+def send_smtp_message(name, phone, page, message=""):
     host, port, user, password, mail_to = smtp_settings()
     if not user or not password or not mail_to:
         raise RuntimeError("smtp not configured")
+    kind = "Вопрос" if message else "Заявка"
     msg = EmailMessage()
-    msg["Subject"] = "Заявка с aspect-it.ru: %s" % name
+    msg["Subject"] = "%s с aspect-it.ru: %s" % (kind, name)
     msg["From"] = user
     msg["To"] = mail_to
     msg["Reply-To"] = user
-    msg.set_content("Имя: %s\nТелефон: %s\nСтраница: %s\n" % (name, phone, page))
+    lines = ["Имя: %s" % name, "Телефон: %s" % phone, "Страница: %s" % page]
+    if message:
+        lines.extend(["", "Вопрос:", message])
+    msg.set_content("\n".join(lines) + "\n")
     with smtp_login(host, port, user, password) as smtp:
         smtp.send_message(msg)
 
 
-def send_mail(name, phone, page):
-    enqueue(name, phone, page or "/")
+def send_mail(name, phone, page, message=""):
+    enqueue(name, phone, page or "/", message)
 
 
 def drain_file(path):
@@ -166,11 +177,12 @@ def drain_file(path):
         name = str(data.get("name") or "").strip()
         phone = str(data.get("phone") or "").strip()
         page = str(data.get("page") or "/").strip()
+        message = str(data.get("message") or "").strip()
         if not name or not phone:
             print("lead %s skipped: missing fields" % i, flush=True)
             continue
         try:
-            send_smtp_message(name, phone, page)
+            send_smtp_message(name, phone, page, message)
             print("lead %s sent" % i, flush=True)
         except Exception as exc:
             print("lead %s failed: %s" % (i, type(exc).__name__), flush=True)
@@ -251,6 +263,7 @@ class Handler(BaseHTTPRequestHandler):
         name = str(data.get("name") or "").strip()
         phone = str(data.get("phone") or "").strip()
         page = str(data.get("page") or "").strip()[:200]
+        message = str(data.get("message") or "").strip()[:MAX_MESSAGE]
         if not name or len(name) > MAX_NAME:
             self._json(400, {"ok": False, "error": "name"})
             return
@@ -258,7 +271,7 @@ class Handler(BaseHTTPRequestHandler):
             self._json(400, {"ok": False, "error": "phone"})
             return
         try:
-            send_mail(name, phone, page or "/")
+            send_mail(name, phone, page or "/", message)
         except RuntimeError:
             self._json(503, {"ok": False, "error": "config"})
             return

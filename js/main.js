@@ -248,6 +248,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const supportMarkup =
+        '<form class="form-group support-dialog-form" data-form>' +
+        '<button type="button" class="support-dialog-close" data-support-close aria-label="Закрыть">×</button>' +
+        '<p class="support-dialog-kicker">Поддержка</p>' +
+        '<h2 id="support-dialog-title">Написать в поддержку</h2>' +
+        '<p class="support-dialog-lead">Ответим на почту, обычно в течение двух часов в рабочее время.</p>' +
+        '<div class="form-hp" aria-hidden="true"><input type="text" name="company" tabindex="-1" autocomplete="off" /></div>' +
+        '<label class="form-field"><span>Имя</span><input type="text" name="name" autocomplete="name" required /></label>' +
+        '<label class="form-field"><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" required /></label>' +
+        '<label class="form-field"><span>Вопрос</span><textarea name="message" rows="4" required maxlength="1200"></textarea></label>' +
+        '<div class="form-actions"><button type="submit" class="btn">Отправить</button></div>' +
+        '<label class="form-consent"><input type="checkbox" name="consent" required /><span>Согласен на <a href="privacy.html">обработку персональных данных</a></span></label>' +
+        '<p class="form-success">Спасибо! Мы ответим в ближайшее время.</p>' +
+        '<p class="form-error" role="alert">Не удалось отправить. Напишите на hello@aspect-it.ru или попробуйте ещё раз.</p>' +
+        '</form>';
+
+    const supportOpeners = document.querySelectorAll('[data-support-open]');
+    if (supportOpeners.length) {
+        const dialog = document.createElement('dialog');
+        dialog.className = 'support-dialog';
+        dialog.setAttribute('aria-labelledby', 'support-dialog-title');
+        dialog.innerHTML = supportMarkup;
+        document.body.appendChild(dialog);
+        supportOpeners.forEach((el) => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (typeof dialog.showModal === 'function') dialog.showModal();
+            });
+        });
+        dialog.querySelectorAll('[data-support-close]').forEach((btn) => {
+            btn.addEventListener('click', () => dialog.close());
+        });
+        dialog.addEventListener('click', (e) => {
+            if (e.target === dialog) dialog.close();
+        });
+    }
+
     document.querySelectorAll('form[data-form]').forEach((form) => {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -260,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: (form.elements.name && form.elements.name.value.trim()) || '',
                 phone: (form.elements.phone && form.elements.phone.value.trim()) || '',
                 company: (form.elements.company && form.elements.company.value.trim()) || '',
+                message: (form.elements.message && form.elements.message.value.trim()) || '',
                 page: window.location.pathname,
             };
             if (button) {
