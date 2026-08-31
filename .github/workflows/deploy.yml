@@ -330,8 +330,10 @@ jobs:
             smtp_status=$?
             set -e
             if [ "$smtp_status" -ne 0 ]; then
-              echo "::warning::SMTP login failed. SMTP_PASSWORD must be a Yandex app password for sorvallsorokin@yandex.ru"
+              echo "::error::SMTP login from VPS failed — Timeweb may still block 465/587"
               $COMPOSE_CMD logs --no-color --tail 40 mailer || true
+            else
+              echo "SMTP login from VPS succeeded"
             fi
 
             echo "=== Let's Encrypt ==="

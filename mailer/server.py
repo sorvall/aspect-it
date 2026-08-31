@@ -157,7 +157,12 @@ def send_smtp_message(name, phone, page, message=""):
 
 
 def send_mail(name, phone, page, message=""):
-    enqueue(name, phone, page or "/", message)
+    try:
+        send_smtp_message(name, phone, page or "/", message)
+        return
+    except Exception as exc:
+        sys.stderr.write("smtp send failed, queueing: %s: %s\n" % (type(exc).__name__, exc))
+        enqueue(name, phone, page or "/", message)
 
 
 def drain_file(path):
