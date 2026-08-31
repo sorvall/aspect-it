@@ -44,9 +44,9 @@ def rate_ok(ip):
 
 
 def send_mail(name, phone, page):
-    host = env("SMTP_HOST", "smtp.yandex.ru")
+    host = env("SMTP_HOST", "smtp.mail.ru")
     port = int(env("SMTP_PORT", "465") or "465")
-    user = env("SMTP_USER")
+    user = env("SMTP_USER") or "sorvall@mail.ru"
     password = env("SMTP_PASSWORD")
     mail_to = env("MAIL_TO") or "sorvall@mail.ru"
     if not user or not password or not mail_to:
@@ -62,16 +62,20 @@ def send_mail(name, phone, page):
     )
 
     context = ssl.create_default_context()
-    if port == 465:
-        with smtplib.SMTP_SSL(host, port, context=context, timeout=20) as smtp:
+    try:
+        if port == 465:
+            with smtplib.SMTP_SSL(host, port, context=context, timeout=20) as smtp:
+                smtp.login(user, password)
+                smtp.send_message(msg)
+            return
+        with smtplib.SMTP(host, port, timeout=20) as smtp:
+            smtp.ehlo()
+            smtp.starttls(context=context)
             smtp.login(user, password)
             smtp.send_message(msg)
-        return
-    with smtplib.SMTP(host, port, timeout=20) as smtp:
-        smtp.ehlo()
-        smtp.starttls(context=context)
-        smtp.login(user, password)
-        smtp.send_message(msg)
+    except Exception as exc:
+        sys.stderr.write("smtp send failed: %s: %s\n" % (type(exc).__name__, exc))
+        raise
 
 
 class Handler(BaseHTTPRequestHandler):

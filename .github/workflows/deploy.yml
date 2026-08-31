@@ -9,8 +9,8 @@
 # Опционально:
 #   SSH_PORT        — порт SSH, если не 22
 #   CERTBOT_EMAIL   — email для Let's Encrypt (уведомления об истечении сертификата)
-#   SMTP_PASSWORD   — пароль приложения Яндекс.Почты для hello@aspect-it.ru
-#   SMTP_USER       — ящик SMTP, по умолчанию hello@aspect-it.ru
+#   SMTP_PASSWORD   — пароль приложения Mail.ru для sorvall@mail.ru
+#   SMTP_USER       — ящик SMTP, по умолчанию sorvall@mail.ru
 #   MAIL_TO         — куда слать заявки, по умолчанию sorvall@mail.ru
 #   DOCKERHUB_USERNAME / DOCKERHUB_TOKEN — не обязательны; базовый образ тянется с AWS Public ECR
 #
@@ -201,12 +201,12 @@ jobs:
             echo "Ports 80 and 443 are free — enabling HTTP + HTTPS"
             SMTP_USER='${{ secrets.SMTP_USER }}'
             MAIL_TO='${{ secrets.MAIL_TO }}'
-            if [ -z "$SMTP_USER" ]; then SMTP_USER='hello@aspect-it.ru'; fi
+            if [ -z "$SMTP_USER" ]; then SMTP_USER='sorvall@mail.ru'; fi
             if [ -z "$MAIL_TO" ]; then MAIL_TO='sorvall@mail.ru'; fi
             {
               printf 'HTTP_PORT=%s\nHTTPS_PORT=%s\nDOMAIN=%s\n' "$HTTP_PORT" "$HTTPS_PORT" "$DOMAIN"
               printf 'SMTP_HOST=%s\nSMTP_PORT=%s\nSMTP_USER=%s\nMAIL_TO=%s\n' \
-                'smtp.yandex.ru' '465' "$SMTP_USER" "$MAIL_TO"
+                'smtp.mail.ru' '465' "$SMTP_USER" "$MAIL_TO"
               printf 'SMTP_PASSWORD=%s\n' '${{ secrets.SMTP_PASSWORD }}'
             } > .env
             echo "=== .env (SMTP_PASSWORD hidden) ==="
