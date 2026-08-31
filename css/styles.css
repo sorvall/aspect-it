@@ -3835,13 +3835,23 @@ body.home .footer-band .footer a:hover {
 }
 
 .home-offers-title {
-    font-family: var(--font-sans);
-    font-weight: 400;
+    font-family: var(--font-serif);
+    font-weight: 600;
     font-size: clamp(28px, 3.2vw, 40px);
     letter-spacing: -0.03em;
-    margin: 8px 0 16px;
-    max-width: 16em;
+    line-height: 1.4;
+    margin: 8px 0 20px;
+    max-width: 18em;
     color: var(--ink);
+}
+
+.home-offers-title span {
+    background: var(--ink);
+    color: var(--paper);
+    -webkit-text-fill-color: var(--paper);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: 0.12em 0.38em;
 }
 
 .home-offers-lead {
