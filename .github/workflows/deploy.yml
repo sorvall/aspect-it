@@ -303,6 +303,8 @@ jobs:
             fi
 
             echo "=== Building ==="
+            mkdir -p /tmp/aspect-mailer
+            chmod 1777 /tmp/aspect-mailer
             $COMPOSE_CMD build --progress=plain
 
             echo "=== Starting containers ==="

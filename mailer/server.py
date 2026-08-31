@@ -8,8 +8,11 @@ import ssl
 import sys
 import threading
 import time
+import urllib.error
+import urllib.request
 from email.message import EmailMessage
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from socketserver import ThreadingMixIn, UnixStreamServer
 
 MAX_BODY = 4096
 MAX_NAME = 120
@@ -30,7 +33,10 @@ def client_ip(handler):
     forwarded = handler.headers.get("X-Forwarded-For", "")
     if forwarded:
         return forwarded.split(",")[0].strip()[:64]
-    return handler.client_address[0]
+    addr = handler.client_address
+    if isinstance(addr, tuple) and addr:
+        return str(addr[0])[:64]
+    return "unix"
 
 
 def rate_ok(ip):
@@ -110,23 +116,58 @@ def smtp_login(host, port, user, password):
     raise OSError("smtp unreachable: %s" % "; ".join(errors[:6] or ["no addresses"]))
 
 
+def send_via_https(name, phone, page, mail_to):
+    payload = json.dumps(
+        {
+            "name": name,
+            "phone": phone,
+            "page": page,
+            "_subject": "Заявка с aspect-it.ru: %s" % name,
+        },
+        ensure_ascii=False,
+    ).encode("utf-8")
+    url = "https://formsubmit.co/ajax/%s" % mail_to
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        method="POST",
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "User-Agent": "aspect-it-mailer",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        body = resp.read().decode("utf-8", "replace")
+        sys.stderr.write("https fallback %s %s\n" % (resp.status, body[:240]))
+        if resp.status >= 400:
+            raise RuntimeError("https mail failed")
+
+
 def send_mail(name, phone, page):
     host, port, user, password, mail_to = smtp_settings()
-    if not user or not password or not mail_to:
+    if not mail_to:
         raise RuntimeError("smtp not configured")
 
     msg = EmailMessage()
     msg["Subject"] = "Заявка с aspect-it.ru: %s" % name
-    msg["From"] = user
+    msg["From"] = user or mail_to
     msg["To"] = mail_to
-    msg["Reply-To"] = user
+    if user:
+        msg["Reply-To"] = user
     msg.set_content("Имя: %s\nТелефон: %s\nСтраница: %s\n" % (name, phone, page))
 
+    if user and password:
+        try:
+            with smtp_login(host, port, user, password) as smtp:
+                smtp.send_message(msg)
+            return
+        except Exception as exc:
+            sys.stderr.write("smtp send failed: %s: %s\n" % (type(exc).__name__, exc))
     try:
-        with smtp_login(host, port, user, password) as smtp:
-            smtp.send_message(msg)
+        send_via_https(name, phone, page, mail_to)
     except Exception as exc:
-        sys.stderr.write("smtp send failed: %s: %s\n" % (type(exc).__name__, exc))
+        sys.stderr.write("https send failed: %s: %s\n" % (type(exc).__name__, exc))
         raise
 
 
@@ -147,6 +188,12 @@ def check_smtp():
 
 
 class Handler(BaseHTTPRequestHandler):
+    def address_string(self):
+        try:
+            return BaseHTTPRequestHandler.address_string(self)
+        except Exception:
+            return "unix"
+
     def log_message(self, fmt, *args):
         sys.stderr.write("%s - %s\n" % (self.address_string(), fmt % args))
 
@@ -214,15 +261,30 @@ class Handler(BaseHTTPRequestHandler):
         self._json(200, {"ok": True})
 
 
+class ThreadingUnixHTTPServer(ThreadingMixIn, UnixStreamServer):
+    daemon_threads = True
+    allow_reuse_address = True
+
+
 def main():
+    sock_path = env("SOCKET")
     port = int(env("PORT", "8080") or "8080")
     host, smtp_port, user, password, mail_to = smtp_settings()
     print(
-        "mailer listening on %s smtp=%s:%s user=%s to=%s configured=%s"
-        % (port, host, smtp_port, user, mail_to, bool(password)),
+        "mailer smtp=%s:%s user=%s to=%s configured=%s socket=%s"
+        % (host, smtp_port, user, mail_to, bool(password), sock_path or ("tcp:%s" % port)),
         flush=True,
     )
-    server = ThreadingHTTPServer(("0.0.0.0", port), Handler)
+    if sock_path:
+        os.makedirs(os.path.dirname(sock_path) or ".", exist_ok=True)
+        try:
+            os.unlink(sock_path)
+        except FileNotFoundError:
+            pass
+        server = ThreadingUnixHTTPServer(sock_path, Handler)
+        os.chmod(sock_path, 0o666)
+    else:
+        server = ThreadingHTTPServer(("0.0.0.0", port), Handler)
     server.serve_forever()
 
 

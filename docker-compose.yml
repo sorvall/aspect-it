@@ -5,12 +5,12 @@ services:
       dockerfile: Dockerfile.mailer
     env_file:
       - mailer.env
-    dns:
-      - 8.8.8.8
-      - 1.1.1.1
+    environment:
+      SOCKET: /tmp/aspect-mailer/mailer.sock
+    network_mode: host
+    volumes:
+      - /tmp/aspect-mailer:/tmp/aspect-mailer
     restart: unless-stopped
-    expose:
-      - "8080"
 
   web:
     build: .
@@ -22,6 +22,7 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt:ro
       - certbot-www:/var/www/certbot:ro
+      - /tmp/aspect-mailer:/tmp/aspect-mailer
     depends_on:
       - mailer
     restart: unless-stopped
