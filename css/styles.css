@@ -2891,15 +2891,15 @@ body {
 
 .promo-dialog-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
     z-index: 2;
     width: 44px;
     height: 44px;
     border: 0;
-    background: transparent;
+    background: var(--paper);
     color: var(--ink);
-    font-size: 28px;
+    font-size: 26px;
     line-height: 1;
     cursor: pointer;
 }
@@ -2954,7 +2954,7 @@ body {
 }
 
 .promo-dialog-copy {
-    padding: 32px 48px 28px 32px;
+    padding: 28px 72px 28px 32px;
 }
 
 .promo-dialog-copy h2 {
@@ -3037,15 +3037,18 @@ body {
     }
 
     .promo-dialog-close {
-        color: var(--paper);
+        color: var(--ink);
+        background: var(--paper);
+        top: 12px;
+        right: 12px;
     }
 
     .promo-dialog-close:focus-visible {
-        outline-color: var(--paper);
+        outline-color: var(--ink);
     }
 
     .promo-dialog-price {
-        padding: 20px 52px 18px 22px;
+        padding: 16px 56px 18px 22px;
         justify-content: flex-start;
     }
 
