@@ -66,7 +66,7 @@ def smtp_endpoints(host, preferred_port):
             ports.append(port)
     seen = set()
     for port in ports:
-        for family in (socket.AF_INET, socket.AF_INET6):
+        for family in (socket.AF_INET6, socket.AF_INET):
             try:
                 infos = socket.getaddrinfo(host, port, family, socket.SOCK_STREAM)
             except socket.gaierror as exc:
