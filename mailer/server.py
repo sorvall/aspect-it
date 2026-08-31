@@ -48,7 +48,7 @@ def rate_ok(ip):
 def smtp_settings():
     host = env("SMTP_HOST", "smtp.yandex.ru")
     port = int(env("SMTP_PORT", "465") or "465")
-    user = env("SMTP_USER") or "hello@aspect-it.ru"
+    user = env("SMTP_USER") or "sorvallsorokin@yandex.ru"
     password = env("SMTP_PASSWORD")
     mail_to = env("MAIL_TO") or "sorvall@mail.ru"
     return host, port, user, password, mail_to

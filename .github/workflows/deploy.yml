@@ -9,9 +9,9 @@
 # Опционально:
 #   SSH_PORT        — порт SSH, если не 22
 #   CERTBOT_EMAIL   — email для Let's Encrypt (уведомления об истечении сертификата)
-#   SMTP_PASSWORD   — пароль приложения Яндекс.Почты для hello@aspect-it.ru
+#   SMTP_PASSWORD   — пароль приложения Яндекс.Почты для sorvallsorokin@yandex.ru
 #                     (не пароль Mail.ru: с VPS smtp.mail.ru недоступен)
-#   SMTP_USER       — ящик SMTP, по умолчанию hello@aspect-it.ru
+#   SMTP_USER       — ящик SMTP, по умолчанию sorvallsorokin@yandex.ru
 #   MAIL_TO         — куда слать заявки, по умолчанию sorvall@mail.ru
 #   DOCKERHUB_USERNAME / DOCKERHUB_TOKEN — не обязательны; базовый образ тянется с AWS Public ECR
 #
@@ -74,9 +74,9 @@ jobs:
 
           password = val("SMTP_PASSWORD")
           if not password:
-              raise SystemExit("Задайте секрет SMTP_PASSWORD: пароль приложения Яндекс.Почты для hello@aspect-it.ru")
+              raise SystemExit("Задайте секрет SMTP_PASSWORD: пароль приложения Яндекс.Почты для sorvallsorokin@yandex.ru")
 
-          user = val("SMTP_USER", "hello@aspect-it.ru")
+          user = val("SMTP_USER", "sorvallsorokin@yandex.ru")
           mail_to = val("MAIL_TO", "sorvall@mail.ru")
           Path("mailer.env").write_text(
               "\n".join([
@@ -328,7 +328,7 @@ jobs:
             smtp_status=$?
             set -e
             if [ "$smtp_status" -ne 0 ]; then
-              echo "::warning::SMTP login failed. SMTP_PASSWORD must be a Yandex app password for hello@aspect-it.ru"
+              echo "::warning::SMTP login failed. SMTP_PASSWORD must be a Yandex app password for sorvallsorokin@yandex.ru"
               $COMPOSE_CMD logs --no-color --tail 40 mailer || true
             fi
 
