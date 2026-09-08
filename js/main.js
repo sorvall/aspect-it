@@ -26,6 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(() => heroRule.classList.add('is-in'));
     }
 
+    const heroStream = document.querySelector('.hero-stream');
+    if (heroStream && !reduceMotion) {
+        const streamCards = heroStream.querySelectorAll('.hero-stream-card');
+        const setStream = (on) => {
+            const state = on && !document.hidden ? 'running' : 'paused';
+            streamCards.forEach((card) => {
+                card.style.animationPlayState = state;
+            });
+        };
+        const streamIo = new IntersectionObserver(
+            (entries) => setStream(entries.some((entry) => entry.isIntersecting)),
+            { threshold: 0.05 }
+        );
+        streamIo.observe(heroStream);
+        document.addEventListener('visibilitychange', () => {
+            const box = heroStream.getBoundingClientRect();
+            const inView = box.bottom > 0 && box.top < window.innerHeight;
+            setStream(inView);
+        });
+    }
+
     const HERO_CYCLE_MS = 4000;
     document.documentElement.style.setProperty('--hero-cycle', `${HERO_CYCLE_MS}ms`);
     document.documentElement.style.setProperty('--hero-move', '0.7s');
