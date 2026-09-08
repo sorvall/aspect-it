@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://mc.yandex.ru" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=57" />
+    <link rel="stylesheet" href="/css/styles.css?v=59" />
     <script>document.documentElement.classList.add('js');</script>
     <script type="application/ld+json">
     {
@@ -287,6 +287,104 @@
                     <a class="btn btn-ia" href="#contact">Получить расчёт</a>
                 </article>
             </div>
+
+            <div class="plan-compare" role="region" aria-labelledby="plan-compare-title">
+                <h3 class="plan-compare-title" id="plan-compare-title">Что входит</h3>
+                <p class="plan-compare-lead">Одни и те же строки по трём форматам — без «от» и мелкого шрифта.</p>
+                <div class="plan-compare-scroll">
+                    <table class="plan-table">
+                        <caption class="sr-only">Сравнение аудита, сайта под ключ и абонемента</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Параметр</th>
+                                <th scope="col">Аудит</th>
+                                <th scope="col" class="is-featured">Под ключ</th>
+                                <th scope="col">Абонемент</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Цена</th>
+                                <td>0&nbsp;₽</td>
+                                <td class="is-featured">120&nbsp;000&nbsp;₽</td>
+                                <td>8&nbsp;000&nbsp;₽/мес</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Срок</th>
+                                <td>24 часа</td>
+                                <td class="is-featured">14 дней</td>
+                                <td>с этого месяца</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Разбор текущего сайта</th>
+                                <td><span class="plan-yes">есть</span></td>
+                                <td class="is-featured"><span class="plan-yes">есть</span></td>
+                                <td><span class="plan-no">—</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">КП с фиксированной ценой</th>
+                                <td><span class="plan-yes">без обязательств</span></td>
+                                <td class="is-featured"><span class="plan-yes">в договоре</span></td>
+                                <td><span class="plan-no">—</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Дизайн до 12 страниц</th>
+                                <td><span class="plan-no">—</span></td>
+                                <td class="is-featured"><span class="plan-yes">есть</span></td>
+                                <td><span class="plan-no">—</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Вёрстка и HTTPS</th>
+                                <td><span class="plan-no">—</span></td>
+                                <td class="is-featured"><span class="plan-yes">запуск по адресу</span></td>
+                                <td>следим за HTTPS</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">SEO под Яндекс</th>
+                                <td><span class="plan-no">—</span></td>
+                                <td class="is-featured"><span class="plan-yes">есть</span></td>
+                                <td>не теряем позиции</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Контент, прайсы, тексты</th>
+                                <td><span class="plan-no">—</span></td>
+                                <td class="is-featured">при запуске</td>
+                                <td><span class="plan-yes">правки за 24&nbsp;ч</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Карты, отзывы, Avito</th>
+                                <td><span class="plan-no">—</span></td>
+                                <td class="is-featured">по задаче</td>
+                                <td><span class="plan-yes">в тарифе</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Правки после запуска</th>
+                                <td><span class="plan-no">—</span></td>
+                                <td class="is-featured">2 итерации</td>
+                                <td><span class="plan-yes">постоянно</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ежемесячный отчёт</th>
+                                <td><span class="plan-no">—</span></td>
+                                <td class="is-featured"><span class="plan-no">—</span></td>
+                                <td><span class="plan-yes">есть</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Скрытые доплаты</th>
+                                <td>0&nbsp;₽</td>
+                                <td class="is-featured">0&nbsp;₽</td>
+                                <td>0&nbsp;₽</td>
+                            </tr>
+                            <tr class="plan-table-cta">
+                                <th scope="row"><span class="sr-only">Выбрать формат</span></th>
+                                <td><a class="link-arrow" href="#contact">Отправить сайт →</a></td>
+                                <td class="is-featured"><a class="link-arrow" href="#contact">Получить расчёт →</a></td>
+                                <td><a class="link-arrow" href="#contact">Подключить →</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -371,64 +469,54 @@
         </div>
     </section>
 
-    <section class="home-process" aria-label="Этапы работы">
+    <section class="home-process" id="process" aria-label="Этапы работы">
         <div class="container">
             <p class="section-label">04 / Ход</p>
             <h2 class="home-process-title">Четыре этапа реализации Вашего проекта</h2>
-            <ol class="home-process-track">
-                <li>
-                    <span class="home-process-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                            <circle cx="10.5" cy="10.5" r="6.25"/>
-                            <path d="M15.2 15.2 21 21"/>
-                            <path d="M8.5 10.5h4M10.5 8.5v4"/>
-                        </svg>
-                    </span>
-                    <span class="home-process-num">01</span>
-                    <strong>Аудит и техническое задание</strong>
-                    <p class="home-process-term">Срок: 24 часа.</p>
-                    <p>Проводим анализ текущего сайта (если есть), фиксируем требования к новому решению. Результат — документ со структурой, функциональными блоками и сметой. Без авансов и обязательств с вашей стороны.</p>
-                </li>
-                <li>
-                    <span class="home-process-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                            <rect x="3" y="3" width="7.5" height="7.5"/>
-                            <rect x="13.5" y="3" width="7.5" height="7.5"/>
-                            <rect x="3" y="13.5" width="7.5" height="7.5"/>
-                            <rect x="13.5" y="13.5" width="7.5" height="7.5"/>
-                        </svg>
-                    </span>
-                    <span class="home-process-num">02</span>
-                    <strong>Проектирование интерфейсов</strong>
-                    <p>Разрабатываем прототипы и дизайн-макеты. Фокус — на пользовательских сценариях и конверсионных элементах. Финализируем визуальную и структурную части до полного утверждения.</p>
-                </li>
-                <li>
-                    <span class="home-process-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                            <path d="M8.5 6.5 3.5 12l5 5.5"/>
-                            <path d="M15.5 6.5 20.5 12l-5 5.5"/>
-                            <path d="M13.2 4.5 10.8 19.5"/>
-                        </svg>
-                    </span>
-                    <span class="home-process-num">03</span>
-                    <strong>Разработка и наполнение</strong>
-                    <p>Верстка с адаптивом под все устройства, интеграция с CMS. На этом этапе закладываем базовую SEO-оптимизацию (мета-теги, структура URL, микроразметка), подготавливаем текстовый контент и настраиваем формы с отправкой заявок в вашу CRM.</p>
-                </li>
-                <li>
-                    <span class="home-process-icon home-process-icon--solid" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
-                            <path d="M12 3c3.2 2.4 6 6.2 6 11.2 0 1.6-.9 2.8-2.2 2.8H8.2C6.9 17 6 15.8 6 14.2 6 9.2 8.8 5.4 12 3Z"/>
-                            <path d="M10 21h4"/>
-                            <path d="M9.2 14.5 7 20"/>
-                            <path d="M14.8 14.5 17 20"/>
-                            <circle cx="12" cy="11" r="1.2"/>
-                        </svg>
-                    </span>
-                    <span class="home-process-num">04</span>
-                    <strong>Запуск и передача</strong>
-                    <p>Размещение на боевом сервере, установка SSL-сертификата, настройка производительности и мониторинга. После технического релиза передаем полный доступ к сайту и хостингу. Последующее обслуживание — по отдельному абонементу, который включает доработки и техническую поддержку.</p>
-                </li>
-            </ol>
+            <p class="home-process-lead">Нажмите этап — видно срок и что происходит. Весь цикл: 7–14 дней до запуска.</p>
+            <div class="stepper" data-stepper>
+                <div class="stepper-nav" role="tablist" aria-label="Этапы проекта">
+                    <button type="button" class="stepper-tab" role="tab" id="home-step-tab-0" aria-controls="home-step-panel-0" aria-selected="true">
+                        <span class="stepper-num">01</span>
+                        <span class="stepper-name">Аудит и ТЗ</span>
+                        <span class="stepper-term">24 часа</span>
+                    </button>
+                    <button type="button" class="stepper-tab" role="tab" id="home-step-tab-1" aria-controls="home-step-panel-1" aria-selected="false" tabindex="-1">
+                        <span class="stepper-num">02</span>
+                        <span class="stepper-name">Проектирование</span>
+                        <span class="stepper-term">макет до старта вёрстки</span>
+                    </button>
+                    <button type="button" class="stepper-tab" role="tab" id="home-step-tab-2" aria-controls="home-step-panel-2" aria-selected="false" tabindex="-1">
+                        <span class="stepper-num">03</span>
+                        <span class="stepper-name">Разработка</span>
+                        <span class="stepper-term">контент и SEO</span>
+                    </button>
+                    <button type="button" class="stepper-tab" role="tab" id="home-step-tab-3" aria-controls="home-step-panel-3" aria-selected="false" tabindex="-1">
+                        <span class="stepper-num">04</span>
+                        <span class="stepper-name">Запуск</span>
+                        <span class="stepper-term">HTTPS и доступы</span>
+                    </button>
+                </div>
+                <div class="stepper-panels">
+                    <article class="stepper-panel is-on" role="tabpanel" id="home-step-panel-0" aria-labelledby="home-step-tab-0">
+                        <p class="home-process-term">Срок: 24 часа.</p>
+                        <h3>Аудит и техническое задание</h3>
+                        <p>Проводим анализ текущего сайта (если есть), фиксируем требования к новому решению. Результат — документ со структурой, функциональными блоками и сметой. Без авансов и обязательств с вашей стороны.</p>
+                    </article>
+                    <article class="stepper-panel" role="tabpanel" id="home-step-panel-1" aria-labelledby="home-step-tab-1">
+                        <h3>Проектирование интерфейсов</h3>
+                        <p>Разрабатываем прототипы и дизайн-макеты. Фокус — на пользовательских сценариях и конверсионных элементах. Финализируем визуальную и структурную части до полного утверждения. 50% оплаты — после макета.</p>
+                    </article>
+                    <article class="stepper-panel" role="tabpanel" id="home-step-panel-2" aria-labelledby="home-step-tab-2">
+                        <h3>Разработка и наполнение</h3>
+                        <p>Вёрстка с адаптивом под все устройства. На этом этапе закладываем базовую SEO-оптимизацию (мета-теги, структура URL, микроразметка), подготавливаем текстовый контент и настраиваем формы заявок. Еженедельный отчёт о ходе работ.</p>
+                    </article>
+                    <article class="stepper-panel" role="tabpanel" id="home-step-panel-3" aria-labelledby="home-step-tab-3">
+                        <h3>Запуск и передача</h3>
+                        <p>Размещение на боевом сервере, установка SSL-сертификата, настройка производительности и мониторинга. После технического релиза передаём полный доступ к сайту и хостингу. Дальше — абонемент на поддержку, если подключите.</p>
+                    </article>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -790,6 +878,18 @@
         </div>
     </section>
 
+    <section class="home-cta" aria-labelledby="home-cta-title">
+        <div class="container home-cta-inner">
+            <p class="section-label">Старт</p>
+            <h2 id="home-cta-title">Бесплатный аудит за 24 часа</h2>
+            <p>Пришлите ссылку на сайт — разберём, что мешает заявкам, и назовём цену. Ничего не должны: ни договора, ни предоплаты.</p>
+            <div class="home-cta-actions">
+                <a href="#contact" class="btn btn-ia">Оставить заявку</a>
+                <a href="tel:+79654080754" class="btn btn-ia-ghost">8&nbsp;965&nbsp;408-07-54</a>
+            </div>
+        </div>
+    </section>
+
     <section class="form-section form-section--ia" id="contact">
         <div class="container">
             <div class="form-ia reveal">
@@ -851,6 +951,6 @@
     <noscript><div><img src="https://mc.yandex.ru/watch/112115171" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <script src="js/yandex-metrika.js?v=2" defer></script>
     <script src="js/jivo.js?v=2" defer></script>
-    <script src="js/main.js?v=35"></script>
+    <script src="js/main.js?v=37"></script>
 </body>
 </html>

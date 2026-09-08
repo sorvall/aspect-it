@@ -37,7 +37,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://mc.yandex.ru" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,500;0,600;0,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css?v=57" />
+    <link rel="stylesheet" href="/css/styles.css?v=59" />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -353,31 +353,51 @@
         </div>
     </section>
 
-    <section class="section section--steps">
+    <section class="section section--steps" id="process">
         <div class="container">
             <div class="section-label">Процесс</div>
             <h2 class="section-title">Как мы работаем</h2>
-            <p class="section-desc" style="margin-bottom: 40px;">Прозрачный процесс из 4 шагов — вы всегда знаете, на каком этапе проект и сколько осталось до запуска</p>
-            <div class="steps-grid">
-                <div class="step-item reveal stagger-1">
-                    <div class="num">1</div>
-                    <h4>Бесплатный аудит</h4>
-                    <p>Смотрим ваш сайт, находим слабые места, обсуждаем цели — за 24 часа КП с фиксированной ценой и сроками</p>
+            <p class="section-desc" style="margin-bottom: 40px;">Нажмите этап — видно, что происходит и сколько это занимает. Весь цикл: 7–14 дней до запуска.</p>
+            <div class="stepper" data-stepper>
+                <div class="stepper-nav" role="tablist" aria-label="Как мы работаем">
+                    <button type="button" class="stepper-tab" role="tab" id="svc-step-tab-0" aria-controls="svc-step-panel-0" aria-selected="true">
+                        <span class="stepper-num">01</span>
+                        <span class="stepper-name">Аудит</span>
+                        <span class="stepper-term">24 часа</span>
+                    </button>
+                    <button type="button" class="stepper-tab" role="tab" id="svc-step-tab-1" aria-controls="svc-step-panel-1" aria-selected="false" tabindex="-1">
+                        <span class="stepper-num">02</span>
+                        <span class="stepper-name">Дизайн</span>
+                        <span class="stepper-term">макет, 50% оплаты</span>
+                    </button>
+                    <button type="button" class="stepper-tab" role="tab" id="svc-step-tab-2" aria-controls="svc-step-panel-2" aria-selected="false" tabindex="-1">
+                        <span class="stepper-num">03</span>
+                        <span class="stepper-name">Вёрстка</span>
+                        <span class="stepper-term">контент и SEO</span>
+                    </button>
+                    <button type="button" class="stepper-tab" role="tab" id="svc-step-tab-3" aria-controls="svc-step-panel-3" aria-selected="false" tabindex="-1">
+                        <span class="stepper-num">04</span>
+                        <span class="stepper-name">Запуск</span>
+                        <span class="stepper-term">HTTPS и доступы</span>
+                    </button>
                 </div>
-                <div class="step-item reveal stagger-2">
-                    <div class="num">2</div>
-                    <h4>Дизайн и согласование</h4>
-                    <p>Готовим макет, согласовываем с вами, 50% оплаты — после утверждения, 2 итерации правок включены</p>
-                </div>
-                <div class="step-item reveal stagger-3">
-                    <div class="num">3</div>
-                    <h4>Вёрстка, контент, SEO</h4>
-                    <p>Делаем сайт, пишем тексты, настраиваем SEO — еженедельные отчёты и промежуточные показы, вы в курсе прогресса</p>
-                </div>
-                <div class="step-item reveal stagger-4">
-                    <div class="num">4</div>
-                    <h4>Запуск по HTTPS</h4>
-                    <p>Размещаем на сервере, привязываем домен, настраиваем HTTPS и публикуем, передаём доступы и инструкцию, 50% — после запуска, дальше — <a href="services.html#support">абонемент на поддержку и контент</a> от 8 000 ₽/мес</p>
+                <div class="stepper-panels">
+                    <article class="stepper-panel is-on" role="tabpanel" id="svc-step-panel-0" aria-labelledby="svc-step-tab-0">
+                        <h3>Бесплатный аудит</h3>
+                        <p>Смотрим ваш сайт, находим слабые места, обсуждаем цели — за 24 часа КП с фиксированной ценой и сроками. Без авансов и обязательств.</p>
+                    </article>
+                    <article class="stepper-panel" role="tabpanel" id="svc-step-panel-1" aria-labelledby="svc-step-tab-1">
+                        <h3>Дизайн и согласование</h3>
+                        <p>Готовим макет, согласовываем с вами. 50% оплаты — после утверждения. 2 итерации правок включены.</p>
+                    </article>
+                    <article class="stepper-panel" role="tabpanel" id="svc-step-panel-2" aria-labelledby="svc-step-tab-2">
+                        <h3>Вёрстка, контент, SEO</h3>
+                        <p>Делаем сайт, пишем тексты, настраиваем SEO — еженедельные отчёты и промежуточные показы, вы в курсе прогресса.</p>
+                    </article>
+                    <article class="stepper-panel" role="tabpanel" id="svc-step-panel-3" aria-labelledby="svc-step-tab-3">
+                        <h3>Запуск по HTTPS</h3>
+                        <p>Размещаем на сервере, привязываем домен, настраиваем HTTPS и публикуем, передаём доступы и инструкцию. 50% — после запуска, дальше — <a href="services.html#support">абонемент на поддержку и контент</a> от 8 000 ₽/мес.</p>
+                    </article>
                 </div>
             </div>
         </div>
@@ -442,6 +462,6 @@
     <noscript><div><img src="https://mc.yandex.ru/watch/112115171" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <script src="js/yandex-metrika.js?v=2" defer></script>
     <script src="js/jivo.js?v=2" defer></script>
-    <script src="js/main.js?v=35"></script>
+    <script src="js/main.js?v=37"></script>
 </body>
 </html>

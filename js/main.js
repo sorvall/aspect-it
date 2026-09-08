@@ -26,78 +26,123 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(() => heroRule.classList.add('is-in'));
     }
 
-    const heroRotate = document.querySelector('[data-hero-rotate]');
-    if (heroRotate) {
-        const words = [...heroRotate.querySelectorAll('.hero-title-word')];
-        const apply = (index) => {
-            words.forEach((word, n) => {
-                word.classList.toggle('is-on', n === index);
-                word.classList.toggle('is-passed', n < index);
-            });
-        };
+    const HERO_CYCLE_MS = 4000;
+    document.documentElement.style.setProperty('--hero-cycle', `${HERO_CYCLE_MS}ms`);
+    document.documentElement.style.setProperty('--hero-move', '0.7s');
 
-        if (reduceMotion || words.length < 2) {
-            apply(0);
-        } else {
-            let current = 0;
-            let timer = 0;
-            const dwell = 2000;
-            const arm = () => {
-                window.clearTimeout(timer);
-                if (document.hidden) return;
-                timer = window.setTimeout(() => {
-                    current = (current + 1) % words.length;
-                    apply(current);
-                    arm();
-                }, dwell);
-            };
-            apply(0);
-            arm();
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) window.clearTimeout(timer);
-                else arm();
-            });
-        }
-    }
+    const heroRotate = document.querySelector('[data-hero-rotate]');
+    const rotateWords = heroRotate
+        ? [...heroRotate.querySelectorAll('.hero-title-word')]
+        : [];
+    let rotateIndex = 0;
+    const applyRotate = (index) => {
+        if (!rotateWords.length) return;
+        rotateIndex = (index + rotateWords.length) % rotateWords.length;
+        rotateWords.forEach((word, n) => {
+            word.classList.toggle('is-on', n === rotateIndex);
+            word.classList.toggle('is-passed', n < rotateIndex);
+        });
+    };
+    if (rotateWords.length) applyRotate(0);
 
     const cloud = document.querySelector('[data-cloud-cycle]');
+    const cloudTabs = cloud ? [...cloud.querySelectorAll('.hero-cloud-tab')] : [];
+    const cloudPanels = cloud ? [...cloud.querySelectorAll('.hero-cloud-panel')] : [];
+    let cloudIndex = 0;
+    const cloudCanAuto = Boolean(cloud) && !reduceMotion && cloudTabs.length > 1;
+    const cloudPaused = () =>
+        !cloud ||
+        document.hidden ||
+        cloud.matches(':hover') ||
+        cloud.contains(document.activeElement);
+
+    const showCloud = (index) => {
+        if (!cloudTabs.length) return;
+        cloudIndex = (index + cloudTabs.length) % cloudTabs.length;
+        cloudTabs.forEach((tab, n) => {
+            const on = n === cloudIndex;
+            tab.setAttribute('aria-selected', on ? 'true' : 'false');
+            tab.tabIndex = on ? 0 : -1;
+        });
+        cloudPanels.forEach((panel, n) => {
+            if (n === cloudIndex) {
+                panel.classList.remove('is-on');
+                panel.hidden = false;
+                void panel.offsetWidth;
+                panel.classList.add('is-on');
+            } else {
+                panel.hidden = true;
+                panel.classList.remove('is-on');
+            }
+        });
+        if (cloud) cloud.classList.toggle('is-cycling', cloudCanAuto && !cloudPaused());
+    };
+
+    const syncCloudCycling = () => {
+        if (cloud) cloud.classList.toggle('is-cycling', cloudCanAuto && !cloudPaused());
+    };
+
+    if (cloudTabs.length) showCloud(0);
+
+    const canHeroCycle = !reduceMotion && (rotateWords.length > 1 || cloudCanAuto);
+    let heroCycleTimer = 0;
+    const armHeroCycle = () => {
+        window.clearTimeout(heroCycleTimer);
+        if (!canHeroCycle || document.hidden) {
+            if (cloud) cloud.classList.toggle('is-cycling', false);
+            return;
+        }
+        if (cloud) cloud.classList.toggle('is-cycling', cloudCanAuto && !cloudPaused());
+        heroCycleTimer = window.setTimeout(() => {
+            if (rotateWords.length > 1) applyRotate(rotateIndex + 1);
+            if (cloudCanAuto && !cloudPaused()) showCloud(cloudIndex + 1);
+            else if (cloud) cloud.classList.toggle('is-cycling', cloudCanAuto && !cloudPaused());
+            armHeroCycle();
+        }, HERO_CYCLE_MS);
+    };
+
     if (cloud) {
-        const tabs = [...cloud.querySelectorAll('.hero-cloud-tab')];
-        const panels = [...cloud.querySelectorAll('.hero-cloud-panel')];
-        const dwell = 4200;
-        const canAuto = !reduceMotion && tabs.length > 1;
-        let current = 0;
-        let timer = 0;
+        cloudTabs.forEach((tab, n) => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                showCloud(n);
+                armHeroCycle();
+            });
+        });
+        cloud.querySelector('.hero-cloud-tabs')?.addEventListener('keydown', (e) => {
+            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+            e.preventDefault();
+            const dir = e.key === 'ArrowRight' ? 1 : -1;
+            const next = (cloudIndex + dir + cloudTabs.length) % cloudTabs.length;
+            cloudTabs[next].focus();
+            showCloud(next);
+            armHeroCycle();
+        });
+        cloud.addEventListener('mouseenter', syncCloudCycling);
+        cloud.addEventListener('mouseleave', syncCloudCycling);
+        cloud.addEventListener('focusin', syncCloudCycling);
+        cloud.addEventListener('focusout', () => window.setTimeout(syncCloudCycling, 0));
+    }
+    document.addEventListener('visibilitychange', armHeroCycle);
+    armHeroCycle();
 
-        const paused = () =>
-            document.hidden || cloud.matches(':hover') || cloud.contains(document.activeElement);
-
-        const arm = () => {
-            window.clearTimeout(timer);
-            cloud.classList.toggle('is-cycling', canAuto && !paused());
-            if (!canAuto || paused()) return;
-            timer = window.setTimeout(() => show(current + 1), dwell);
-        };
+    document.querySelectorAll('[data-stepper]').forEach((root) => {
+        const tabs = [...root.querySelectorAll('[role="tab"]')];
+        const panels = [...root.querySelectorAll('[role="tabpanel"]')];
+        if (tabs.length < 2 || tabs.length !== panels.length) return;
 
         const show = (index) => {
-            current = (index + tabs.length) % tabs.length;
+            const current = (index + tabs.length) % tabs.length;
             tabs.forEach((tab, n) => {
                 const on = n === current;
                 tab.setAttribute('aria-selected', on ? 'true' : 'false');
                 tab.tabIndex = on ? 0 : -1;
             });
             panels.forEach((panel, n) => {
-                if (n === current) {
-                    panel.classList.remove('is-on');
-                    panel.hidden = false;
-                    void panel.offsetWidth;
-                    panel.classList.add('is-on');
-                } else {
-                    panel.hidden = true;
-                    panel.classList.remove('is-on');
-                }
+                const on = n === current;
+                panel.classList.toggle('is-on', on);
+                panel.hidden = !on;
             });
-            arm();
         };
 
         tabs.forEach((tab, n) => {
@@ -106,21 +151,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 show(n);
             });
         });
-        cloud.querySelector('.hero-cloud-tabs')?.addEventListener('keydown', (e) => {
-            if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+        root.querySelector('[role="tablist"]')?.addEventListener('keydown', (e) => {
+            if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(e.key)) return;
             e.preventDefault();
-            const dir = e.key === 'ArrowRight' ? 1 : -1;
-            const next = (current + dir + tabs.length) % tabs.length;
+            const selected = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+            let next = selected;
+            if (e.key === 'ArrowRight') next = selected + 1;
+            if (e.key === 'ArrowLeft') next = selected - 1;
+            if (e.key === 'Home') next = 0;
+            if (e.key === 'End') next = tabs.length - 1;
+            next = (next + tabs.length) % tabs.length;
             tabs[next].focus();
             show(next);
         });
-        cloud.addEventListener('mouseenter', arm);
-        cloud.addEventListener('mouseleave', arm);
-        cloud.addEventListener('focusin', arm);
-        cloud.addEventListener('focusout', () => window.setTimeout(arm, 0));
-        document.addEventListener('visibilitychange', arm);
+
         show(0);
-    }
+    });
 
     document.querySelectorAll('.home-rise, .home-process').forEach((el) => {
         if (reduceMotion) {
