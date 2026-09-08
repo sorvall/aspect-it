@@ -26,6 +26,40 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(() => heroRule.classList.add('is-in'));
     }
 
+    const heroRotate = document.querySelector('[data-hero-rotate]');
+    if (heroRotate) {
+        const words = [...heroRotate.querySelectorAll('.hero-title-word')];
+        const apply = (index) => {
+            words.forEach((word, n) => {
+                word.classList.toggle('is-on', n === index);
+                word.classList.toggle('is-passed', n < index);
+            });
+        };
+
+        if (reduceMotion || words.length < 2) {
+            apply(0);
+        } else {
+            let current = 0;
+            let timer = 0;
+            const dwell = 2000;
+            const arm = () => {
+                window.clearTimeout(timer);
+                if (document.hidden) return;
+                timer = window.setTimeout(() => {
+                    current = (current + 1) % words.length;
+                    apply(current);
+                    arm();
+                }, dwell);
+            };
+            apply(0);
+            arm();
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) window.clearTimeout(timer);
+                else arm();
+            });
+        }
+    }
+
     const cloud = document.querySelector('[data-cloud-cycle]');
     if (cloud) {
         const tabs = [...cloud.querySelectorAll('.hero-cloud-tab')];
